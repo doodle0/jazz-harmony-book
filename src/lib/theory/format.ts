@@ -30,7 +30,7 @@ export function formatChord(chord: Chord | string): string {
 		tensions = [];
 	}
 	let out = noteName(c.root) + suffix;
-	if (tensions.length) out += `(${tensions.map(prettyDegree).join(' ')})`;
+	if (tensions.length) out += `(${tensions.map(prettyDegree).join(', ')})`;
 	if (c.bass) out += '/' + noteName(c.bass);
 	return out;
 }

@@ -12,11 +12,11 @@
 			"variants": {
 				"A": {
 					"label": "키 안에 머물기",
-					"prog": "IΔ7 | % | ii-7 | V7 | IΔ7 | % | ii-7 | V7"
+					"prog": "IΔ7 | % | vi-7 | ii-7 V7 | IΔ7 | ii-7 V7 | IΔ7 | %"
 				},
 				"B": {
 					"label": "III로 외출",
-					"prog": "IΔ7 | % | ii-7/III | V7/III | IIIΔ7 | % | ii-7 | V7"
+					"prog": "IΔ7 | % | vi-7 | iiø7/III V7/III | IIIΔ7 | ii-7 V7 | IΔ7 | %"
 				}
 			},
 			"provenance": {
@@ -32,18 +32,18 @@
 		},
 		{
 			"id": "tz-dolphin",
-			"title": "5도권을 타고 ♭III로",
+			"title": "ii-V를 따라 ♭III로",
 			"style": "latin",
 			"key": "E♭",
 			"tempo": 172,
 			"variants": {
 				"A": {
 					"label": "키 안에 머물기",
-					"prog": "IΔ7 | % | ii-7 | V7"
+					"prog": "ii-7 | V7 | IΔ7 | % | ii-7 | V7 | IΔ7 | ii-7 V7"
 				},
 				"B": {
 					"label": "♭III로",
-					"prog": "IΔ7 | % | ii-7/♭III V7/♭III | ♭IIIΔ7 | ii-7 | V7"
+					"prog": "ii-7 | V7 | IΔ7 | % | ii-7/♭III | V7/♭III | ♭IIIΔ7 | ii-7 V7"
 				}
 			},
 			"provenance": {

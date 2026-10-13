@@ -78,8 +78,9 @@
 
 	function hold() {
 		holding = true;
-		const held: Example = { ...ex, style: 'pad', prog: 'V7 | %', variants: undefined };
-		player.play({ ...exampleSource(id, held), title: 'V7에서 멈추기…' }, { loop: false });
+		// hold whichever dominant is selected, so the keyboard and the sound agree
+		const held: Example = { ...ex, style: 'pad', prog: `${variant} | %`, variants: undefined };
+		player.play({ ...exampleSource(id, held), title: `${variant}에서 멈추기…` }, { loop: false });
 	}
 
 	function shuffle() {
@@ -136,7 +137,7 @@
 	{#snippet controls()}
 		<HearButton playing={playing && !holding} loading={player.loading && player.isActive(id)} onclick={toggle} />
 		<button type="button" class="btn" style:background="var(--plum)" style:color="var(--on-color)" onclick={hold}>
-			<Hand size={18} /> V7에서 멈추기
+			<Hand size={18} /> {variant}에서 멈추기
 		</button>
 		<ShuffleButton onclick={shuffle} count={deck.label} />
 	{/snippet}

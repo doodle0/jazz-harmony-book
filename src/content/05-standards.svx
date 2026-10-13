@@ -51,7 +51,7 @@ I 이외의 코드를 목표로 하는 V7입니다. *We Wish You a Merry Christm
 | IV | v-7 – I7 – IV | *Misty* |
 | ii | iiiø7 – VI7 – ii | *It Could Happen to You* |
 | vi | viiø7 – III7 – vi | *Confirmation*, *I'll Close My Eyes* |
-| iii | ♯ivø7 – VII7 – iii | *Yours Is My Heart Alone*, *Stella by Starlight* |
+| iii | ♯ivø7 – VII7 – iii | *Yours Is My Heart Alone*, *Stella by Starlight* (마지막 8마디) |
 
 **알아보는 지름길:**
 - 뜬금없는 **v-7** → **IV**로 가는 ii-V가 온다 (약 90%는 맞음).
@@ -72,7 +72,7 @@ I 이외의 코드를 목표로 하는 V7입니다. *We Wish You a Merry Christm
 ## 실전 적용
 - 🎷 **솔로:** 세컨더리 도미넌트에서는 **목표 키**를 기준으로 생각하세요. 목표가 마이너면 하모닉 마이너나 프리지안 도미넌트, 메이저면 믹솔리디안이나 얼터드. 세컨더리 도미넌트의 3도는 목표 코드의 이끎음이니 거기에 착지하세요.
 - 🎹 **컴핑:** I이 길게 이어지면 V7/ii나 ♯io7을 끼워 움직임을 만드세요. 베이스는 디미니시드 버전을 반음계 워킹으로 연주할 수 있습니다.
-- ✍️ **작곡·편곡:** 도착을 늦추고 싶으면 목표에서 거꾸로 세컨더리 ii-V를 이어 붙이세요. 샤프 포 워크다운은 턴어라운드를 두 마디로 늘리는 고전적인 방법입니다.
+- ✍️ **작곡·편곡:** 도착을 늦추고 싶으면 목표에서 거꾸로 세컨더리 ii-V를 이어 붙이세요. 샤프 포 워크다운은 I에 머무는 마디들을 긴 턴어라운드(♯ivø7부터 I까지 세 마디)로 채우는 고전적인 방법입니다.
 
 ---
 
@@ -190,7 +190,7 @@ ii-V-I이 앞문이라면 **iv-7 – ♭VII7 – I** 은 뒷문입니다. 다른
 - **위종지:** iv-7 ♭VII7은 **♭III**의 ii-V인데 I로 갔다.
 - **인터체인지:** 두 코드 모두 I **에이올리안**(♭III의 상대단조)에 다이아토닉하다.
 
-*Yardbird Suite*와 *Misty*에서 들을 수 있습니다: IV로 가는 v-7 – I7, 이어서 백도어, 그리고 iii로 가는 위종지.
+*Yardbird Suite*는 둘째 마디에 바로 백도어가 나옵니다. *Misty*에서는 IV로 가는 v-7 – I7, 이어서 백도어, 그리고 iii로 가는 위종지를 차례로 들을 수 있습니다.
 
 <DeviceAB set="backdoor" color="var(--leaf)" />
 

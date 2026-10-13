@@ -10,7 +10,7 @@
 			"tempo": 64,
 			"variants": {
 				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
 			},
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		},
@@ -22,7 +22,7 @@
 			"tempo": 138,
 			"variants": {
 				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
 			},
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		},
@@ -35,7 +35,7 @@
 			"comp": "piano",
 			"variants": {
 				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
 			},
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		},
@@ -47,7 +47,7 @@
 			"tempo": 150,
 			"variants": {
 				"major": { "label": "메이저", "prog": "ii-9 | % | V13 | % | IΔ9 | % | % | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | % | V7(♭9 ♭13) | % | i-9 | % | % | %" }
+				"minor": { "label": "마이너", "prog": "iiø7 | % | V7(♭9, ♭13) | % | i-9 | % | % | %" }
 			},
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		},
@@ -59,7 +59,7 @@
 			"tempo": 168,
 			"variants": {
 				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
 			},
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		}

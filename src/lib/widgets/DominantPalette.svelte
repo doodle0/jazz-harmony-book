@@ -24,11 +24,11 @@
 	const V_SUFFIX: Record<string, string> = {
 		mixolydian: '13',
 		'aeolian-dominant': '7(♭13)',
-		'phrygian-dominant': '7(♭9 ♭13)',
-		'lydian-dominant': '7(9 ♯11 13)',
+		'phrygian-dominant': '7(♭9, ♭13)',
+		'lydian-dominant': '7(9, ♯11, 13)',
 		altered: '7alt',
-		'whole-tone': '+7(9 ♯11)',
-		'half-whole': '7(♭9 13)'
+		'whole-tone': '+7(9, ♯11)',
+		'half-whole': '7(♭9, 13)'
 	};
 	// tension, from calm to wild (for the meter)
 	const TENSION: Record<string, number> = {

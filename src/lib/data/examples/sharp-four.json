@@ -1,7 +1,7 @@
 {
 	"concept": "sharp-four",
 	"title": "샤프 포 워크다운",
-	"summary": "♯ivø7 – VII7 – iii – VI7 – ii – V – I. 턴어라운드를 두 마디로 늘리는 고전적인 방법이에요.",
+	"summary": "♯ivø7 – VII7 – iii – VI7 – ii – V – I. I에 머무는 마디들을 긴 턴어라운드로 채우는 고전적인 방법이에요.",
 	"examples": [
 		{
 			"id": "s4-close-eyes",
@@ -12,11 +12,11 @@
 			"variants": {
 				"A": {
 					"label": "I에 머물기",
-					"prog": "IΔ7 | % | iii-7 VI7 | ii-7 V7"
+					"prog": "IΔ7 | % | % | ii-7 V7 | IΔ7 | %"
 				},
 				"B": {
 					"label": "샤프 포 워크다운",
-					"prog": "♯ivø7 VII7 | iii-7 VI7 | ii-7 V7 | IΔ7"
+					"prog": "♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7 | IΔ7 | %"
 				}
 			},
 			"provenance": {
@@ -39,11 +39,11 @@
 			"variants": {
 				"A": {
 					"label": "I에 머물기",
-					"prog": "IΔ7 | % | ii-7 | V7"
+					"prog": "IΔ7 | % | % | ii-7 V7 | IΔ7 | %"
 				},
 				"B": {
 					"label": "워크다운",
-					"prog": "♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7"
+					"prog": "♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7 | IΔ7 | %"
 				}
 			},
 			"provenance": {
@@ -61,11 +61,11 @@
 			"variants": {
 				"A": {
 					"label": "I에 머물기",
-					"prog": "IΔ7 | % | % | % | ii-7 | % | V7 | %"
+					"prog": "IΔ7 | % | % | % | ii-7 | V7 | IΔ7 | %"
 				},
 				"B": {
 					"label": "워크다운",
-					"prog": "♯ivø7 | VII7 | iii-7 | VI7 | ii-7 | % | V7 | %"
+					"prog": "♯ivø7 | VII7 | iii-7 | VI7 | ii-7 | V7 | IΔ7 | %"
 				}
 			},
 			"provenance": {

@@ -56,15 +56,29 @@ function slot(c: Chord, s: string, opts: VoiceOptions): string | null {
 			if (has(c, 'b9')) return 'b9';
 			if (has(c, '#9')) return '#9';
 			if (c.quality === 'dim7') return null;
+			// a plain 7sus keeps its root on top instead of an unwritten 9th
+			if (c.quality === 'sus7' && !has(c, '9')) return '1';
 			return '9';
 		}
 		case '#9':
 			return has(c, '#9') ? '#9' : slot(c, '9', opts);
 		case '13': {
 			if (has(c, 'b13')) return 'b13';
-			if (has(c, '13') || c.quality === 'dom7' || c.quality === 'sus7') return '13';
+			if (has(c, '13')) return '13';
+			// an altered fifth takes the 13th's place (D7(♭5): F♯ A♭ C E)
+			if (c.quality === 'dom7' && (has(c, 'b5') || has(c, '#5'))) return slot(c, '5', opts);
+			if (c.quality === 'dom7') return '13';
 			return slot(c, '5', opts);
 		}
+		case '13|5':
+			// the fifth of a rootless Δ7 / -7 gives way to a written colour tone:
+			// CΔ7(♯11) → E F♯ B D, C-7(11) → E♭ F B♭ D, C-7(13) → E♭ A B♭ D
+			if (c.quality === 'maj7' && has(c, '#11')) return '#11';
+			if (c.quality === 'maj7' && has(c, '13')) return '13';
+			if (c.quality === 'min7' || c.quality === 'minMaj7') {
+				for (const t of ['11', '13', 'b13']) if (has(c, t)) return t;
+			}
+			return slot(c, '5', opts);
 		case '11':
 			return has(c, '#11') ? '#11' : '11';
 		default:
@@ -93,7 +107,7 @@ function forms(q: Quality): { A: string[]; B: string[] } {
 		case 'sus':
 			return { A: ['3', '5', '1'], B: ['5', '1', '3'] };
 		default:
-			return { A: ['3', '5', '7', '9'], B: ['7', '9', '3', '5'] };
+			return { A: ['3', '13|5', '7', '9'], B: ['7', '9', '3', '13|5'] };
 	}
 }
 
@@ -102,7 +116,8 @@ function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B'): string[] {
 		case 'shell':
 			return form === 'A' ? ['1', '3', '7'] : ['1', '7', '3'];
 		case 'close':
-			return CHORD_TONES[c.quality].length === 3 ? ['1', '3', '5'] : ['1', '3', '5', '7'];
+			// 7alt has no 5th among its chord tones but still needs its ♭7
+			return CHORD_TONES[c.quality].some((t) => /[67]/.test(t)) ? ['1', '3', '5', '7'] : ['1', '3', '5'];
 		case 'triad':
 			return ['1', '3', '5'];
 		default:
@@ -110,9 +125,26 @@ function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B'): string[] {
 	}
 }
 
-/** Resolve slots to degrees (dropping empty ones) and stack them upwards from `bottom`. */
-function stack(c: Chord, slots: string[], bottom: number, opts: VoiceOptions): VoicedNote[] {
-	const degrees = slots.map((s) => slot(c, s, opts)).filter((d): d is string => !!d);
+/**
+ * Resolve slots to degrees (dropping empty ones). Rootless forms then add any written
+ * tension the form has no room for on top, so G7(♯11) keeps its ♯11. 7alt already
+ * implies its tensions, and the ø7 ninth follows the halfDimNinth option.
+ */
+function degreesFor(c: Chord, style: VoicingStyle, form: 'A' | 'B', opts: VoiceOptions): string[] {
+	const degrees = slotsFor(c, style, form)
+		.map((s) => slot(c, s, opts))
+		.filter((d): d is string => !!d);
+	if (['shell', 'close', 'triad'].includes(style) || c.quality === 'alt7') return degrees;
+	const semis = (d: string) => degreeInterval(d).semis;
+	for (const t of c.tensions) {
+		if (c.quality === 'halfDim7' && /9$/.test(t)) continue;
+		if (!degrees.some((d) => semis(d) === semis(t))) degrees.push(t);
+	}
+	return degrees;
+}
+
+/** Stack degrees upwards from `bottom`. */
+function stack(c: Chord, degrees: string[], bottom: number): VoicedNote[] {
 	const out: VoicedNote[] = [];
 	let floor = bottom;
 	for (const [i, d] of degrees.entries()) {
@@ -126,12 +158,12 @@ function stack(c: Chord, slots: string[], bottom: number, opts: VoiceOptions): V
 }
 
 /** All placements of a form whose lowest note lies in [low, high]. */
-function placements(c: Chord, slots: string[], opts: VoiceOptions): VoicedNote[][] {
+function placements(c: Chord, degrees: string[], opts: VoiceOptions): VoicedNote[][] {
 	const low = opts.low ?? 48;
 	const high = opts.high ?? 62;
 	const out: VoicedNote[][] = [];
 	for (let b = low; b <= high; b++) {
-		const v = stack(c, slots, b, opts);
+		const v = stack(c, degrees, b);
 		if (v.length && v[0].midi === b) out.push(v);
 	}
 	return out;
@@ -167,7 +199,7 @@ export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: Voi
 		else candidateForms = ['A', 'B'];
 		let best: { v: VoicedNote[]; form: 'A' | 'B'; score: number } | null = null;
 		for (const form of candidateForms) {
-			for (const v of placements(c, slotsFor(c, style, form), opts)) {
+			for (const v of placements(c, degreesFor(c, style, form, opts), opts)) {
 				const score = prev ? distance(prev, v) : Math.abs(v[0].midi - center) + (form === 'A' ? 0 : 0.5);
 				if (!best || score < best.score) best = { v, form, score };
 			}
@@ -177,6 +209,15 @@ export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: Voi
 		prev = best.v;
 	});
 	return out;
+}
+
+/**
+ * A fixed stack of degrees from the bass register up, each note the nearest one above
+ * the last: '1 5 9 13 3 7 ♯11' is the Lydian chord as stacked fifths.
+ */
+export function voiceStack(c: Chord, degrees: string[], low = 36): Voicing {
+	const bottom = low + ((pc(transpose(c.root, degreeInterval(degrees[0]))) - low) % 12 + 12) % 12;
+	return { notes: stack(c, degrees, bottom) };
 }
 
 export function voiceChord(c: Chord, style: VoicingStyle, opts: VoiceOptions = {}): Voicing {

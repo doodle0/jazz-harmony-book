@@ -53,7 +53,7 @@
 			"style": "ballad",
 			"key": "G-",
 			"tempo": 72,
-			"prog": "iv-7 | ♭VII7 | ♭IIIΔ7 | ♭VIΔ7 | iiø7 | V7(♭9) | i-6 | %",
+			"prog": "iv-7 | ♭VII7 | ♭IIIΔ7 | ♭VIΔ7 | iiø7 | V7(♭9, ♭13) | i-6 | %",
 			"note": "G 마이너는 보통의 잼 키입니다(리얼북은 E 마이너).",
 			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
 		}

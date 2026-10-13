@@ -12,15 +12,15 @@
 			"variants": {
 				"A": {
 					"label": "V → I",
-					"prog": "ii-7 | V7 | IΔ7 | V7/ii"
+					"prog": "IΔ7 vi-7 | ii-7 V7 | IΔ7 V7/ii | ii-7 V7"
 				},
 				"B": {
 					"label": "V → iii",
-					"prog": "ii-7 | V7 | iii-7 | V7/ii"
+					"prog": "IΔ7 vi-7 | ii-7 V7 | iii-7 V7/ii | ii-7 V7"
 				},
 				"C": {
 					"label": "V → vi",
-					"prog": "ii-7 | V7 | vi-7 | V7/ii"
+					"prog": "IΔ7 vi-7 | ii-7 V7 | vi-7 V7/ii | ii-7 V7"
 				}
 			},
 			"provenance": {

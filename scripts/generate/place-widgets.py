@@ -14,7 +14,7 @@ IMPORTS = {
 # (file, anchor text, insertion, where) where = 'after' (after the paragraph/table containing anchor) or 'before'
 EDITS = {
  "01-function.svx": [
-  ("| 마이너 (C) | Dø7 |", '\n<Hear prog="ii-7 | V7 | IΔ7 | %" key="C" style="swing" tempo={132} label="메이저 ii-V-I" /> <Hear prog="iiø7 | V7(♭9 ♭13) | i-6 | %" key="C-" style="swing" tempo={132} label="마이너 ii-V-i" />\n', "after"),
+  ("| 마이너 (C) | Dø7 |", '\n<Hear prog="ii-7 | V7 | IΔ7 | %" key="C" style="swing" tempo={132} label="메이저 ii-V-I" /> <Hear prog="iiø7 | V7(♭9, ♭13) | i-6 | %" key="C-" style="swing" tempo={132} label="마이너 ii-V-i" />\n', "after"),
   ("**마이너에서 ø7과 도미넌트 V를 쓰는 이유:**", '\n<Hear prog="iiø7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={70} label="v-7 → i (건조함)" /> <Hear prog="iiø7 | V7(♭9) | i-7 | %" key="C-" style="ballad" tempo={70} label="V7 → i (끌림)" />\n', "after"),
   ("ii-V-I에서 A → B → A(또는 B → A → B)로", "\n<IIVIExplorer />\n", "after"),
   ("**드릴:** 아무 리드시트나", '\n<Heard id="function:drill" />\n', "after"),
@@ -25,11 +25,11 @@ EDITS = {
   ("G 마이너의 *Autumn Leaves*", '\n<Hear prog="iv-7 | ♭VII7 | ♭IIIΔ7 | ♭VIΔ7 | iiø7 | V7(♭9) | i-6 | %" key="G-" style="swing" tempo={126} label="Autumn Leaves 첫 8마디 (G 마이너)" />\n', "after"),
   ("**리디안과 도리안에는 기피음이 없습니다:**", "\n<RubTest />\n", "after"),
   ("정말 필요한 능력은 어떤 음이 부딪치는지", '\n🎧 [Corcovado (Jobim) 들어 보기](https://www.youtube.com/results?search_query=Corcovado+Jobim+Astrud+Gilberto+Stan+Getz): 멜로디가 기피음 위에 앉아 있는데도 아름답게 들리는 순간을 찾아보세요.\n', "after"),
-  ("- **리디안 코드** (C Lyd)", '\n<Hear prog="IΔ7(9 ♯11 13) | %" key="C" style="pad" tempo={70} label="리디안 코드" /> <Hear prog="i-7(9 11) | %" key="C" style="pad" tempo={70} label="도리안 코드" />\n', "after"),
+  ("- **리디안 코드** (C Lyd)", '\n<Hear prog="IΔ7(9, ♯11, 13) | %" key="C" style="pad" tempo={70} label="리디안 코드" /> <Hear prog="i-7(9, 11) | %" key="C" style="pad" tempo={70} label="도리안 코드" />\n', "after"),
  ],
  "03-minor-dominant.svx": [
-  ("| 멜로딕 마이너 (상행) | C D E♭ F G **A B**", '\n<Hear prog="iv-7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={72} label="내추럴: v-7 → i" /> <Hear prog="iv-7 | V7(♭9 ♭13) | i-7 | %" key="C-" style="ballad" tempo={72} label="하모닉: V7 → i" /> <Hear prog="iv-7 | V7 | i-Δ7 | %" key="C-" style="ballad" tempo={72} label="멜로딕: i-Δ7" />\n', "after"),
-  ("꼭 알아야 할 것은 하나뿐입니다: **5번 모드, 프리지안 도미넌트**", '\n<Hear prog="i-7 | ♭VII7 | ♭VIΔ7 | V7(♭9 ♭13)" key="A-" style="latin" tempo={150} label="안달루시안 케이던스 i–♭VII–♭VI–V" />\n', "after"),
+  ("| 멜로딕 마이너 (상행) | C D E♭ F G **A B**", '\n<Hear prog="iv-7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={72} label="내추럴: v-7 → i" /> <Hear prog="iv-7 | V7(♭9, ♭13) | i-7 | %" key="C-" style="ballad" tempo={72} label="하모닉: V7 → i" /> <Hear prog="iv-7 | V7 | i-Δ7 | %" key="C-" style="ballad" tempo={72} label="멜로딕: i-Δ7" />\n', "after"),
+  ("꼭 알아야 할 것은 하나뿐입니다: **5번 모드, 프리지안 도미넌트**", '\n<Hear prog="i-7 | ♭VII7 | ♭VIΔ7 | V7(♭9, ♭13)" key="A-" style="latin" tempo={150} label="안달루시안 케이던스 i–♭VII–♭VI–V" />\n', "after"),
   ("**도미넌트 스케일** = ♮3과 ♭7을 가진 스케일.", "\n<DominantPalette />\n", "before"),
  ],
  "04-bebop.svx": [
@@ -49,7 +49,7 @@ EDITS = {
   ("*Yardbird Suite*와 *Misty*에서 들을 수 있습니다", '\n<DeviceAB set="backdoor" color="var(--leaf)" />\n', "after"),
  ],
  "06-modal.svx": [
-  ("필수 감상: *So What*", '\n<Hear prog="i-7(9 11) | % | % | % | ♭ii-7(9 11) | % | i-7(9 11) | %" key="D-" style="modal" tempo={132} label="So What 식 도리안 뱀프 (반음 위로 평행 이동)" />\n', "after"),
+  ("필수 감상: *So What*", '\n<Hear prog="i-7(9, 11) | % | % | % | ♭ii-7(9, 11) | % | i-7(9, 11) | %" key="D-" style="modal" tempo={132} label="So What 식 도리안 뱀프 (반음 위로 평행 이동)" />\n', "after"),
   ("재즈에서 \"sus\"는 거의 항상 **7sus4**입니다", '\n<Hear prog="I7sus | % | I13sus | %" key="C" style="modal" tempo={100} label="C7sus → C13sus" /> <Hear prog="i-11 | %" key="C" style="pad" tempo={80} label="C-11 (♭3이 있음)" />\n', "after"),
  ],
  "07-workflow.svx": [

@@ -47,14 +47,14 @@ V7의 3도와 7도 사이에는 **트라이톤**이 있습니다(G7에서 B–F)
 | | ii | V | I |
 |---|---|---|---|
 | 메이저 (C) | D-7 | G7 | CΔ7 |
-| 마이너 (C) | Dø7 | G7 (♭9, ♭13) | C-7 / C-6 / C-Δ7 |
+| 마이너 (C) | Dø7 | G7(♭9, ♭13) | C-7 / C-6 / C-Δ7 |
 
-<Hear prog="ii-7 | V7 | IΔ7 | %" key="C" style="swing" tempo={132} label="메이저 ii-V-I" /> <Hear prog="iiø7 | V7(♭9 ♭13) | i-6 | %" key="C-" style="swing" tempo={132} label="마이너 ii-V-i" />
+<Hear prog="ii-7 | V7 | IΔ7 | %" key="C" style="swing" tempo={132} label="메이저 ii-V-I" /> <Hear prog="iiø7 | V7(♭9, ♭13) | i-6 | %" key="C-" style="swing" tempo={132} label="마이너 ii-V-i" />
 
 
 **마이너에서 ø7과 도미넌트 V를 쓰는 이유:** 내추럴 마이너로 다이아토닉 7화음을 쌓으면 iiø7은 자연스럽게 나오지만, v는 **v-7**이 되어 트라이톤이 없고 건조하게 들립니다. 7음을 반음 올리면(C 마이너에서 B♮) v-7이 V7이 됩니다. 이 한 음의 변화가 하모닉 마이너의 기원입니다(§3).
 
-<Hear prog="iiø7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={70} label="v-7 → i (건조함)" /> <Hear prog="iiø7 | V7(♭9) | i-7 | %" key="C-" style="ballad" tempo={70} label="V7 → i (끌림)" />
+<Hear prog="iiø7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={70} label="v-7 → i (건조함)" /> <Hear prog="iiø7 | V7(♭9, ♭13) | i-7 | %" key="C-" style="ballad" tempo={70} label="V7 → i (끌림)" />
 
 
 ## 기본 보이싱 (근음 없는 "버클리" A/B 폼)
@@ -75,7 +75,7 @@ ii-V-I에서 A → B → A(또는 B → A → B)로 번갈아 쓰면 성부가 �
 
 **C 마이너 ii-V-i**
 
-| Dø7 | G7(♭9 ♭13) | C-9 |
+| Dø7 | G7(♭9, ♭13) | C-9 |
 |---|---|---|
 | C F A♭ (베이스 D) | B E♭ F A♭ | B♭ D E♭ G |
 

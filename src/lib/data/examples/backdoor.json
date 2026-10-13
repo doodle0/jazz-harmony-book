@@ -5,18 +5,18 @@
 	"examples": [
 		{
 			"id": "bd-yardbird",
-			"title": "IV 다음의 백도어",
+			"title": "둘째 마디의 백도어",
 			"style": "bebop",
 			"key": "C",
 			"tempo": 196,
 			"variants": {
 				"A": {
 					"label": "앞문 ii-V",
-					"prog": "IΔ7 | % | v-7 | I7 | IVΔ7 | ii-7 V7 | IΔ7 | %"
+					"prog": "I6 | ii-7 V7 | I7 ♭VII7 | VI7 | II7 | V7 | I6 | ii-7 V7"
 				},
 				"B": {
 					"label": "백도어",
-					"prog": "IΔ7 | % | v-7 | I7 | IVΔ7 | iv-7 ♭VII7 | IΔ7 | %"
+					"prog": "I6 | iv-7 ♭VII7 | I7 ♭VII7 | VI7 | II7 | V7 | I6 | ii-7 V7"
 				}
 			},
 			"provenance": {

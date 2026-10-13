@@ -78,9 +78,12 @@
 	const FIFTHS = Array.from({ length: 12 }, (_, i) => i);
 	let shift = $derived(1 - pos); // lydian +1 … locrian -5
 	let windowSet = $derived(new Set(Array.from({ length: 7 }, (_, i) => (((shift - 1 + i) % 12) + 12) % 12)));
-	// clockwise = sharp side, counter-clockwise = flat side
+	// clockwise = sharp side, counter-clockwise = flat side. Inside the window, spell each
+	// note as the mode does (Locrian on C has G♭, Lydian has F♯).
 	let fifthName = (i: number) => {
-		const j = i <= 6 ? i : i - 12;
+		const lo = shift - 1;
+		const inWindow = (((i - lo) % 12) + 12) % 12 < 7;
+		const j = inWindow ? lo + ((((i - lo) % 12) + 12) % 12) : i <= 6 ? i : i - 12;
 		return noteName(transpose(key.tonic, { steps: (((j * 4) % 7) + 7) % 7, semis: (((j * 7) % 12) + 12) % 12 }));
 	};
 

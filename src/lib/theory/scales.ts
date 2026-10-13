@@ -28,11 +28,11 @@ export const MODES: ScaleDef[] = [
 export const DOMINANT_SCALES: ScaleDef[] = [
 	{ id: 'mixolydian', name: '믹솔리디안', degrees: ['1', '2', '3', '4', '5', '6', 'b7'], chord: '13', mood: '9, 13 — 평범하고 밝은 V7' },
 	{ id: 'aeolian-dominant', name: '에이올리안 도미넌트', degrees: ['1', '2', '3', '4', '5', 'b6', 'b7'], chord: '7(♭13)', mood: '9, ♭13 — 마이너 쪽으로 기울어짐' },
-	{ id: 'phrygian-dominant', name: '프리지안 도미넌트', degrees: ['1', 'b2', '3', '4', '5', 'b6', 'b7'], chord: '7(♭9 ♭13)', mood: '♭9, ♭13 — 마이너 키 V7의 기본' },
-	{ id: 'lydian-dominant', name: '리디안 도미넌트', degrees: ['1', '2', '3', '#4', '5', '6', 'b7'], chord: '7(9 ♯11 13)', mood: '9, ♯11, 13 — 반짝이는 ♯11' },
-	{ id: 'altered', name: '얼터드', degrees: ['1', 'b2', '#2', '3', 'b5', 'b6', 'b7'], chord: '7alt', mood: '♭9 ♯9 ♭5 ♭13 — 최대 긴장' },
-	{ id: 'whole-tone', name: '홀톤', degrees: ['1', '2', '3', '#4', '#5', 'b7'], chord: '+7(9 ♯11)', mood: '9, ♯11, ♯5 — 떠다니는 모호함' },
-	{ id: 'half-whole', name: '하프-홀 디미니시드', degrees: ['1', 'b2', '#2', '3', '#4', '5', '6', 'b7'], chord: '7(♭9 13)', mood: '♭9 ♯9 ♯11 13 — 대칭, 반짝임' }
+	{ id: 'phrygian-dominant', name: '프리지안 도미넌트', degrees: ['1', 'b2', '3', '4', '5', 'b6', 'b7'], chord: '7(♭9, ♭13)', mood: '♭9, ♭13 — 마이너 키 V7의 기본' },
+	{ id: 'lydian-dominant', name: '리디안 도미넌트', degrees: ['1', '2', '3', '#4', '5', '6', 'b7'], chord: '7(9, ♯11, 13)', mood: '9, ♯11, 13 — 반짝이는 ♯11' },
+	{ id: 'altered', name: '얼터드', degrees: ['1', 'b2', '#2', '3', 'b5', 'b6', 'b7'], chord: '7alt', mood: '♭9, ♯9, ♭5, ♭13 — 최대 긴장' },
+	{ id: 'whole-tone', name: '홀톤', degrees: ['1', '2', '3', '#4', '#5', 'b7'], chord: '+7(9, ♯11)', mood: '9, ♯11, ♯5 — 떠다니는 모호함' },
+	{ id: 'half-whole', name: '하프-홀 디미니시드', degrees: ['1', 'b2', '#2', '3', '#4', '5', '6', 'b7'], chord: '7(♭9, 13)', mood: '♭9, ♯9, ♯11, 13 — 대칭, 반짝임' }
 ];
 
 export const SCALES: Record<string, ScaleDef> = Object.fromEntries(

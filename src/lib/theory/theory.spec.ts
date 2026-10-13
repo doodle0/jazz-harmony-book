@@ -4,7 +4,7 @@ import { parseChord } from './chord';
 import { formatChord, formatNote } from './format';
 import { romanToChord } from './roman';
 import { parseProgression, resolveProgression, parseKey } from './progression';
-import { voiceProgression } from './voicing';
+import { voiceProgression, voiceStack } from './voicing';
 import { avoidNotes, MODES } from './scales';
 
 const names = (ms: { pitch: { step: number; alt: number } }[]) => ms.map((n) => noteName(n.pitch)).join(' ');
@@ -33,7 +33,7 @@ describe('format', () => {
 		['Bm7b5', 'Bø7'],
 		['Bdim7', 'Bo7'],
 		['G7b9', 'G7(♭9)'],
-		['G7(b9 b13)', 'G7(♭9 ♭13)'],
+		['G7(b9, b13)', 'G7(♭9, ♭13)'],
 		['C7alt', 'C7alt'],
 		['C7sus', 'C7sus'],
 		['C+7', 'C+7'],
@@ -41,21 +41,22 @@ describe('format', () => {
 		['Ebmaj7', 'E♭Δ7'],
 		['F#m7b5', 'F♯ø7'],
 		['Db7(#11)', 'D♭7(♯11)'],
-		['C6/9', 'C6(9)']
+		['C6/9', 'C6(9)'],
+		['G7(b9 b13)', 'G7(♭9, ♭13)']
 	])('%s → %s', (input, out) => {
 		expect(formatChord(input)).toBe(out);
 	});
 	it('keeps lecture notation as is', () => {
-		for (const s of ['CΔ7', 'D-7', 'G7', 'Bø7', 'Bo7', 'C-6', 'G7(♭9 ♭13)']) expect(formatChord(s)).toBe(s);
+		for (const s of ['CΔ7', 'D-7', 'G7', 'Bø7', 'Bo7', 'C-6', 'G7(♭9, ♭13)']) expect(formatChord(s)).toBe(s);
 	});
 	it('writes plain extensions as one number, like the guide', () => {
-		expect(['D-9', 'G13', 'CΔ9', 'C9sus', 'G7(♭9 13)', 'C-7(9 11)'].map((c) => formatChord(c))).toEqual([
+		expect(['D-9', 'G13', 'CΔ9', 'C9sus', 'G7(♭9, 13)', 'C-7(9, 11)'].map((c) => formatChord(c))).toEqual([
 			'D-9',
 			'G13',
 			'CΔ9',
 			'C9sus',
-			'G7(♭9 13)',
-			'C-7(9 11)'
+			'G7(♭9, 13)',
+			'C-7(9, 11)'
 		]);
 	});
 	it('reads extensions as tensions', () => {
@@ -87,7 +88,7 @@ describe('roman', () => {
 		['♭iii-7', 'G', 'B♭-7'],
 		['viio7', 'C', 'Bo7'],
 		['vi', 'C', 'A-'],
-		['V7(♭9 ♭13)', 'C', 'G7(♭9 ♭13)'],
+		['V7(♭9, ♭13)', 'C', 'G7(♭9, ♭13)'],
 		['♯io7', 'E♭', 'Eo7']
 	])('%s in %s → %s', (roman, key, out) => {
 		expect(formatChord(romanToChord(roman, pitch(key)))).toBe(out);
@@ -138,7 +139,7 @@ describe('voicing', () => {
 		expect(v.map((x) => names(x.notes))).toEqual(['F A C E', 'F A B E', 'E G B D']);
 	});
 	it('voices the minor ii-V-i like the guide', () => {
-		const v = voiceProgression(['Dø7', 'G7(b9 b13)', 'C-9'].map(parseChord), 'alternate', { startForm: 'B' });
+		const v = voiceProgression(['Dø7', 'G7(b9, b13)', 'C-9'].map(parseChord), 'alternate', { startForm: 'B' });
 		expect(names(v[1].notes)).toBe('B E♭ F A♭');
 		expect(names(v[2].notes)).toBe('B♭ D E♭ G');
 		expect(names(v[0].notes)).toBe('C F A♭');
@@ -148,6 +149,27 @@ describe('voicing', () => {
 		for (let i = 1; i < v.length; i++) {
 			v[i].notes.forEach((n, j) => expect(Math.abs(n.midi - v[i - 1].notes[j].midi)).toBeLessThanOrEqual(2));
 		}
+	});
+	const rootless = (c: string) => names(voiceProgression([parseChord(c)], 'A')[0].notes);
+	it('keeps written tensions in rootless voicings', () => {
+		expect(rootless('C7(♯11)')).toBe('E A B♭ D F♯');
+		expect(rootless('D7(♭5)')).toBe('F♯ A♭ C E');
+		expect(rootless('D7(♯5)')).toBe('F♯ A♯ C E');
+		expect(rootless('CΔ7(♯11)')).toBe('E F♯ B D');
+		expect(rootless('CΔ7(9, ♯11, 13)')).toBe('E F♯ B D A');
+		expect(rootless('C-11')).toBe('E♭ F B♭ D');
+		expect(rootless('C-7(13)')).toBe('E♭ A B♭ D');
+	});
+	it('tells 7sus, 9sus and 13sus apart', () => {
+		expect(rootless('C7sus')).toBe('F G B♭ C');
+		expect(rootless('C9sus')).toBe('F G B♭ D');
+		expect(rootless('C13sus')).toBe('F A B♭ D');
+	});
+	it('keeps the ♭7 of 7alt in close position', () => {
+		expect(names(voiceProgression([parseChord('C7alt')], 'close')[0].notes)).toBe('C E G♭ B♭');
+	});
+	it('stacks fifths for the Lydian chord', () => {
+		expect(names(voiceStack(parseChord('CΔ7(9, ♯11, 13)'), ['1', '5', '9', '13', '3', '7', '♯11']).notes)).toBe('C G D A E B F♯');
 	});
 });
 

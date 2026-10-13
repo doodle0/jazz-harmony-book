@@ -1,4 +1,4 @@
-// Chord symbols. Parses both the lecture's notation (CΔ7, D-7, Bø7, G7(♭9 ♭13))
+// Chord symbols. Parses both the lecture's notation (CΔ7, D-7, Bø7, G7(♭9, ♭13))
 // and common/tonal spellings (Cmaj7, Dm7, Bm7b5, G7b9), into one structure.
 // Display goes through format.ts.
 

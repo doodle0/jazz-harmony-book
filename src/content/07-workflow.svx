@@ -21,14 +21,14 @@
 | Eø7 A7 | viiø7 – III7 = **vi로 가는** ii-V |
 | D-7 (G7) | vi-7 = ii-7/V · II7 = V7/V |
 | C-7 F7 | v-7 – I7 = **IV로 가는** ii-V |
-| B♭Δ7 E♭7 | IVΔ7 – ♭VII7 (백도어 색채) |
+| B♭Δ7 · B♭-7 E♭7 | IVΔ7 – iv-7 ♭VII7 = **백도어** |
 | FΔ7 | IΔ7 |
 | Bø7 E7 A-7 D7 G-7 C7 | ♯ivø7 – VII7 – iii – VI7 – ii – V = **샤프 포 워크다운** |
 | FΔ7 | IΔ7 |
 
 모든 마디가 ii-V-I의 아이디어입니다. 그게 보이면 이 곡은 코드 서른 개가 아니라 결정 여덟 개입니다.
 
-<Hear prog="IΔ7 | % | viiø7 V7/vi | vi-7 V7/V | v-7 I7 | IVΔ7 ♭VII7 | IΔ7 | % | ♯ivø7 VII7 | iii-7 VI7 | ii-7 V7 | IΔ7" key="F" style="swing" tempo={150} label="I'll Close My Eyes 분석 따라 듣기" />
+<Hear prog="IΔ7 | % | viiø7 | V7/vi | vi-7 | V7/V | v-7 | I7 | IVΔ7 | iv-7 ♭VII7 | IΔ7 | % | ♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7 | IΔ7" key="F" style="swing" tempo={150} label="I'll Close My Eyes 분석 따라 듣기" />
 
 
 ## 곡을 빨리 익히는 법

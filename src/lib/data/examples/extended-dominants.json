@@ -34,11 +34,11 @@
 			"variants": {
 				"A": {
 					"label": "5도 사슬",
-					"prog": "III7 | VI7 | II7 | V7"
+					"prog": "III7 | VI7 | II7 | V7 | IΔ7 | %"
 				},
 				"B": {
 					"label": "전부 대체",
-					"prog": "subV7/vi | subV7/ii | subV7/V | subV7"
+					"prog": "subV7/vi | subV7/ii | subV7/V | subV7 | IΔ7 | %"
 				}
 			},
 			"provenance": {

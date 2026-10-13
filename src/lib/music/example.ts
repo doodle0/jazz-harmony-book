@@ -4,7 +4,7 @@
 import type { Style, Sequence, NoteEv } from '#lib/audio/types.ts';
 import { renderGroove, METER } from '#lib/audio/grooves/index.ts';
 import { parseProgression, resolveProgression, totalBeats, parseKey, type Key, type ResolvedChord } from '#lib/theory/progression.ts';
-import { voiceProgression, type VoiceOptions, type Voicing, type VoicingStyle } from '#lib/theory/voicing.ts';
+import { voiceProgression, voiceStack, type VoiceOptions, type Voicing, type VoicingStyle } from '#lib/theory/voicing.ts';
 import type { Inst } from '#lib/audio/types.ts';
 
 export type Status = 'generated' | 'flagged' | 'approved';
@@ -37,6 +37,8 @@ export interface Example {
 	prog?: string;
 	variants?: Record<string, Variant>;
 	voicing?: VoicingStyle;
+	/** fixed voicing as a degree stack from the bass up, e.g. '1 5 9 13 3 7 ♯11' (overrides `voicing`) */
+	stack?: string;
 	comp?: Inst;
 	note?: string;
 	provenance: Provenance;
@@ -114,7 +116,11 @@ export function arrange(ex: Example, o: ArrangeOptions = {}): Arranged {
 	const key = o.key ?? parseKey(ex.key);
 	const prog = parseProgression(progOf(ex, o.variant), meter);
 	const chords = resolveProgression(prog, key);
-	const voicings = o.voicings ?? voiceProgression(chords.map((c) => c.chord), o.voicing ?? ex.voicing ?? 'rootless', o.voiceOptions);
+	const stack = ex.stack?.split(/\s+/).map((d) => d.replace(/♭/g, 'b').replace(/♯/g, '#'));
+	const voicings =
+		o.voicings ??
+		(stack ? chords.map((c) => voiceStack(c.chord, stack)) : null) ??
+		voiceProgression(chords.map((c) => c.chord), o.voicing ?? ex.voicing ?? 'rootless', o.voiceOptions);
 	const seq = renderGroove(o.style ?? ex.style, {
 		chords,
 		voicings,

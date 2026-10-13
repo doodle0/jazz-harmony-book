@@ -11,12 +11,12 @@
 			"tempo": 196,
 			"variants": {
 				"A": {
-					"label": "iii – VI7",
-					"prog": "IΔ7 | iii-7 V7/ii | ii-7 V7 | IΔ7"
+					"label": "vi-7 – II7",
+					"prog": "IΔ7 | vi-7 II7 | ii-7 | V7"
 				},
 				"B": {
 					"label": "♭iii-7 – ♭VI7",
-					"prog": "IΔ7 | ♭iii-7 ♭VI7 | ii-7 V7 | IΔ7"
+					"prog": "IΔ7 | ♭iii-7 ♭VI7 | ii-7 | V7"
 				}
 			},
 			"provenance": {
@@ -32,18 +32,18 @@
 		},
 		{
 			"id": "cv-alice",
-			"title": "Blues for Alice 식 사슬",
+			"title": "Blues for Alice",
 			"style": "swing",
 			"key": "F",
 			"tempo": 168,
 			"variants": {
 				"A": {
-					"label": "5도 사슬",
-					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7"
+					"label": "보통의 재즈 블루스",
+					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7 | ♯ivo7 | iii-7 | VI7 | ii-7 | V7 | IΔ7 VI7 | ii-7 V7"
 				},
 				"B": {
-					"label": "반음 하행",
-					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7 | iv-7 ♭VII7 | iii-7 VI7 | ♭iii-7 ♭VI7 | ii-7 V7"
+					"label": "반음 하행 ii-V",
+					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7 | iv-7 ♭VII7 | iii-7 VI7 | ♭iii-7 ♭VI7 | ii-7 | V7 | IΔ7 VI7 | ii-7 V7"
 				}
 			},
 			"provenance": {
@@ -70,7 +70,7 @@
 				},
 				"B": {
 					"label": "위에서 내려오기",
-					"prog": "iii-7 | ♭iii-7 | ii-7 | subV7"
+					"prog": "iii-7 ♭iii-7 | ii-7 subV7 | IΔ7 | %"
 				}
 			},
 			"provenance": {

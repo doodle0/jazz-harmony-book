@@ -1,6 +1,7 @@
 <script lang="ts">
 	// Inline "hear this" pill for a progression written in the prose:
 	// <Hear prog="ii-7 V7 | IΔ7" key="C" style="swing" />
+	// `stack` fixes the voicing as degrees from the bass up: stack="1 5 9 13 3 7 ♯11"
 	import { Play, Square } from '@lucide/svelte';
 	import type { Style } from '#lib/audio/types.ts';
 	import { exampleSource } from '#lib/music/deck.svelte.ts';
@@ -14,8 +15,9 @@
 		key = 'C',
 		style = 'swing',
 		tempo = 120,
-		label
-	}: { prog: string; key?: string; style?: Style; tempo?: number; label?: string } = $props();
+		label,
+		stack
+	}: { prog: string; key?: string; style?: Style; tempo?: number; label?: string; stack?: string } = $props();
 
 	const id = $props.id();
 	let ex = $derived<Example>({
@@ -25,6 +27,7 @@
 		key,
 		tempo,
 		prog,
+		stack,
 		provenance: { status: 'generated', origin: 'ai' }
 	});
 	let shownKey = $derived(player.keyFor(id, parseKey(key)));
