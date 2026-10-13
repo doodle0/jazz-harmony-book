@@ -74,7 +74,8 @@ export function playDrum(ctx: BaseAudioContext, out: AudioNode, drum: Drum, t: n
 			burst(ctx, out, t, { type: 'bandpass', freq: 5500, q: 1.5, attack: 0.004, decay: 0.045, gain: 0.3 * v });
 			break;
 		case 'brush':
-			burst(ctx, out, t, { type: 'bandpass', freq: 3200, q: 0.6, attack: 0.03, decay: 0.28, gain: 0.18 * v });
+			// a quick attack so each beat lands on time; the decay keeps the swish
+			burst(ctx, out, t, { type: 'bandpass', freq: 3200, q: 0.6, attack: 0.008, decay: 0.22, gain: 0.18 * v });
 			break;
 		case 'shaker':
 			burst(ctx, out, t, { type: 'bandpass', freq: 6500, q: 1.2, attack: 0.012, decay: 0.06, gain: 0.25 * v });

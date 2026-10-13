@@ -186,22 +186,96 @@ const hardBop: Groove = {
 
 // ---- ballad ---------------------------------------------------------------
 
+/**
+ * Ballad bass that mixes feels: most bars in two (roots, a 5th on beat 3 of a long chord,
+ * sometimes a pickup into the next chord); the last bar of each four-bar phrase walks in
+ * four into the next phrase.
+ */
+function balladBass(g: GrooveInput, vel = 0.7): NoteEv[] {
+	const out: NoteEv[] = [];
+	let prev = bassMidi(g.chords[0].chord, 36);
+	g.chords.forEach((c, i) => {
+		const next = g.chords[(i + 1) % g.chords.length];
+		const changes = next.symbol !== c.symbol;
+		const bar = Math.floor(c.start / g.beatsPerBar);
+		const walk = bar % 4 === 3;
+		const root = nearest(rootPc(c), prev);
+		// a half step into the next root, from the side we're coming from (never repeating `from`)
+		const approachTo = (from: number) => {
+			const target = nearest(rootPc(next), from);
+			let m = target + (from > target ? 1 : -1);
+			if (m === from) m = target + (from > target ? -1 : 1);
+			return Math.min(BASS_HIGH, Math.max(BASS_LOW, m));
+		};
+		const n = Math.max(1, Math.round(c.beats));
+		if (walk && n >= 2) {
+			// four: root, chord tones, then a chromatic approach on the last beat
+			const notes = [root];
+			let cur = root;
+			const inner = [thirdOf(c), fifthOf(c)];
+			for (let b = 1; b < n - 1; b++) notes.push((cur = nearest(tonePc(c, inner[(b - 1) % 2]), cur)));
+			notes.push(approachTo(cur));
+			notes.forEach((m, b) => out.push({ beat: c.start + b, dur: 0.9, inst: 'bass', midi: [m], vel: b === 0 ? vel : vel * 0.85 }));
+			prev = notes[notes.length - 1];
+			return;
+		}
+		// two: half notes, with an occasional pickup on beat 4 of a long chord
+		out.push({ beat: c.start, dur: Math.min(2, c.beats) - 0.1, inst: 'bass', midi: [root], vel });
+		prev = root;
+		if (c.beats >= 4) {
+			const pickup = changes && rand(i * 7 + 3) < 0.45;
+			const fifth = nearest(tonePc(c, fifthOf(c)), root);
+			out.push({ beat: c.start + 2, dur: (pickup ? 1 : c.beats - 2) - 0.1, inst: 'bass', midi: [fifth], vel: vel * 0.85 });
+			prev = fifth;
+			if (pickup) {
+				const m = approachTo(fifth);
+				out.push({ beat: c.start + 3, dur: 0.9, inst: 'bass', midi: [m], vel: vel * 0.8 });
+				prev = m;
+			}
+		}
+	});
+	return out;
+}
+
+// piano rhythms for a chord that fills a bar (offsets in beats; x.5 is swung)
+const BALLAD_COMP: number[][] = [[0, 2], [0, 1.5], [0, 2.5], [0], [0, 1.5, 3]];
+
+/**
+ * Ballad comping: a rhythm per bar from BALLAD_COMP, and now and then a new chord
+ * anticipated by an eighth (the "and" of 4, or of 2 for a mid-bar change). Each hit lasts until just before the next one.
+ */
+function balladComp(g: GrooveInput): NoteEv[] {
+	const inst = g.comp ?? 'piano';
+	const hits: { beat: number; midi: number[]; vel: number }[] = [];
+	g.chords.forEach((c, i) => {
+		const midi = g.voicings[i].notes.map((n) => n.midi);
+		const prevChord = g.chords[i - 1];
+		const anticipate = i > 0 && prevChord.symbol !== c.symbol && rand(i * 11 + 1) < 0.3;
+		const pat = c.beats >= 4 ? BALLAD_COMP[Math.floor(rand(i * 5 + 2) * BALLAD_COMP.length)] : [0];
+		pat.forEach((o, k) => {
+			if (k === 0 && anticipate) {
+				// the push replaces anything the previous chord had from that eighth on
+				for (let j = hits.length - 1; j >= 0 && hits[j].beat >= c.start - 0.5; j--) hits.pop();
+				hits.push({ beat: c.start - 0.5, midi, vel: 0.5 });
+			} else hits.push({ beat: c.start + o, midi, vel: k === 0 ? 0.48 : 0.38 });
+		});
+	});
+	return hits.map((h, k) => {
+		const nextBeat = k + 1 < hits.length ? hits[k + 1].beat : g.beats;
+		return { beat: h.beat, dur: Math.max(0.3, nextBeat - h.beat - 0.12), inst, midi: h.midi, vel: h.vel };
+	});
+}
+
 const ballad: Groove = {
 	swing: 0.66,
-	comp: (g) =>
-		g.chords.map((c, i) => ({
-			beat: c.start,
-			dur: c.beats,
-			inst: g.comp ?? 'piano',
-			midi: g.voicings[i].notes.map((n) => n.midi),
-			vel: 0.45
-		})),
-	bass: (g) => rootFifthBass(g, [[0, 'R', 1.9], [2, '5', 1.9]], 0.7),
+	comp: balladComp,
+	bass: (g) => balladBass(g),
 	drums: (g) =>
 		perBar(g, (s) => {
 			const ev: DrumEv[] = [];
-			for (let b = 0; b < g.beatsPerBar; b++) ev.push({ beat: s + b, drum: 'brush', vel: 0.3 });
-			ev.push({ beat: s + 1, drum: 'hatFoot', vel: 0.3 }, { beat: s + 3, drum: 'hatFoot', vel: 0.3 });
+			for (let b = 0; b < g.beatsPerBar; b++) ev.push({ beat: s + b, drum: 'brush', vel: b % 2 ? 0.28 : 0.34 });
+			// brush taps and hi-hat foot on 2 and 4 hold the backbeat
+			for (const b of [1, 3]) ev.push({ beat: s + b, drum: 'snare', vel: 0.16 }, { beat: s + b, drum: 'hatFoot', vel: 0.38 });
 			return ev;
 		})
 };
