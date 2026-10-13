@@ -1,0 +1,67 @@
+{
+	"concept": "ii-v-i",
+	"title": "ii-V-I",
+	"examples": [
+		{
+			"id": "iivi-ballad",
+			"title": "발라드 ii-V-I",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 64,
+			"variants": {
+				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+			},
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "iivi-swing",
+			"title": "미디엄 스윙 ii-V-I",
+			"style": "swing",
+			"key": "C",
+			"tempo": 138,
+			"variants": {
+				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+			},
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "iivi-bossa",
+			"title": "보사노바 ii-V-I",
+			"style": "bossa",
+			"key": "D",
+			"tempo": 128,
+			"comp": "piano",
+			"variants": {
+				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+			},
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "iivi-waltz",
+			"title": "재즈 왈츠 ii-V-I",
+			"style": "waltz",
+			"key": "F",
+			"tempo": 150,
+			"variants": {
+				"major": { "label": "메이저", "prog": "ii-9 | % | V13 | % | IΔ9 | % | % | %" },
+				"minor": { "label": "마이너", "prog": "iiø7 | % | V7(♭9 ♭13) | % | i-9 | % | % | %" }
+			},
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "iivi-hardbop",
+			"title": "하드밥 ii-V-I",
+			"style": "hard-bop",
+			"key": "B♭",
+			"tempo": 168,
+			"variants": {
+				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
+				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9 ♭13) | i-9 | %" }
+			},
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		}
+	]
+}

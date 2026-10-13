@@ -1,0 +1,33 @@
+{
+	"concept": "avoid-notes",
+	"title": "기피음 실험",
+	"examples": [
+		{
+			"id": "rub-pad",
+			"title": "피아노 코드 위에서",
+			"style": "pad",
+			"key": "C",
+			"tempo": 80,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "rub-ballad",
+			"title": "브러시 발라드 위에서",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 66,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "rub-bossa",
+			"title": "보사노바 위에서",
+			"style": "bossa",
+			"key": "F",
+			"tempo": 120,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		}
+	]
+}

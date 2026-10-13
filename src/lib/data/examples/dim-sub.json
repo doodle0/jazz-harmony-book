@@ -1,0 +1,73 @@
+{
+	"concept": "dim-sub",
+	"title": "디미니시드 대체",
+	"summary": "근음을 뺀 V7(♭9)는 곧 viio7. 세컨더리 도미넌트를 목표의 반음 아래 o7로 바꾸면 베이스가 반음계로 올라갑니다.",
+	"examples": [
+		{
+			"id": "dim-swing",
+			"title": "IΔ7 – ♯io7 – ii-7",
+			"style": "swing",
+			"key": "E♭",
+			"tempo": 144,
+			"variants": {
+				"A": {
+					"label": "세컨더리 도미넌트",
+					"prog": "IΔ7 V7/ii | ii-7 V7/iii | iii-7 V7/ii | ii-7 V7"
+				},
+				"B": {
+					"label": "o7 대체",
+					"prog": "IΔ7 ♯io7 | ii-7 ♯iio7 | iii-7 V7/ii | ii-7 V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "dim-ballad",
+			"title": "발라드 o7",
+			"style": "ballad",
+			"key": "F",
+			"tempo": 64,
+			"variants": {
+				"A": {
+					"label": "V7/ii",
+					"prog": "IΔ7 | V7/ii | ii-7 | V7"
+				},
+				"B": {
+					"label": "♯io7",
+					"prog": "IΔ7 | ♯io7 | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "dim-bossa",
+			"title": "보사 o7",
+			"style": "bossa",
+			"key": "C",
+			"tempo": 124,
+			"variants": {
+				"A": {
+					"label": "V7/ii",
+					"prog": "IΔ7 | V7/ii | ii-7 | V7"
+				},
+				"B": {
+					"label": "♯io7",
+					"prog": "IΔ7 | ♯io7 | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

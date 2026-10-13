@@ -1,0 +1,78 @@
+{
+	"concept": "iii-biii",
+	"title": "iii – ♭III – ii – V – I",
+	"summary": "VI7은 V7/ii이니, 그 트라이톤 대체인 ♭III7으로 바꾸면 iii부터 반음씩 미끄러져 내려갑니다.",
+	"examples": [
+		{
+			"id": "ib-four",
+			"title": "Four의 엔딩",
+			"style": "bebop",
+			"key": "E♭",
+			"tempo": 200,
+			"variants": {
+				"A": {
+					"label": "iii – VI7",
+					"prog": "iii-7 V7/ii | ii-7 V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "iii – ♭III7",
+					"prog": "iii-7 subV7/ii | ii-7 V7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Four",
+				"composer": "Miles Davis",
+				"year": 1954
+			}
+		},
+		{
+			"id": "ib-swing",
+			"title": "스윙 엔딩",
+			"style": "swing",
+			"key": "G",
+			"tempo": 150,
+			"variants": {
+				"A": {
+					"label": "iii – VI7",
+					"prog": "iii-7 V7/ii | ii-7 V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "iii – ♭III7",
+					"prog": "iii-7 subV7/ii | ii-7 V7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "ib-bossa",
+			"title": "보사 엔딩",
+			"style": "bossa",
+			"key": "C",
+			"tempo": 120,
+			"variants": {
+				"A": {
+					"label": "iii – VI7",
+					"prog": "iii-7 | V7/ii | ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "iii – ♭III7",
+					"prog": "iii-7 | subV7/ii | ii-7 | subV7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

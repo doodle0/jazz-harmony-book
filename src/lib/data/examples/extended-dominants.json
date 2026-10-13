@@ -1,0 +1,73 @@
+{
+	"concept": "extended-dominants",
+	"title": "익스텐디드 도미넌트",
+	"summary": "5도권을 따라 내려가는 도미넌트의 사슬. 하나 걸러 트라이톤 대체하면 베이스가 반음계로 내려옵니다.",
+	"examples": [
+		{
+			"id": "ed-swing",
+			"title": "도미넌트 사슬",
+			"style": "swing",
+			"key": "C",
+			"tempo": 160,
+			"variants": {
+				"A": {
+					"label": "5도 사슬",
+					"prog": "VII7 | III7 | VI7 | II7 | V7 | % | IΔ7 | %"
+				},
+				"B": {
+					"label": "하나 걸러 대체",
+					"prog": "VII7 | subV7/vi | VI7 | subV7/V | V7 | % | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "ed-hardbop",
+			"title": "하드밥 사슬",
+			"style": "hard-bop",
+			"key": "F",
+			"tempo": 176,
+			"variants": {
+				"A": {
+					"label": "5도 사슬",
+					"prog": "III7 | VI7 | II7 | V7"
+				},
+				"B": {
+					"label": "전부 대체",
+					"prog": "subV7/vi | subV7/ii | subV7/V | subV7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "ed-samba",
+			"title": "삼바 사슬",
+			"style": "samba",
+			"key": "D",
+			"tempo": 112,
+			"variants": {
+				"A": {
+					"label": "5도 사슬",
+					"prog": "VI7 | II7 | V7 | IΔ7"
+				},
+				"B": {
+					"label": "하나 걸러 대체",
+					"prog": "VI7 | subV7/V | V7 | IΔ7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

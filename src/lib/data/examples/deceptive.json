@@ -1,0 +1,82 @@
+{
+	"concept": "deceptive",
+	"title": "위종지",
+	"summary": "V7이 I 대신 다른 곳에 착지합니다. 재즈에서 가장 흔한 건 ii – V – iii이에요.",
+	"examples": [
+		{
+			"id": "dc-misty",
+			"title": "턴어라운드 위종지",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 62,
+			"variants": {
+				"A": {
+					"label": "V → I",
+					"prog": "ii-7 | V7 | IΔ7 | V7/ii"
+				},
+				"B": {
+					"label": "V → iii",
+					"prog": "ii-7 | V7 | iii-7 | V7/ii"
+				},
+				"C": {
+					"label": "V → vi",
+					"prog": "ii-7 | V7 | vi-7 | V7/ii"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Misty",
+				"composer": "Erroll Garner",
+				"year": 1954
+			}
+		},
+		{
+			"id": "dc-swing",
+			"title": "스윙 위종지",
+			"style": "swing",
+			"key": "F",
+			"tempo": 144,
+			"variants": {
+				"A": {
+					"label": "V → I",
+					"prog": "ii-7 V7 | IΔ7 | ii-7 V7 | IΔ7"
+				},
+				"B": {
+					"label": "V → iii",
+					"prog": "ii-7 V7 | iii-7 V7/ii | ii-7 V7 | IΔ7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "dc-waltz",
+			"title": "왈츠 위종지",
+			"style": "waltz",
+			"key": "C",
+			"tempo": 150,
+			"variants": {
+				"A": {
+					"label": "V → I",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "V → vi",
+					"prog": "ii-7 | V7 | vi-7 | V7/ii"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

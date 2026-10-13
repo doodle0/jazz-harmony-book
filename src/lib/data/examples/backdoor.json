@@ -1,0 +1,79 @@
+{
+	"concept": "backdoor",
+	"title": "백도어 진행",
+	"summary": "ii-V-I이 앞문이라면 iv-7 – ♭VII7 – I은 뒷문입니다. 더 부드럽고 아련하게 도착해요.",
+	"examples": [
+		{
+			"id": "bd-yardbird",
+			"title": "IV 다음의 백도어",
+			"style": "bebop",
+			"key": "C",
+			"tempo": 196,
+			"variants": {
+				"A": {
+					"label": "앞문 ii-V",
+					"prog": "IΔ7 | % | v-7 | I7 | IVΔ7 | ii-7 V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "백도어",
+					"prog": "IΔ7 | % | v-7 | I7 | IVΔ7 | iv-7 ♭VII7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Yardbird Suite",
+				"composer": "Charlie Parker",
+				"year": 1946
+			},
+			"era": "1940년대"
+		},
+		{
+			"id": "bd-ballad",
+			"title": "발라드 마지막 종지",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 58,
+			"variants": {
+				"A": {
+					"label": "ii-V-I",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "iv-7 – ♭VII7 – I",
+					"prog": "iv-7 | ♭VII7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "bd-bossa",
+			"title": "보사노바 백도어",
+			"style": "bossa",
+			"key": "G",
+			"tempo": 124,
+			"variants": {
+				"A": {
+					"label": "ii-V-I",
+					"prog": "IΔ7 | % | ii-7 | V7"
+				},
+				"B": {
+					"label": "백도어",
+					"prog": "IΔ7 | % | iv-7 | ♭VII7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

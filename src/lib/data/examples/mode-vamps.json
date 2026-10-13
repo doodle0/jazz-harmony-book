@@ -1,0 +1,51 @@
+{
+	"concept": "modes",
+	"title": "모드 밝기",
+	"examples": [
+		{
+			"id": "modes-modal",
+			"title": "모달 뱀프 (스트레이트 8분)",
+			"style": "modal",
+			"key": "D",
+			"tempo": 116,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "modes-drone",
+			"title": "C 드론 위의 스케일",
+			"style": "pad",
+			"key": "C",
+			"tempo": 112,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "modes-ballad",
+			"title": "발라드 패드",
+			"style": "ballad",
+			"key": "F",
+			"tempo": 76,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "modes-bossa",
+			"title": "보사노바 뱀프",
+			"style": "bossa",
+			"key": "G",
+			"tempo": 124,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "modes-latin",
+			"title": "아프로-쿠반 뱀프",
+			"style": "latin",
+			"key": "E",
+			"tempo": 168,
+			"prog": "I | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		}
+	]
+}

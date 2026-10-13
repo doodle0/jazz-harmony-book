@@ -1,0 +1,108 @@
+{
+	"concept": "secondary-dominant",
+	"title": "세컨더리 도미넌트와 세컨더리 ii-V",
+	"summary": "I이 아닌 코드 앞에 그 코드의 V7(또는 ii-V)을 놓으면, 목표 코드가 훨씬 또렷하게 도착합니다.",
+	"examples": [
+		{
+			"id": "sec-a-train",
+			"title": "II7 – V – I",
+			"style": "swing",
+			"key": "C",
+			"tempo": 168,
+			"variants": {
+				"A": {
+					"label": "다이아토닉",
+					"prog": "IΔ7 | % | ii-7 | % | ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "V7/V (II7)",
+					"prog": "IΔ7 | % | V7(♭5)/V | % | ii-7 | V7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Take the A Train",
+				"composer": "Billy Strayhorn",
+				"year": 1939
+			},
+			"era": "스윙 시대"
+		},
+		{
+			"id": "sec-misty",
+			"title": "v-7 – I7 → IV",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 62,
+			"variants": {
+				"A": {
+					"label": "바로 IV",
+					"prog": "IΔ7 | % | IVΔ7 | %"
+				},
+				"B": {
+					"label": "IV로 가는 ii-V",
+					"prog": "IΔ7 | v-7 I7 | IVΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Misty",
+				"composer": "Erroll Garner",
+				"year": 1954
+			},
+			"era": "1950년대",
+			"note": "뜬금없는 v-7이 보이면 IV로 가는 ii-V가 온다고 기대하세요."
+		},
+		{
+			"id": "sec-waltz-vi",
+			"title": "vi와 ii를 준비하기",
+			"style": "waltz",
+			"key": "B♭",
+			"tempo": 156,
+			"variants": {
+				"A": {
+					"label": "다이아토닉",
+					"prog": "IΔ7 | % | vi-7 | % | ii-7 | % | V7 | %"
+				},
+				"B": {
+					"label": "V7/vi, V7/ii",
+					"prog": "IΔ7 | V7/vi | vi-7 | V7/ii | ii-7 | % | V7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "sec-bossa-ii",
+			"title": "세컨더리 ii-V로 ii를 준비",
+			"style": "bossa",
+			"key": "D",
+			"tempo": 126,
+			"variants": {
+				"A": {
+					"label": "다이아토닉",
+					"prog": "IΔ7 | % | ii-7 | V7"
+				},
+				"B": {
+					"label": "iiø7/ii – V7/ii",
+					"prog": "IΔ7 | iiø7/ii V7/ii | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

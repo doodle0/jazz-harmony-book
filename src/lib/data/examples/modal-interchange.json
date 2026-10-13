@@ -1,0 +1,77 @@
+{
+	"concept": "modal-interchange",
+	"title": "모달 인터체인지",
+	"summary": "같은 으뜸음의 다른 모드에서 코드를 빌려옵니다. I 앞의 iv-6나 ♭VIΔ7은 메이저 엔딩을 단숨에 어둡게 만들어요.",
+	"examples": [
+		{
+			"id": "mi-ballad",
+			"title": "빌려온 iv-6",
+			"style": "ballad",
+			"key": "C",
+			"tempo": 64,
+			"variants": {
+				"A": {
+					"label": "IVΔ7",
+					"prog": "ii-7 | IVΔ7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "iv-6",
+					"prog": "ii-7 | iv-6 | IΔ7 | %"
+				},
+				"C": {
+					"label": "♭VIΔ7",
+					"prog": "ii-7 | ♭VIΔ7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "mi-soul",
+			"title": "소울 재즈 인터체인지",
+			"style": "hard-bop",
+			"key": "F",
+			"tempo": 112,
+			"variants": {
+				"A": {
+					"label": "다이아토닉",
+					"prog": "IΔ7 | IVΔ7 | IΔ7 | V7"
+				},
+				"B": {
+					"label": "빌려온 코드",
+					"prog": "IΔ7 | iv-7 | ♭VIΔ7 | ♭VII7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "mi-bossa",
+			"title": "보사 인터체인지",
+			"style": "bossa",
+			"key": "D",
+			"tempo": 120,
+			"variants": {
+				"A": {
+					"label": "IVΔ7",
+					"prog": "IΔ7 | % | IVΔ7 | %"
+				},
+				"B": {
+					"label": "iv-6",
+					"prog": "IΔ7 | % | iv-6 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

@@ -1,0 +1,101 @@
+{
+	"concept": "tritone-sub",
+	"title": "트라이톤 대체",
+	"summary": "V7을 트라이톤 떨어진 도미넌트로 바꾸면 베이스가 반음씩 내려갑니다(ii – ♭II – I). 가이드톤(3도·7도)은 그대로예요.",
+	"examples": [
+		{
+			"id": "tt-ipanema",
+			"title": "ii – ♭II7 – I",
+			"style": "bossa",
+			"key": "F",
+			"tempo": 128,
+			"variants": {
+				"A": {
+					"label": "V7",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "subV7",
+					"prog": "ii-7 | subV7(♯11) | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "The Girl from Ipanema",
+				"composer": "Antônio Carlos Jobim",
+				"year": 1962
+			},
+			"era": "1960년대"
+		},
+		{
+			"id": "tt-swing",
+			"title": "스윙 턴어라운드",
+			"style": "swing",
+			"key": "C",
+			"tempo": 150,
+			"variants": {
+				"A": {
+					"label": "V7",
+					"prog": "IΔ7 vi-7 | ii-7 V7"
+				},
+				"B": {
+					"label": "subV7",
+					"prog": "IΔ7 vi-7 | ii-7 subV7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "tt-ballad",
+			"title": "발라드 종지",
+			"style": "ballad",
+			"key": "A♭",
+			"tempo": 60,
+			"variants": {
+				"A": {
+					"label": "V7",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"B": {
+					"label": "subV7",
+					"prog": "ii-9 | subV7(♯11) | IΔ9 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "tt-latin",
+			"title": "라틴 ii-V-I",
+			"style": "latin",
+			"key": "E♭",
+			"tempo": 176,
+			"variants": {
+				"A": {
+					"label": "V7",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "subV7",
+					"prog": "ii-7 | subV7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

@@ -1,0 +1,83 @@
+{
+	"concept": "chromatic-ii-v",
+	"title": "반음 하행 ii-V",
+	"summary": "도미넌트를 대체한 뒤 다시 ii-V로 쪼개면, ii-V가 반음씩 미끄러져 내려갑니다.",
+	"examples": [
+		{
+			"id": "cv-four",
+			"title": "Four의 브리지",
+			"style": "bebop",
+			"key": "E♭",
+			"tempo": 196,
+			"variants": {
+				"A": {
+					"label": "iii – VI7",
+					"prog": "IΔ7 | iii-7 V7/ii | ii-7 V7 | IΔ7"
+				},
+				"B": {
+					"label": "♭iii-7 – ♭VI7",
+					"prog": "IΔ7 | ♭iii-7 ♭VI7 | ii-7 V7 | IΔ7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Four",
+				"composer": "Miles Davis",
+				"year": 1954
+			}
+		},
+		{
+			"id": "cv-alice",
+			"title": "Blues for Alice 식 사슬",
+			"style": "swing",
+			"key": "F",
+			"tempo": 168,
+			"variants": {
+				"A": {
+					"label": "5도 사슬",
+					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7"
+				},
+				"B": {
+					"label": "반음 하행",
+					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7 | iv-7 ♭VII7 | iii-7 VI7 | ♭iii-7 ♭VI7 | ii-7 V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "Blues for Alice",
+				"composer": "Charlie Parker",
+				"year": 1951
+			}
+		},
+		{
+			"id": "cv-latin",
+			"title": "라틴 사슬",
+			"style": "latin",
+			"key": "C",
+			"tempo": 180,
+			"variants": {
+				"A": {
+					"label": "한 번의 ii-V",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "위에서 내려오기",
+					"prog": "iii-7 | ♭iii-7 | ii-7 | subV7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

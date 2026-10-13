@@ -1,0 +1,78 @@
+{
+	"concept": "sharp-four",
+	"title": "샤프 포 워크다운",
+	"summary": "♯ivø7 – VII7 – iii – VI7 – ii – V – I. 턴어라운드를 두 마디로 늘리는 고전적인 방법이에요.",
+	"examples": [
+		{
+			"id": "s4-close-eyes",
+			"title": "I'll Close My Eyes 식",
+			"style": "swing",
+			"key": "F",
+			"tempo": 150,
+			"variants": {
+				"A": {
+					"label": "I에 머물기",
+					"prog": "IΔ7 | % | iii-7 VI7 | ii-7 V7"
+				},
+				"B": {
+					"label": "샤프 포 워크다운",
+					"prog": "♯ivø7 VII7 | iii-7 VI7 | ii-7 V7 | IΔ7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "I'll Close My Eyes",
+				"composer": "Billy Reid",
+				"year": 1945
+			}
+		},
+		{
+			"id": "s4-ballad",
+			"title": "발라드 워크다운",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 60,
+			"variants": {
+				"A": {
+					"label": "I에 머물기",
+					"prog": "IΔ7 | % | ii-7 | V7"
+				},
+				"B": {
+					"label": "워크다운",
+					"prog": "♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "s4-waltz",
+			"title": "왈츠 워크다운",
+			"style": "waltz",
+			"key": "B♭",
+			"tempo": 150,
+			"variants": {
+				"A": {
+					"label": "I에 머물기",
+					"prog": "IΔ7 | % | % | % | ii-7 | % | V7 | %"
+				},
+				"B": {
+					"label": "워크다운",
+					"prog": "♯ivø7 | VII7 | iii-7 | VI7 | ii-7 | % | V7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

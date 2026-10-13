@@ -1,0 +1,43 @@
+{
+	"concept": "dominant-palette",
+	"title": "도미넌트 팔레트",
+	"examples": [
+		{
+			"id": "dp-swing",
+			"title": "미디엄 스윙 ii-V-I",
+			"style": "swing",
+			"key": "F",
+			"tempo": 126,
+			"prog": "ii-7 | V7 | IΔ7 | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "dp-ballad",
+			"title": "발라드 ii-V-I",
+			"style": "ballad",
+			"key": "D♭",
+			"tempo": 60,
+			"prog": "ii-7 | V7 | IΔ7 | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "dp-bossa",
+			"title": "보사노바 ii-V-I",
+			"style": "bossa",
+			"key": "C",
+			"tempo": 120,
+			"comp": "piano",
+			"prog": "ii-7 | V7 | IΔ7 | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		},
+		{
+			"id": "dp-latin",
+			"title": "아프로-쿠반 ii-V-i",
+			"style": "latin",
+			"key": "G-",
+			"tempo": 168,
+			"prog": "iiø7 | V7 | i-6 | %",
+			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+		}
+	]
+}

@@ -1,0 +1,83 @@
+{
+	"concept": "tonicization",
+	"title": "으뜸음화",
+	"summary": "세컨더리 목표가 손님이 아니라 새 집처럼 들리기 시작하면 으뜸음화입니다.",
+	"examples": [
+		{
+			"id": "tz-bell",
+			"title": "III로 으뜸음화",
+			"style": "swing",
+			"key": "F",
+			"tempo": 168,
+			"variants": {
+				"A": {
+					"label": "키 안에 머물기",
+					"prog": "IΔ7 | % | ii-7 | V7 | IΔ7 | % | ii-7 | V7"
+				},
+				"B": {
+					"label": "III로 외출",
+					"prog": "IΔ7 | % | ii-7/III | V7/III | IIIΔ7 | % | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "If I Were a Bell",
+				"composer": "Frank Loesser",
+				"year": 1950
+			}
+		},
+		{
+			"id": "tz-dolphin",
+			"title": "5도권을 타고 ♭III로",
+			"style": "latin",
+			"key": "E♭",
+			"tempo": 172,
+			"variants": {
+				"A": {
+					"label": "키 안에 머물기",
+					"prog": "IΔ7 | % | ii-7 | V7"
+				},
+				"B": {
+					"label": "♭III로",
+					"prog": "IΔ7 | % | ii-7/♭III V7/♭III | ♭IIIΔ7 | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"tune": {
+				"title": "On Green Dolphin Street",
+				"composer": "Bronisław Kaper",
+				"year": 1947
+			}
+		},
+		{
+			"id": "tz-ballad",
+			"title": "발라드 으뜸음화",
+			"style": "ballad",
+			"key": "B♭",
+			"tempo": 64,
+			"variants": {
+				"A": {
+					"label": "한 마디 외출",
+					"prog": "IΔ7 | ii-7/IV V7/IV | IVΔ7 | V7"
+				},
+				"B": {
+					"label": "두 마디 머물기",
+					"prog": "IΔ7 | ii-7/IV V7/IV | IVΔ7 | % | ii-7/IV V7/IV | IVΔ7 | ii-7 | V7"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

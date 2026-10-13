@@ -1,0 +1,62 @@
+<script>
+	import Hear from '#lib/widgets/Hear.svelte';
+	import Heard from '#lib/components/Heard.svelte';
+</script>
+
+## 이것만은 기억하자
+- 로마 숫자는 기능을 드러낸다. 대/소문자는 3도를 따른다.
+- 메이저 ii-7 – V7 – IΔ7 · 마이너 iiø7 – V7 – i-7
+- 리디안 ♯4 · 믹솔리디안 ♭7 · 도리안 ♮6 · 프리지안 ♭2
+- 리디안과 도리안에는 기피음이 없다.
+- 얼터드 = 1 3 ♭7 + ♭5 ♭9 ♯9 ♭13 = 반음 위의 멜로딕 마이너
+- 프리지안 도미넌트 = 믹솔리디안 ♭9 ♭13 = 하모닉 마이너 5번 모드
+- 리디안 도미넌트와 얼터드: 같은 멜로딕 마이너, 트라이톤 차이
+- 비밥 메이저 = I6 + viio7 · 비밥 멜로딕 마이너 = i-6 + viio7
+- 근음 없는 V7(♭9) = viio7
+- subV7 = ♭II7 (가이드톤이 서로 뒤바뀜)
+- 목표의 반음 위에 있는 도미넌트 = 트라이톤 대체
+- 뜬금없는 v-7 → IV로 가는 ii-V · ♯ivø7 → iii로 · viiø7 → vi로
+- 백도어: iv-7 – ♭VII7 – I
+- 7sus = 이웃한 5도 4개, 펜타토닉 = 이웃한 5도 5개
+- 어떤 규칙보다 자기 귀를 믿어라.
+
+## 패턴 → 해석
+
+| 보이는 것 | 떠올릴 것 |
+|---|---|
+| 4도 간격의 X-7 Y7 | Y보다 4도 위 코드로 가는 ii-V |
+| Xø7 Y7 | 마이너 ii-V, 목표는 마이너 |
+| 다음 코드의 반음 위 도미넌트 | 트라이톤 대체 |
+| 반음씩 내려가는 ii-V | 반음 하행 ii-V 사슬 (트라이톤 대체 + 준비) |
+| iii – ♭III7 – ii – V | VI7의 트라이톤 대체 |
+| iv-7 – ♭VII7 – I | 백도어 |
+| ii – V – iii | 위종지 (턴어라운드) |
+| 코드의 반음 아래 o7 | 그 코드의 근음 없는 V7♭9 |
+| 키 밖의 메이저 코드로 가는 ii-V-I이 오래 머묾 | 으뜸음화 |
+| 코드가 바뀌는 동안 베이스가 순차 하행 | 라인 클리셰 |
+
+**패턴을 귀로:** <Hear prog="ii-7 | V7 | IΔ7 | %" label="ii-V-I" /> <Hear prog="ii-7 | subV7 | IΔ7 | %" label="트라이톤 대체" /> <Hear prog="iii-7 subV7/ii | ii-7 V7 | IΔ7 | %" label="iii–♭III–ii–V" /> <Hear prog="iv-7 | ♭VII7 | IΔ7 | %" label="백도어" /> <Hear prog="ii-7 | V7 | iii-7 | V7/ii" label="위종지" /> <Hear prog="IΔ7 | ♯io7 | ii-7 | V7" label="o7 = 근음 없는 V7♭9" /> <Hear prog="IΔ7 | v-7 I7 | IVΔ7 | %" label="v-7 → IV" /> <Hear prog="♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7" label="샤프 포 워크다운" />
+
+
+## 개념별 레퍼토리
+
+| 개념 | 곡 |
+|---|---|
+| ii-V 알아보기 | *Confirmation*, *All of Me* |
+| 세컨더리 도미넌트와 ii-V | *I'll Close My Eyes*, *It Could Happen to You*, *Take the A Train*, *But Not for Me* |
+| 으뜸음화 | *If I Were a Bell*, *All the Things You Are*, *On Green Dolphin Street*, *Out of the Past* |
+| 트라이톤 대체 | *The Girl from Ipanema*, *Sweet Lorraine* |
+| iii–♭III–ii–V–I | *Four*, *How High the Moon*, *Celia* |
+| 반음 하행 ii-V | *Four*, *Blues for Alice*, *Ask Me Now*, *Just Friends*, *Stablemates* |
+| 위종지 | *Ceora*, *Misty* |
+| 백도어 | *Yardbird Suite*, *Misty* |
+| 모달 / sus / 쿼털 | *So What*, *My Favorite Things*, *Maiden Voyage*, *Mahjong* |
+| 모달 감상 목록 | *Nardis*, *Naima*, *Yes or No*, *Speak No Evil*, *Nica's Dream* |
+| 프리지안 도미넌트 | *Spain* (도입부) |
+
+## 더 공부하기
+- Martin Rohrmeier, "The Syntax of Jazz Harmony: Diatonic Tonality, Phrase Structure, and Form," *Music Theory and Analysis* 7(1), 2020
+- *Barry Harris Videos* (YouTube): 6th 디미니시드 체계와 "코드 하나는 몇 개의 키에 들어 있나"를 다룬 수업 녹화본
+- Louie Zong, *Chord Personalities* (YouTube): 각 로마 숫자가 무슨 일을 하는지 재미있게 느껴 볼 수 있는 영상
+
+<Heard id="reference:chapter" />
