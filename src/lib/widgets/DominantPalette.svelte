@@ -48,8 +48,13 @@
 	let key = $derived(player.keyFor(id, usual, ex.id));
 	let scale = $derived(DOMINANT_SCALES.find((s) => s.id === scaleId)!);
 
+	// Phrygian dominant is the minor-key V7 (ch.3), so in a major example it resolves to i-6
+	const toMinor = (e: Example, sid: string) => sid === 'phrygian-dominant' && !e.key.endsWith('-');
+
 	function withV(e: Example, sid: string): Example {
-		return { ...e, prog: e.prog!.replace(/V7/, `V${V_SUFFIX[sid]}`), voicing: 'rootless' };
+		let prog = e.prog!.replace(/V7/, `V${V_SUFFIX[sid]}`);
+		if (toMinor(e, sid)) prog = prog.replace(/\bii-7/, 'iiø7').replace(/IΔ7/, 'i-6');
+		return { ...e, prog, voicing: 'rootless' };
 	}
 
 	/** an 8th-note run up the scale over the V bar */
@@ -126,6 +131,9 @@
 	</div>
 
 	<p class="mt-3 text-sm"><b>{scale.name}</b> · {scale.mood}</p>
+	{#if toMinor(ex, scaleId)}
+		<p class="mt-1 text-sm text-ink-soft">프리지안 도미넌트는 마이너로 가는 V7이라, 이 예시에서는 ii-V-i(마이너)로 바꿔 들려줍니다.</p>
+	{/if}
 	<div class="mt-1 flex flex-wrap gap-1">
 		{#each scale.degrees as d (d)}
 			<span class="rounded-md border-2 border-ink px-1.5 text-sm font-bold" style:background={['1', '3', 'b7'].includes(d) ? 'var(--teal)' : NATURAL.includes(d) ? 'var(--sky)' : 'var(--tomato)'}>{prettyDegree(d)}</span>

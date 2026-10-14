@@ -1,0 +1,37 @@
+{
+	"id": "function",
+	"questions": [
+		{
+			"kind": "choice",
+			"q": "F 키에서 G-7 – C7 – FΔ7을 로마 숫자로 읽으면?",
+			"options": [
+				"ii-7 – V7 – IΔ7",
+				"ii-7 – V7/V – IΔ7",
+				"vi-7 – II7 – IVΔ7"
+			],
+			"answer": 0,
+			"explain": "F 키에서 G는 2도, C는 5도입니다. 키가 바뀌어도 역할은 같은 ii-V-I이에요."
+		},
+		{
+			"kind": "choice",
+			"q": "G7 → C에서 끌림을 만드는 두 음은?",
+			"options": [
+				"G와 D (1도와 5도)",
+				"B와 F (3도와 7도)",
+				"D와 A (5도와 9도)"
+			],
+			"answer": 1,
+			"explain": "B–F는 트라이톤입니다. B는 C로 올라가고 F는 E로 내려가요. V 3화음(G B D)에는 F가 없어서 끌림이 약합니다."
+		},
+		{
+			"kind": "choice",
+			"q": "근음 없는 보이싱으로 D-7 – G7 – CΔ7을 A 폼으로 시작하면, G7은 어떤 폼이 되나요?",
+			"options": [
+				"A 폼 (맨 아래 3도)",
+				"B 폼 (맨 아래 7도)"
+			],
+			"answer": 1,
+			"explain": "A → B → A로 번갈아야 모든 성부가 순차로 움직입니다: D-9 (F A C E) → G13 (F A B E) → CΔ9 (E G B D)."
+		}
+	]
+}

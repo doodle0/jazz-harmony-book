@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Three Minors (guide §3): one iv – v – i in natural, harmonic and melodic minor.
 	// Raising the 7th turns v-7 into a real V7; raising the 6th as well removes the
-	// augmented 2nd and turns iv-7 into IV7. A vibes run plays the scale over the V bar.
+	// augmented 2nd and turns iv-7 into IV7. Both raised-7th scales end on i-Δ7. A vibes run plays the scale over the V bar.
 	import data from '#lib/data/examples/three-minors.json';
 	import WidgetCard from '#lib/components/WidgetCard.svelte';
 	import PianoKeys, { type KeyMark } from '#lib/components/PianoKeys.svelte';
@@ -28,12 +28,12 @@
 		harmonic: {
 			degrees: ['1', '2', 'b3', '4', '5', 'b6', '7'],
 			color: 'var(--tomato)',
-			text: '7음을 올려 진짜 V7이 생깁니다. 대신 ♭6과 7 사이에 증2도가 남아 "스파이시한" 소리가 납니다.'
+			text: '7음을 올려 진짜 V7이 생기고, 토닉도 i-Δ7이 됩니다. 대신 ♭6과 7 사이에 증2도가 남아 "스파이시한" 소리가 납니다. 실제 곡에서는 V7만 올린 7음을 빌리고 토닉은 i-6나 i-7로 두는 경우가 많습니다(§1의 마이너 ii-V-i).'
 		},
 		melodic: {
 			degrees: ['1', '2', 'b3', '4', '5', '6', '7'],
 			color: 'var(--plum)',
-			text: '6음까지 올려 증2도를 없앱니다. 아래는 마이너, 위는 메이저: iv-7이 IV7로, i-7이 i-Δ7로 바뀝니다.'
+			text: '6음까지 올려 증2도를 없앱니다. 아래는 마이너, 위는 메이저: iv-7이 IV7로 바뀝니다. 토닉 i-Δ7은 하모닉과 같습니다.'
 		}
 	};
 	const NATURAL = SCALES.natural.degrees;

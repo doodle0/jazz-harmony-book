@@ -1,0 +1,73 @@
+{
+	"concept": "sus-vs-minor11",
+	"title": "sus와 -11",
+	"summary": "위쪽 음은 거의 같고, 왼손의 한 음만 다릅니다. 4도(sus)일 때와 ♭3(-11)일 때 코드가 메이저인지 마이너인지 들리는지 비교해 보세요.",
+	"examples": [
+		{
+			"id": "sm-modal",
+			"title": "모달 뱀프",
+			"style": "modal",
+			"key": "D",
+			"tempo": 132,
+			"variants": {
+				"sus": {
+					"label": "7sus (3도 대신 4도)",
+					"prog": "I9sus | %"
+				},
+				"m11": {
+					"label": "-11 (♭3 + 11)",
+					"prog": "i-11 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "sm-ballad",
+			"title": "발라드 패드",
+			"style": "ballad",
+			"key": "F",
+			"tempo": 66,
+			"variants": {
+				"sus": {
+					"label": "7sus (3도 대신 4도)",
+					"prog": "I9sus | %"
+				},
+				"m11": {
+					"label": "-11 (♭3 + 11)",
+					"prog": "i-11 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "sm-bossa",
+			"title": "보사노바",
+			"style": "bossa",
+			"key": "G",
+			"tempo": 124,
+			"variants": {
+				"sus": {
+					"label": "7sus (3도 대신 4도)",
+					"prog": "I9sus | %"
+				},
+				"m11": {
+					"label": "-11 (♭3 + 11)",
+					"prog": "i-11 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

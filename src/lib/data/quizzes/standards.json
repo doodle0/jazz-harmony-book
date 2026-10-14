@@ -1,0 +1,45 @@
+{
+	"id": "standards",
+	"questions": [
+		{
+			"kind": "choice",
+			"q": "이건 무슨 장치일까요? 듣고 골라 보세요.",
+			"hear": {
+				"prog": "ii-7 | subV7 | IΔ7 | %",
+				"key": "C",
+				"style": "swing",
+				"tempo": 126
+			},
+			"options": [
+				"세컨더리 도미넌트",
+				"트라이톤 대체",
+				"디미니시드 대체"
+			],
+			"answer": 1,
+			"explain": "D-7 – D♭7 – CΔ7. 베이스가 반음씩 내려옵니다. 다음 코드보다 반음 위의 도미넌트7은 트라이톤 대체예요."
+		},
+		{
+			"kind": "choice",
+			"q": "이건 무슨 장치일까요?",
+			"hear": {
+				"prog": "IΔ7 | ♯io7 | ii-7 | V7",
+				"key": "F",
+				"style": "ballad",
+				"tempo": 72
+			},
+			"options": [
+				"디미니시드 대체",
+				"백도어",
+				"반음 하행 ii-V"
+			],
+			"answer": 0,
+			"explain": "FΔ7 – F♯o7 – G-7. 베이스가 반음 올라갑니다. F♯o7은 D7(♭9)(= V7/ii)에서 근음을 뺀 소리입니다."
+		},
+		{
+			"kind": "reveal",
+			"q": "(생각해 보기의 답) It Could Happen to You 후반에서 F-7 자리에 친 F♯-7 B7, 그 B7은?",
+			"answer": "F7(V7/V)의 트라이톤 대체, 즉 subV7/V",
+			"explain": "B7은 바로 뒤의 B♭7보다 반음 위에 있는 도미넌트입니다. F♯-7 B7은 그 대체를 다시 ii-V로 쪼갠 것이고, 곧바로 F-7 B♭7로 반음 내려오니 5.4의 반음 하행 ii-V 그대로입니다."
+		}
+	]
+}

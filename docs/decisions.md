@@ -20,8 +20,12 @@ The author's rulings on the book. These override the plan (`docs/plan.md`) where
 - Chapters 8–10 (workflow, practice, reference) are tentative; the author is deciding whether to keep them. No new work on them until then. (2026-10-15)
 - Line cliché is not taught. It slipped in from a side note in the lecture; remove it from the reference table. (2026-10-15)
 - *Out of the Past* is dropped everywhere: it was a class assignment and is obscure on the scene. (2026-10-15)
-- The *Fly Me to the Moon* melodic-minor bebop choice over A-7 and D-7 is intended. Whether the exercise itself stays is open. (2026-10-15)
+- The *Fly Me to the Moon* melodic-minor bebop choice over A-7 and D-7 is intended. The written assignment is replaced by the One-beat-early diminished A/B demo (original line), one sentence explaining the melodic-minor choice, and a short "직접 해 보기" note. (2026-10-15)
 - No rhythm-changes section. (2026-10-15)
+- The tonicization meter (bar-count slider) is dropped. Its replacement is a home-tone probe: over a tonicizing passage the reader sounds the old or the new tonic and hears which one feels like rest. (2026-10-15)
+- Mode Brightness keeps its generic vamps; no per-mode jazz settings. (2026-10-15)
+- The *Misty* deceptive A/B keeps its extra "V → vi" version. (2026-10-15)
+- Ch.1 may show chord symbols with 9/13 (D-9, G13); only the words "텐션" and "기피음" stay out. (2026-10-15)
 - Voice: direct address is preferred, but "강의자는…" passages are often the author's own opinions, so they're handled case by case, never rewritten in bulk. (2026-10-15)
 - Guide §5 is split into ch.5 "스탠다드의 문법" and ch.6 "집으로 가는 다른 길"; the book has 10 chapters, and the `.svx` files are the master copy.
 

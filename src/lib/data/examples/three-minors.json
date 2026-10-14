@@ -16,7 +16,7 @@
 				},
 				"harmonic": {
 					"label": "하모닉",
-					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+					"prog": "iv-7 | V7(♭9, ♭13) | i-Δ7 | %"
 				},
 				"melodic": {
 					"label": "멜로딕",
@@ -42,7 +42,7 @@
 				},
 				"harmonic": {
 					"label": "하모닉",
-					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+					"prog": "iv-7 | V7(♭9, ♭13) | i-Δ7 | %"
 				},
 				"melodic": {
 					"label": "멜로딕",
@@ -68,7 +68,7 @@
 				},
 				"harmonic": {
 					"label": "하모닉",
-					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+					"prog": "iv-7 | V7(♭9, ♭13) | i-Δ7 | %"
 				},
 				"melodic": {
 					"label": "멜로딕",
@@ -94,7 +94,7 @@
 				},
 				"harmonic": {
 					"label": "하모닉",
-					"prog": "iv-7 | % | V7(♭9, ♭13) | % | i-7 | % | % | %"
+					"prog": "iv-7 | % | V7(♭9, ♭13) | % | i-Δ7 | % | % | %"
 				},
 				"melodic": {
 					"label": "멜로딕",
@@ -120,7 +120,7 @@
 				},
 				"harmonic": {
 					"label": "하모닉",
-					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+					"prog": "iv-7 | V7(♭9, ♭13) | i-Δ7 | %"
 				},
 				"melodic": {
 					"label": "멜로딕",

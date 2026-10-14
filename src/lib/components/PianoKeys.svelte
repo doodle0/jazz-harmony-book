@@ -43,7 +43,8 @@
 		flash = [],
 		glides = [],
 		onTap,
-		legend = true
+		legend = true,
+		names = {}
 	}: {
 		low?: number;
 		high?: number;
@@ -54,6 +55,8 @@
 		glides?: { from: number; to: number }[];
 		onTap?: (midi: number) => void;
 		legend?: boolean;
+		/** legend names to use instead of the defaults, e.g. where a chapter hasn't taught a term yet */
+		names?: Partial<Record<MarkKind, string>>;
 	} = $props();
 
 	const BLACK = new Set([1, 3, 6, 8, 10]);
@@ -211,7 +214,7 @@
 			{#each usedKinds as k (k)}
 				<span class="inline-flex items-center gap-1">
 					<span class="inline-block size-3 rounded-full border-[1.5px] border-ink" style:background={MARK_COLOR[k]}></span>
-					{MARK_NAME[k]}
+					{names[k] ?? MARK_NAME[k]}
 				</span>
 			{/each}
 		</div>

@@ -6,7 +6,7 @@
 import { CHORD_TONES, type Chord, type Quality } from './chord';
 import { degreeInterval, pc, transpose, type Pitch } from './pitch';
 
-export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'smooth' | 'triad' | 'spread';
+export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'smooth' | 'drop2' | 'triad' | 'spread';
 
 export interface VoicedNote {
 	midi: number;
@@ -116,13 +116,17 @@ function forms(q: Quality): { A: string[]; B: string[] } {
 	}
 }
 
+/** Styles built from the chord tones alone (no added colour tones). */
+const CHORD_TONE_STYLES: VoicingStyle[] = ['close', 'smooth', 'drop2', 'triad'];
+
 function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B', opts: VoiceOptions = {}): string[] {
-	if (opts.family === 'shell' && !['close', 'smooth', 'triad'].includes(style)) style = 'shell';
+	if (opts.family === 'shell' && !CHORD_TONE_STYLES.includes(style)) style = 'shell';
 	switch (style) {
 		case 'shell':
 			return form === 'A' ? ['1', '3', '7'] : ['1', '7', '3'];
 		case 'close':
 		case 'smooth':
+		case 'drop2':
 			// 7alt has no 5th among its chord tones but still needs its ♭7
 			return CHORD_TONES[c.quality].some((t) => /[67]/.test(t)) ? ['1', '3', '5', '7'] : ['1', '3', '5'];
 		case 'triad':
@@ -141,7 +145,7 @@ function degreesFor(c: Chord, style: VoicingStyle, form: 'A' | 'B', opts: VoiceO
 	const degrees = slotsFor(c, style, form, opts)
 		.map((s) => slot(c, s, opts))
 		.filter((d): d is string => !!d);
-	if (['shell', 'close', 'smooth', 'triad'].includes(style) || opts.family === 'shell' || c.quality === 'alt7') return degrees;
+	if (style === 'shell' || CHORD_TONE_STYLES.includes(style) || opts.family === 'shell' || c.quality === 'alt7') return degrees;
 	const semis = (d: string) => degreeInterval(d).semis;
 	for (const t of c.tensions) {
 		if (c.quality === 'halfDim7' && /9$/.test(t)) continue;
@@ -298,7 +302,8 @@ interface Candidate {
 /**
  * Voices a progression. 'A' / 'B' fix the form, 'alternate' goes A-B-A…, 'rootless'
  * picks whichever form moves least, 'shell' / 'close' / 'triad' use those shapes,
- * 'smooth' is close position in whichever inversion moves least, and 'spread' is a
+ * 'smooth' is close position in whichever inversion moves least, 'drop2' is a close
+ * inversion with the second voice from the top an octave down, and 'spread' is a
  * two-hand root-shell-pretty voicing without the root (the bass plays it).
  *
  * The whole progression is voiced at once (a shortest path through every chord's
@@ -307,7 +312,7 @@ interface Candidate {
  */
 export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: VoiceOptions = {}): Voicing[] {
 	const spread = style === 'spread' && opts.family !== 'shell';
-	const shell = style === 'shell' || (opts.family === 'shell' && !['close', 'smooth', 'triad'].includes(style));
+	const shell = style === 'shell' || (opts.family === 'shell' && !CHORD_TONE_STYLES.includes(style));
 	const low = opts.low ?? 48;
 	const high = opts.high ?? 62;
 	const center = (low + high) / 2;
@@ -331,8 +336,15 @@ export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: Voi
 		} else forms = ['A', 'B'];
 		return forms.flatMap((form) => {
 			const base = degreesFor(c, style, form, opts);
-			// 'smooth': chord tones in any inversion, so each voice moves as little as it can
-			const shapes = style === 'smooth' ? base.map((_, r) => [...base.slice(r), ...base.slice(0, r)]) : [base];
+			// 'smooth': chord tones in any inversion, so each voice moves as little as it can.
+			// 'drop2': each close inversion with its second voice from the top dropped an octave
+			const inversions = base.map((_, r) => [...base.slice(r), ...base.slice(0, r)]);
+			const shapes =
+				style === 'smooth'
+					? inversions
+					: style === 'drop2' && base.length === 4
+						? inversions.map(([a, b, c, d]) => [c, a, b, d])
+						: [base];
 			return shapes
 				.flatMap((d) => placements(c, d, low, high))
 				.map((v) => ({
@@ -394,4 +406,24 @@ export function voiceChord(c: Chord, style: VoicingStyle, opts: VoiceOptions = {
 export function bassMidi(c: Chord, low = 36): number {
 	const p = c.bass ?? c.root;
 	return low + ((pc(p) - low) % 12 + 12) % 12;
+}
+
+/**
+ * A shape stacked inside a scale: from scale step `start`, go up `steps` scale steps at a
+ * time. Diatonic planing moves the same step pattern to another start, so the intervals
+ * follow the mode: [3, 3, 3] is a stack of fourths, [3, 3, 3, 2] the So What shape
+ * (on D Dorian from D: D G C F A).
+ */
+export function scaleStack(root: Pitch, scaleDegrees: string[], start: number, steps: number[], low = 50): VoicedNote[] {
+	const n = scaleDegrees.length;
+	const idx = [start];
+	for (const s of steps) idx.push(idx[idx.length - 1] + s);
+	const out: VoicedNote[] = [];
+	for (const i of idx) {
+		const degree = scaleDegrees[((i % n) + n) % n];
+		const p = transpose(root, degreeInterval(degree));
+		const floor = out.length ? out[out.length - 1].midi + 1 : low;
+		out.push({ midi: floor + ((pc(p) - floor) % 12 + 12) % 12, pitch: p, degree });
+	}
+	return out;
 }

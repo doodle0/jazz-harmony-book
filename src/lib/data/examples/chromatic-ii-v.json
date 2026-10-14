@@ -38,7 +38,7 @@
 			"tempo": 168,
 			"variants": {
 				"A": {
-					"label": "보통의 재즈 블루스",
+					"label": "앞 4마디는 원곡, 뒤는 단순화",
 					"prog": "IΔ7 | viiø7 III7 | vi-7 II7 | v-7 I7 | IV7 | ♯ivo7 | iii-7 | VI7 | ii-7 | V7 | IΔ7 VI7 | ii-7 V7"
 				},
 				"B": {
@@ -55,7 +55,8 @@
 				"title": "Blues for Alice",
 				"composer": "Charlie Parker",
 				"year": 1951
-			}
+			},
+			"note": "앞 네 마디는 둘 다 원곡(버드 블루스)입니다. 차이는 6마디부터: B에서 ii-V가 반음씩 내려옵니다."
 		},
 		{
 			"id": "cv-latin",
@@ -65,19 +66,20 @@
 			"tempo": 180,
 			"variants": {
 				"A": {
-					"label": "한 번의 ii-V",
-					"prog": "ii-7 | V7 | IΔ7 | %"
+					"label": "5도로 내려오기",
+					"prog": "iii-7 VI7 | ii-7 V7 | IΔ7 | %"
 				},
 				"B": {
-					"label": "위에서 내려오기",
-					"prog": "iii-7 ♭iii-7 | ii-7 subV7 | IΔ7 | %"
+					"label": "반음 하행 ii-V",
+					"prog": "iii-7 VI7 | ♭iii-7 ♭VI7 | ii-7 V7 | IΔ7"
 				}
 			},
 			"provenance": {
 				"status": "generated",
 				"origin": "ai",
 				"model": "claude-opus-5-5/v1"
-			}
+			},
+			"note": "B는 VI7을 트라이톤 대체한 ♭III7을 다시 ii-V(♭iii-7 ♭VI7)로 쪼갰습니다. ii-V가 통째로 반음 내려옵니다."
 		}
 	]
 }

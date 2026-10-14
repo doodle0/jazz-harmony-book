@@ -39,6 +39,8 @@ export interface Example {
 	voicing?: VoicingStyle;
 	/** fixed voicing as a degree stack from the bass up, e.g. '1 5 9 13 3 7 ♯11' (overrides `voicing`) */
 	stack?: string;
+	/** lowest MIDI note for the bottom of `stack` (default C2) */
+	stackLow?: number;
 	comp?: Inst;
 	note?: string;
 	provenance: Provenance;
@@ -125,7 +127,7 @@ export function arrange(ex: Example, o: ArrangeOptions = {}): Arranged {
 	const stack = ex.stack?.split(/\s+/).map((d) => d.replace(/♭/g, 'b').replace(/♯/g, '#'));
 	const voicings =
 		o.voicings ??
-		(stack ? chords.map((c) => voiceStack(c.chord, stack)) : null) ??
+		(stack ? chords.map((c) => voiceStack(c.chord, stack, ex.stackLow)) : null) ??
 		voiceProgression(chords.map((c) => c.chord), o.voicing ?? ex.voicing ?? 'spread', o.voiceOptions);
 	const seq = renderGroove(o.style ?? ex.style, {
 		chords,
@@ -143,4 +145,17 @@ export function arrange(ex: Example, o: ArrangeOptions = {}): Arranged {
 /** Production builds hide flagged items (plan §7). */
 export function visible(examples: Example[]): Example[] {
 	return examples.filter((e) => e.provenance.status !== 'flagged');
+}
+
+/**
+ * Rolls every chord from the second one on: its notes enter one after another, bottom up,
+ * `step` beats apart, so the reader hears each note of a chord they first heard as a block.
+ */
+export function rollAfterFirst(seq: Sequence, chords: ResolvedChord[], step = 0.22): Sequence {
+	const from = chords[1]?.start ?? Infinity;
+	const notes = seq.notes.flatMap((n) => {
+		if (n.beat < from - 1e-6 || n.midi.length < 2 || n.inst === 'bass' || n.inst === 'ebass') return [n];
+		return [...n.midi].sort((a, b) => a - b).map((m, i) => ({ ...n, beat: n.beat + i * step, dur: Math.max(0.5, n.dur - i * step), midi: [m] }));
+	});
+	return { ...seq, notes };
 }

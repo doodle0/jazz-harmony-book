@@ -1,6 +1,10 @@
 <script>
 	import Hear from '#lib/widgets/Hear.svelte';
 	import Heard from '#lib/components/Heard.svelte';
+	import Quiz from '#lib/components/Quiz.svelte';
+	import DeviceAB from '#lib/widgets/DeviceAB.svelte';
+	import ModalPlaningPad from '#lib/widgets/ModalPlaningPad.svelte';
+	import SusVsMinor11 from '#lib/widgets/SusVsMinor11.svelte';
 </script>
 
 ## 무엇이 모달하게 만드는가
@@ -16,15 +20,18 @@
 
 <Hear prog="i-7(9, 11) | % | % | % | ♭ii-7(9, 11) | % | i-7(9, 11) | %" key="D-" style="modal" tempo={132} label="So What 식 도리안 뱀프 (반음 위로 평행 이동)" />
 
+같은 D-7이라도 무엇이 뒤따르느냐에 따라 전혀 다르게 들립니다. A는 D-7이 G7을 거쳐 C로 가려는 ii, 즉 **길**입니다. B는 D-7에 그대로 머무르는 도리안 뱀프로, D-7 자체가 **머무는 곳**입니다. 바꿔 가며 들어 보세요.
+
+<DeviceAB set="modal-vs-functional" color="var(--teal)" kicker="기능 vs 모달" />
+
 
 ## sus 코드
 
 재즈에서 "sus"는 거의 항상 **7sus4**입니다: 1 4 5 ♭7 (C7sus = C F G B♭). 9sus, 13sus, 7sus♭9로 확장됩니다. 3도가 없어서 메이저도 마이너도 아닙니다.
 
-<Hear prog="I7sus | % | I13sus | %" key="C" style="modal" tempo={100} label="C7sus → C13sus" /> <Hear prog="i-11 | %" key="C" style="pad" tempo={80} label="C-11 (♭3이 있음)" />
+**-11**과 헷갈리지 마세요. -11은 ♭3과 11을 모두 가집니다. "3도 *대신* 4도를 썼다" = sus, "-7에 11을 *더했다*" = -11. sus에는 3도가 없으니, §3에서 도미넌트의 기피음이라고 했던 내추럴 11(4도)이 여기서는 부딪칠 상대 없이 코드의 일부가 됩니다.
 
-
-**-11**과 헷갈리지 마세요. -11은 ♭3과 11을 모두 가집니다. "3도 *대신* 4도를 썼다" = sus, "-7에 11을 *더했다*" = -11.
+<SusVsMinor11 />
 
 **sus ↔ 펜타토닉:** 5도권(§2)에서
 - **이웃한 음 5개** = 펜타토닉 스케일 (C G D A E = C 메이저 펜타토닉)
@@ -39,6 +46,10 @@
 
 완전4도 세 개 위에 장3도 하나, 예: **E A D G B**. 구성음이 **펜타토닉**(G 메이저 펜타토닉)이므로, 새로운 코드라기보다 "펜타토닉 코드"의 보이싱으로 보세요. 간격 덕분에 텐션이 아름답게 배치됩니다: E A D G B는 베이스에 따라 E-11, CΔ9(13), A9sus가 됩니다.
 
+모달 컴핑에서는 이 모양을 코드마다 바꾸지 않고, **모드 안에서 그대로 미끄러뜨립니다**(평행 이동). 아래 패드에서 칸을 골라 모양을 놓을 음도를 바꿔 보세요. 베이스는 그대로인데 위의 모양만 스케일을 따라 움직입니다.
+
+<ModalPlaningPad />
+
 ## 펜타토닉은 전 세계의 것
 
 펜타토닉 스케일은 세계 곳곳에서 독립적으로 생겨났습니다. 재즈의 뿌리 중 하나인 서아프리카 음악도 깊이 펜타토닉적입니다. 한 문화에만 속한 것으로 분류하지 마세요.
@@ -48,5 +59,7 @@
 - 🎷 **솔로:** 긴 도리안이나 sus 뱀프에서는 모드 안의 펜타토닉들을 쓰고(D 도리안에는 C, F, G 메이저 펜타토닉이 들어 있음) 그 사이를 **오가며** 인사이드/아웃사이드의 음영을 만드세요. 4도를 쌓은 모양을 아르페지오처럼 멜로디로 연주하세요.
 - 🎹 **컴핑:** 코드를 바꾸는 대신 So What이나 쿼털 모양 하나를 **모드 안에서 다이아토닉하게** 움직이세요(평행 이동). 공간을 남기세요. 모달 컴핑은 질감이 핵심입니다.
 - ✍️ **작곡·편곡:** 느리게 움직이는 sus나 마이너 코드, 평행 이동, 모드의 특징음(도리안은 ♮6, 리디안은 ♯4)에 기대는 멜로디로 모달 곡을 만드세요. *Maiden Voyage*를 보세요: sus 코드 시퀀스, 평행한 모양, 각 코드의 특정 음도에 머무는 멜로디.
+
+<Quiz id="modal" />
 
 <Heard id="modal:chapter" />

@@ -33,7 +33,6 @@
 | ii – V – iii | 위종지 (턴어라운드) |
 | 코드의 반음 아래 o7 | 그 코드의 근음 없는 V7♭9 |
 | 키 밖의 메이저 코드로 가는 ii-V-I이 오래 머묾 | 으뜸음화 |
-| 코드가 바뀌는 동안 베이스가 순차 하행 | 라인 클리셰 |
 
 **패턴을 귀로:** <Hear prog="ii-7 | V7 | IΔ7 | %" label="ii-V-I" /> <Hear prog="ii-7 | subV7 | IΔ7 | %" label="트라이톤 대체" /> <Hear prog="iii-7 subV7/ii | ii-7 V7 | IΔ7 | %" label="iii–♭III–ii–V" /> <Hear prog="iv-7 | ♭VII7 | IΔ7 | %" label="백도어" /> <Hear prog="ii-7 | V7 | iii-7 | V7/ii" label="위종지" /> <Hear prog="IΔ7 | ♯io7 | ii-7 | V7" label="o7 = 근음 없는 V7♭9" /> <Hear prog="IΔ7 | v-7 I7 | IVΔ7 | %" label="v-7 → IV" /> <Hear prog="♯ivø7 | VII7 | iii-7 VI7 | ii-7 V7" label="샤프 포 워크다운" />
 
@@ -44,7 +43,7 @@
 |---|---|
 | ii-V 알아보기 | *Confirmation*, *All of Me* |
 | 세컨더리 도미넌트와 ii-V | *I'll Close My Eyes*, *It Could Happen to You*, *Take the A Train*, *But Not for Me* |
-| 으뜸음화 | *If I Were a Bell*, *All the Things You Are*, *On Green Dolphin Street*, *Out of the Past* |
+| 으뜸음화 | *If I Were a Bell*, *All the Things You Are*, *On Green Dolphin Street* |
 | 트라이톤 대체 | *The Girl from Ipanema*, *Sweet Lorraine* |
 | iii–♭III–ii–V–I | *Four*, *How High the Moon*, *Celia* |
 | 반음 하행 ii-V | *Four*, *Blues for Alice*, *Ask Me Now*, *Just Friends*, *Stablemates* |

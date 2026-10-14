@@ -1,0 +1,33 @@
+{
+	"id": "bebop",
+	"questions": [
+		{
+			"kind": "choice",
+			"q": "C 비밥 도미넌트 스케일에 더한 경과음은?",
+			"options": [
+				"♯5 (G♯)",
+				"♮7 (B)",
+				"♭3 (E♭)"
+			],
+			"answer": 1,
+			"explain": "C B B♭ A G F E D로 8분음표를 내려가면 정박에 C B♭ G E, 즉 C7의 코드톤이 옵니다."
+		},
+		{
+			"kind": "choice",
+			"q": "C 비밥 메이저(C D E F G G♯ A B)는 어떤 두 코드가 번갈아 나온 것일까요?",
+			"options": [
+				"CΔ7 + G7",
+				"C6 + Bo7",
+				"C6 + G♯+"
+			],
+			"answer": 1,
+			"explain": "C E G A(C6)와 B D F G♯(Bo7)이 번갈아 나옵니다. 코드 + 디미니시드 = 스케일."
+		},
+		{
+			"kind": "reveal",
+			"q": "C6의 클로즈 보이싱 E G A C(맨 위가 멜로디 C)를 드랍 2로 바꾸면?",
+			"answer": "A E G C",
+			"explain": "위에서 두 번째 성부(A)를 한 옥타브 내립니다."
+		}
+	]
+}

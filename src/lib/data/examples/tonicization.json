@@ -12,11 +12,11 @@
 			"variants": {
 				"A": {
 					"label": "키 안에 머물기",
-					"prog": "IΔ7 | % | vi-7 | ii-7 V7 | IΔ7 | ii-7 V7 | IΔ7 | %"
+					"prog": "I6 | IV7 | I6 | iiø7/vi V7/vi | vi-7 | ii-7 V7 | I6 | ii-7 V7"
 				},
 				"B": {
 					"label": "III로 외출",
-					"prog": "IΔ7 | % | vi-7 | iiø7/III V7/III | IIIΔ7 | ii-7 V7 | IΔ7 | %"
+					"prog": "I6 | IV7 | I6 | iiø7/vi V7/vi | vi-7 | iiø7/III V7/III | IIIΔ7 | ii-7 V7"
 				}
 			},
 			"provenance": {
@@ -28,7 +28,8 @@
 				"title": "If I Were a Bell",
 				"composer": "Frank Loesser",
 				"year": 1950
-			}
+			},
+			"note": "목표 IIIΔ7은 메이저인데 ii 자리에 ø7을 썼습니다. §5의 \"목표가 마이너면 ø7\" 규칙과 다르지만, III로 가는 ii-V에서는 흔한 모양입니다. ø7(B D F A)은 원래 키의 음을 더 많이 남겨서(B-7이면 F♯까지 바뀝니다) 외출이 덜 갑작스럽습니다."
 		},
 		{
 			"id": "tz-dolphin",

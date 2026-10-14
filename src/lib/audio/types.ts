@@ -1,4 +1,4 @@
-export type Inst = 'piano' | 'bass' | 'guitar' | 'vibes' | 'epiano' | 'organ' | 'ebass' | 'eguitar';
+export type Inst = 'piano' | 'bass' | 'guitar' | 'vibes' | 'epiano' | 'organ' | 'ebass' | 'eguitar' | 'sax' | 'brass';
 export type Drum = 'ride' | 'hat' | 'hatFoot' | 'kick' | 'snare' | 'backbeat' | 'rim' | 'brush' | 'shaker' | 'cowbell';
 
 export interface NoteEv {

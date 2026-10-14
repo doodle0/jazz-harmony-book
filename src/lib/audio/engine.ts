@@ -16,7 +16,9 @@ const INSTRUMENTS: Record<Inst, { name: string; volume: number }> = {
 	epiano: { name: 'electric_piano_1', volume: 100 },
 	organ: { name: 'drawbar_organ', volume: 72 },
 	ebass: { name: 'electric_bass_finger', volume: 108 },
-	eguitar: { name: 'electric_guitar_muted', volume: 100 }
+	eguitar: { name: 'electric_guitar_muted', volume: 100 },
+	sax: { name: 'alto_sax', volume: 92 },
+	brass: { name: 'brass_section', volume: 88 }
 };
 
 const LOOKAHEAD = 0.15; // seconds scheduled ahead

@@ -4,7 +4,8 @@ import { parseChord } from './chord';
 import { formatChord, formatNote } from './format';
 import { romanToChord } from './roman';
 import { parseProgression, resolveProgression, parseKey, allKeys } from './progression';
-import { voiceProgression, voiceStack } from './voicing';
+import { voiceProgression, voiceStack, scaleStack } from './voicing';
+import { parseLine, lineLength } from '#lib/music/line.ts';
 import { avoidNotes, MODES } from './scales';
 
 const names = (ms: { pitch: { step: number; alt: number } }[]) => ms.map((n) => noteName(n.pitch)).join(' ');
@@ -220,5 +221,33 @@ describe('avoid notes', () => {
 		expect(avoidNotes(parseChord('C-7'), scale('aeolian'))).toEqual(['b6']);
 		expect(avoidNotes(parseChord('C-7'), scale('phrygian'))).toEqual(['b2', 'b6']);
 		expect(avoidNotes(parseChord('Cø7'), scale('locrian'))).toEqual(['b2']);
+	});
+});
+
+describe('drop 2 and scale stacks', () => {
+	it('drop 2 spreads a close four-note chord over more than an octave', () => {
+		const vs = voiceProgression([parseChord('C6'), parseChord('G7'), parseChord('CΔ7')], 'drop2');
+		for (const v of vs) {
+			expect(v.notes).toHaveLength(4);
+			const span = v.notes[3].midi - v.notes[0].midi;
+			expect(span).toBeGreaterThan(12);
+		}
+	});
+
+	it('So What shape on D Dorian from E is E A D G B', () => {
+		const dorian = ['1', '2', 'b3', '4', '5', '6', 'b7'];
+		const notes = scaleStack(pitch('D'), dorian, 1, [3, 3, 3, 2]);
+		expect(notes.map((n) => noteName(n.pitch))).toEqual(['E', 'A', 'D', 'G', 'B']);
+		const ivs = notes.slice(1).map((n, i) => n.midi - notes[i].midi);
+		expect(ivs).toEqual([5, 5, 5, 4]);
+	});
+});
+
+describe('melody lines', () => {
+	it('reads degrees, octaves and lengths in the key', () => {
+		const line = parseLine('_6 1 ^1:1 r b7:2', pitch('C'));
+		expect(line.map((n) => n.midi)).toEqual([57, 60, 72, null, 70]);
+		expect(line.map((n) => n.beat)).toEqual([0, 0.5, 1, 2, 2.5]);
+		expect(lineLength(line)).toBe(4.5);
 	});
 });

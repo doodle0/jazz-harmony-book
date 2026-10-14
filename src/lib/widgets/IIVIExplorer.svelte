@@ -2,7 +2,8 @@
 	// ★ ii-V-I Voicing Explorer (guide §1): major/minor, A / B / alternating A·B·A or B·A·B,
 	// for either root-position shells (A = 1-3-7, B = 1-7-3) or four-note rootless voicings.
 	// The ladder shows every voice moving by step; the ø7 ninth toggle plays the
-	// textbook ♭9 (an avoid note) against the ♮9.
+	// textbook ♭9 (which rubs against the root) against the ♮9. Ch.1 hasn't taught
+	// tensions or avoid notes yet, so the widget doesn't use those words.
 	import data from '#lib/data/examples/ii-v-i.json';
 	import WidgetCard from '#lib/components/WidgetCard.svelte';
 	import PianoKeys, { type KeyMark } from '#lib/components/PianoKeys.svelte';
@@ -134,7 +135,7 @@
 				onchange={refresh}
 				options={[
 					{ value: 'none', label: '9 없음 (정석)' },
-					{ value: 'b9', label: '♭9 (기피음)', color: 'var(--tomato)' },
+					{ value: 'b9', label: '♭9 (근음과 부딪침)', color: 'var(--tomato)' },
 					{ value: '9', label: '♮9 (모던)', color: 'var(--sky)' }
 				]}
 			/>
@@ -163,7 +164,7 @@
 		{/if}
 	</div>
 	<div class="mt-2">
-		<PianoKeys low={range.low} high={range.high} {marks} onTap={(m) => player.tap('piano', [m])} />
+		<PianoKeys low={range.low} high={range.high} {marks} names={{ chord: '3도·7도', tension: '위쪽 음 (9·13·5)', avoid: '부딪치는 음' }} onTap={(m) => player.tap('piano', [m])} />
 	</div>
 
 	{#snippet controls()}

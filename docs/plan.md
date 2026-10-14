@@ -548,9 +548,9 @@ This is the densest chapter (rule 9).
 
 ### Ch.4 Bebop and 6th-diminished
 The core idea is rhythmic and melodic, and none of it can be heard yet (audit §1.4).
-- 📝 **Interim, before the widgets:** one written-out 8th-note bebop line that plays (needs note-level playback, the same path as the Dominant Palette's scale run) and one block-chord harmonization of a short phrase. Give drop 2 more than one sentence.
+- 📝 Done with full widgets instead of interim sounds (Downbeat Aligner, the harmonizer, One-beat-early diminished). Drop 2 is now explained with an example.
 - 📝 **Fly Me to the Moon exercise:** the melodic-minor bebop choice on A-7 and D-7 is intended. If the exercise stays, add one sentence explaining it, since the chapter's frame is "-7 = relative 6th". Recommended: turn the assignment into the One-beat-early diminished A/B below plus a short "직접 해 보기" note, because a written homework doesn't fit the interactive format (open question §13).
-- **Engine:** drop 2 voicings (needed by the Harmonizer, the Voicing Gallery and ch.9's practice list).
+- **Engine:** drop 2 voicings (done; used by the Harmonizer, later the Voicing Gallery and ch.9's practice list).
 - ★ **Downbeat Aligner:**
   - An 8th-note scale run over a metronome; the notes that land on downbeats are highlighted.
   - Toggle the bebop passing tone on and off: chord tones drift off the beat, then snap back into place.
@@ -589,16 +589,15 @@ New chapter (split from guide §5). Each section has a home image; DeviceAB demo
   - Explain why ♭VII7 in the backdoor resembles the chromatic ii-V (B♭7 shares D F A♭ with G7♭9's diminished chord), or soften the claim; ch.5 taught only tritone and diminished substitution.
   - "실전 적용" headings become h3.
 - **Home-Away-Home Journey** (from ch.1) with a detour path per section: staying a while (tonicization), opening the neighbor's door (deceptive), the same house in different light (modal interchange), the back door.
-- **Tonicization meter:** a slider for how long a tonicized key is held (1 bar → 8 bars). Hear when the ear stops hearing it as color and starts hearing a new home.
-- **V는 어디로 갈까?** (ear trainer): ii-V plays, then resolves to I, vi, iii, ♭II or backdoor; the reader guesses. It builds the deceptive-cadence instinct. Rounds rotate key and style, so the ear learns the function rather than one sound. It doubles as the chapter's self-check.
+- ~~**Tonicization meter**~~ (dropped by the author: a bar-count slider didn't explain the concept).
+- **Home-tone probe** (replaces it): a tonicizing passage loops while the reader holds the old tonic, the new tonic or nothing on top. When the new tonic is the one that sounds like rest, the visit has become a tonicization.
+- **V는 어디로 갈까?** (ear trainer): ii-V plays, then lands on I, vi, iii or ♭VI; the reader guesses with the arrival hidden, then can compare with going home. It builds the deceptive-cadence instinct. Rounds rotate key and style, so the ear learns the function rather than one sound. It doubles as the chapter's self-check.
 
 ### Ch.7 Modal jazz
 Quartal and So What voicings are described but can't be played yet (audit §1.4).
-- 📝 **Interim, before the widgets:**
-  - A DeviceAB "functional vs modal": a D-7 G7 loop against a D Dorian vamp.
-  - Fixed-stack `<Hear>` pills (the example `stack` field) for one quartal and one So What voicing, with a static piano diagram.
-- **Engine:** quartal and So What voicings with diatonic planing.
-- **Sus vs -11:** A/B with the 3rd shown and hidden.
+- 📝 Done: a DeviceAB "functional vs modal" (ii-7 V7 IΔ7 against a Dorian vamp) plus the widgets below.
+- **Engine:** quartal and So What shapes with diatonic planing (`scaleStack`, done).
+- **Sus vs -11:** A/B with the 3rd shown and hidden (replaces the chapter's two inline sus/-11 pills).
 - **Pentatonic ↔ sus on the circle:** drag a 5-note window around the circle of fifths → the pentatonic plays and its two 7sus chords are shown.
 - ★ **Modal Planing Pad:**
   - Over a Dorian drone, tap degrees to slide a So What or quartal shape diatonically.
@@ -697,6 +696,5 @@ New chapter text and widgets follow §6.1 from the start, so the content pass is
 Resolved questions are recorded in `docs/decisions.md`.
 
 1. **Chapters 8–10:** keep, merge into an appendix, or drop?
-2. **Fly Me to the Moon exercise (ch.4):** keep the written assignment (with a sentence on melodic-minor bebop), or replace it with the One-beat-early diminished A/B? Recommended: replace.
-3. **Full forms vs excerpts:** for tunes whose dataset terms are unclear, default to lecture excerpts?
-4. **Notation:** is a staff view wanted at all, or are the piano view and chord symbols enough? (A `staff` setting exists but does nothing yet.)
+2. **Full forms vs excerpts:** for tunes whose dataset terms are unclear, default to lecture excerpts?
+3. **Notation:** is a staff view wanted at all, or are the piano view and chord symbols enough? (A `staff` setting exists but does nothing yet.)

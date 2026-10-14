@@ -1,0 +1,74 @@
+{
+	"concept": "modal-vs-functional",
+	"title": "같은 -7, 다른 역할",
+	"summary": "A에서 -7은 V7을 거쳐 I로 가는 길이고, B에서는 그 자리에 머무는 곳입니다. B에서는 해결을 기다리지 않게 되는 순간을 느껴 보세요.",
+	"examples": [
+		{
+			"id": "mvf-modal",
+			"title": "모달 스윙",
+			"style": "modal",
+			"key": "C",
+			"tempo": 132,
+			"variants": {
+				"A": {
+					"label": "ii – V – I (길)",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "도리안 뱀프 (머무는 곳)",
+					"prog": "ii-7(9, 11) | % | % | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			},
+			"note": "B는 So What처럼 D 도리안에 머뭅니다. 베이스가 D를 떠나지 않아요."
+		},
+		{
+			"id": "mvf-bossa",
+			"title": "보사노바",
+			"style": "bossa",
+			"key": "F",
+			"tempo": 126,
+			"variants": {
+				"A": {
+					"label": "ii – V – I (길)",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "도리안 뱀프 (머무는 곳)",
+					"prog": "ii-7(9, 11) | % | % | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "mvf-ballad",
+			"title": "발라드",
+			"style": "ballad",
+			"key": "E♭",
+			"tempo": 66,
+			"variants": {
+				"A": {
+					"label": "ii – V – I (길)",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "도리안 뱀프 (머무는 곳)",
+					"prog": "ii-7(9, 11) | % | % | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}
