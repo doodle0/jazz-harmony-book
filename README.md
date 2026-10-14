@@ -2,7 +2,7 @@
 
 Interactive Korean web book based on the 2026 재즈 화성학 클래스 (최지훈). Live at https://doodle0.github.io/jazz-harmony-book/.
 
-The source documents (`docs/`: the guide, course summary and implementation plan) are kept out of this repo.
+Project docs: `docs/plan.md` (spec), `docs/progress.md` (status), `docs/decisions.md` (the author's rulings), `docs/reviews/` (dated reviews). The source documents in `docs/reference/` (the guide and course summary) are kept out of this repo.
 
 ## Commands
 

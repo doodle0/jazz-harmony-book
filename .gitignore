@@ -22,5 +22,6 @@ Thumbs.db
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-# Source documents stay local (not published)
-/docs/
+# Source documents stay local (not published); the rest of docs/ is committed
+/docs/reference/*
+!/docs/reference/README.md
