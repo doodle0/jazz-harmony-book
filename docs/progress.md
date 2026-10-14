@@ -56,7 +56,7 @@ The plan's catalog uses the book's 10 chapters: Tonicization meter and the ear t
 | V는 어디로 갈까? (ear trainer) | ✅ | Arrivals I, vi, iii, ♭VI; the arrival stays hidden until answered; random key, rotating style |
 | Extended Dominants & Subs | 🟡 | Covered by the A/B demo `extended-dominants`; tap-to-sub not built |
 | Tonicization meter | ✖ | Dropped by the author (2026-10-15): a bar-count slider didn't explain the concept |
-| Home-tone probe | ✅ | Replaces the meter in ch.6.1: hold the old tonic, the new tonic or nothing on top of a tonicizing passage (*If I Were a Bell*, ♭III, IV) |
+| Home-tone probe | ✅ | Replaces the meter in ch.6.1: hold the old tonic, the new tonic or nothing on top of a tonicizing passage (*If I Were a Bell* to III, a visit to ♭III; IV was dropped as too close to I) |
 | Versions Through Time | ⏸ | Ch.8–10 on hold |
 | Sus vs -11 | ✅ | Same two-hand shape, the left hand's 4 vs ♭3 named on the keys |
 | Pentatonic ↔ sus on the circle | ⬜ | |

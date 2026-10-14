@@ -128,9 +128,9 @@
 			"id": "dt-backdoor",
 			"title": "6.4 뒷문으로: 백도어",
 			"style": "ballad",
-			"key": "D♭",
+			"key": "C",
 			"tempo": 64,
-			"prog": "IΔ7 | iv-7 | ♭VII7 | IΔ7",
+			"prog": "IΔ7 | iv-7 ♭VII7 | IΔ7 | %",
 			"steps": [
 				{
 					"place": "home",
@@ -147,6 +147,10 @@
 				{
 					"place": "home",
 					"say": "뒷문으로 들어와 집"
+				},
+				{
+					"place": "home",
+					"say": "집에 머묾"
 				}
 			],
 			"provenance": {

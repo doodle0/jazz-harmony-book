@@ -21,7 +21,6 @@ const PROGS = [
 	// HomeTone
 	'I6 | IV7 | I6 | iiø7/vi V7/vi | vi-7 | iiø7/III V7/III | IIIΔ7 | ii-7 V7',
 	'IΔ7 | % | ii-7/♭III V7/♭III | ♭IIIΔ7 | vi-7/♭III | ii-7/♭III V7/♭III | ♭IIIΔ7 | ii-7 V7',
-	'IΔ7 | ii-7/IV V7/IV | IVΔ7 | % | ii-7 | V7',
 	// WhereDoesVGo
 	'ii-7 | V7 | ♭VIΔ7 | %',
 	// DownbeatAligner, OneBeatEarly, SixthDim, planing pad

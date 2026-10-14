@@ -46,17 +46,6 @@
 			newHome: 'b3',
 			visit: [2, 6],
 			provenance: prov
-		},
-		{
-			id: 'tone-four',
-			title: 'IV에 두 마디',
-			style: 'ballad',
-			key: 'B♭',
-			tempo: 66,
-			prog: 'IΔ7 | ii-7/IV V7/IV | IVΔ7 | % | ii-7 | V7',
-			newHome: '4',
-			visit: [1, 3],
-			provenance: prov
 		}
 	];
 
