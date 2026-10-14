@@ -88,6 +88,11 @@ export function playDrum(ctx: BaseAudioContext, out: AudioNode, drum: Drum, t: n
 			burst(ctx, out, t, { type: 'bandpass', freq: 1900, q: 0.7, decay: 0.16, gain: 0.35 * v });
 			tone(ctx, out, t, 'triangle', 200, 160, 0.08, 0.25 * v);
 			break;
+		case 'backbeat':
+			// a crisper, louder snare for funk and soul backbeats
+			burst(ctx, out, t, { type: 'bandpass', freq: 2100, q: 0.9, attack: 0.002, decay: 0.2, gain: 0.6 * v });
+			tone(ctx, out, t, 'triangle', 190, 150, 0.09, 0.35 * v);
+			break;
 		case 'kick':
 			tone(ctx, out, t, 'sine', 120, 45, 0.3, 0.9 * v);
 			break;

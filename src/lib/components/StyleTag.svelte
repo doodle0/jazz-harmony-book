@@ -13,6 +13,9 @@
 		samba: 'var(--leaf)',
 		latin: 'var(--teal)',
 		modal: 'var(--teal)',
+		smooth: 'var(--sky)',
+		funk: 'var(--tomato)',
+		soul: 'var(--plum)',
 		pad: 'var(--paper-2)'
 	};
 

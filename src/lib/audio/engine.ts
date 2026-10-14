@@ -12,7 +12,11 @@ const INSTRUMENTS: Record<Inst, { name: string; volume: number }> = {
 	piano: { name: 'acoustic_grand_piano', volume: 95 },
 	bass: { name: 'acoustic_bass', volume: 110 },
 	guitar: { name: 'acoustic_guitar_nylon', volume: 105 },
-	vibes: { name: 'vibraphone', volume: 90 }
+	vibes: { name: 'vibraphone', volume: 90 },
+	epiano: { name: 'electric_piano_1', volume: 100 },
+	organ: { name: 'drawbar_organ', volume: 72 },
+	ebass: { name: 'electric_bass_finger', volume: 108 },
+	eguitar: { name: 'electric_guitar_muted', volume: 100 }
 };
 
 const LOOKAHEAD = 0.15; // seconds scheduled ahead

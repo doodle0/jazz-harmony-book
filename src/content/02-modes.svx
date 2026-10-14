@@ -47,7 +47,7 @@ C – G – D – A – E – B – F♯(G♭) – D♭ – A♭ – E♭ – B�
 | C-7 | 도리안, 에이올리안, 프리지안 | B♭, E♭, A♭ |
 | Cø7 | 로크리안 | D♭ |
 
-<Hear prog="ii-7 | V7 | IΔ7 | %" key="B♭" style="swing" tempo={120} label="C-7 = B♭의 ii (도리안)" /> <Hear prog="iii-7 | vi-7 | ii-7 | V7" key="A♭" style="swing" tempo={120} label="C-7 = A♭의 iii (프리지안)" />
+<Hear prog="ii-7 | V7 | IΔ7 | %" key="B♭" style="swing" tempo={120} label="B♭ 키 ii–V–I: C-7이 ii (도리안)" /> <Hear prog="iii-7 | vi-7 | ii-7 | V7" key="A♭" style="swing" tempo={120} label="A♭ 키 iii–vi–ii–V: C-7이 iii (프리지안)" />
 
 
 스케일을 고르는 것은 **해석**을 고르는 것입니다. C-7 위에서 C 도리안을 치면 "이건 B♭의 ii"라고 말하는 것이고, C 프리지안을 치면 "이건 A♭의 iii"라고 말하는 것입니다.

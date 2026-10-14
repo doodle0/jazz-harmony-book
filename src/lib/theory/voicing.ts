@@ -6,7 +6,7 @@
 import { CHORD_TONES, type Chord, type Quality } from './chord';
 import { degreeInterval, pc, transpose, type Pitch } from './pitch';
 
-export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'triad';
+export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'smooth' | 'triad';
 
 export interface VoicedNote {
 	midi: number;
@@ -25,6 +25,9 @@ export interface VoiceOptions {
 	halfDimNinth?: 'none' | 'b9' | '9';
 	/** First form for 'alternate' (the guide's minor ii-V-i starts on B) */
 	startForm?: 'A' | 'B';
+	/** For 'A' / 'B' / 'alternate' / 'rootless': four-note rootless forms (default), or
+	 *  root-position shells, where A = 1-3-7 and B = 1-7-3 */
+	family?: 'rootless' | 'shell';
 	/** Window for the lowest note of the voicing */
 	low?: number;
 	high?: number;
@@ -111,11 +114,13 @@ function forms(q: Quality): { A: string[]; B: string[] } {
 	}
 }
 
-function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B'): string[] {
+function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B', opts: VoiceOptions = {}): string[] {
+	if (opts.family === 'shell' && !['close', 'smooth', 'triad'].includes(style)) style = 'shell';
 	switch (style) {
 		case 'shell':
 			return form === 'A' ? ['1', '3', '7'] : ['1', '7', '3'];
 		case 'close':
+		case 'smooth':
 			// 7alt has no 5th among its chord tones but still needs its ♭7
 			return CHORD_TONES[c.quality].some((t) => /[67]/.test(t)) ? ['1', '3', '5', '7'] : ['1', '3', '5'];
 		case 'triad':
@@ -131,10 +136,10 @@ function slotsFor(c: Chord, style: VoicingStyle, form: 'A' | 'B'): string[] {
  * implies its tensions, and the ø7 ninth follows the halfDimNinth option.
  */
 function degreesFor(c: Chord, style: VoicingStyle, form: 'A' | 'B', opts: VoiceOptions): string[] {
-	const degrees = slotsFor(c, style, form)
+	const degrees = slotsFor(c, style, form, opts)
 		.map((s) => slot(c, s, opts))
 		.filter((d): d is string => !!d);
-	if (['shell', 'close', 'triad'].includes(style) || c.quality === 'alt7') return degrees;
+	if (['shell', 'close', 'smooth', 'triad'].includes(style) || opts.family === 'shell' || c.quality === 'alt7') return degrees;
 	const semis = (d: string) => degreeInterval(d).semis;
 	for (const t of c.tensions) {
 		if (c.quality === 'halfDim7' && /9$/.test(t)) continue;
@@ -182,24 +187,31 @@ function distance(a: VoicedNote[], b: VoicedNote[]): number {
 
 /**
  * Voices a progression. 'A' / 'B' fix the form, 'alternate' goes A-B-A…, 'rootless'
- * picks whichever form moves least, 'shell' / 'close' / 'triad' use those shapes.
+ * picks whichever form moves least, 'shell' / 'close' / 'triad' use those shapes, and
+ * 'smooth' is close position in whichever inversion moves least.
  */
 export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: VoiceOptions = {}): Voicing[] {
 	const out: Voicing[] = [];
 	let prev: VoicedNote[] | null = null;
 	const center = ((opts.low ?? 48) + (opts.high ?? 62)) / 2;
+	// 'alternate' switches form on each new chord; a repeated bar keeps its voicing
+	let turn = -1;
 	chords.forEach((c, i) => {
+		if (i === 0 || JSON.stringify(c) !== JSON.stringify(chords[i - 1])) turn++;
 		let candidateForms: ('A' | 'B')[];
 		if (style === 'A' || style === 'B') candidateForms = [style];
 		else if (style === 'alternate') {
 			const first = opts.startForm ?? 'A';
 			const other = first === 'A' ? 'B' : 'A';
-			candidateForms = [i % 2 === 0 ? first : other];
+			candidateForms = [turn % 2 === 0 ? first : other];
 		}
 		else candidateForms = ['A', 'B'];
 		let best: { v: VoicedNote[]; form: 'A' | 'B'; score: number } | null = null;
 		for (const form of candidateForms) {
-			for (const v of placements(c, degreesFor(c, style, form, opts), opts)) {
+			const base = degreesFor(c, style, form, opts);
+			// 'smooth': chord tones in any inversion, so each voice moves as little as it can
+			const shapes = style === 'smooth' ? base.map((_, r) => [...base.slice(r), ...base.slice(0, r)]) : [base];
+			for (const v of shapes.flatMap((d) => placements(c, d, opts))) {
 				const score = prev ? distance(prev, v) : Math.abs(v[0].midi - center) + (form === 'A' ? 0 : 0.5);
 				if (!best || score < best.score) best = { v, form, score };
 			}

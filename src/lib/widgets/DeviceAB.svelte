@@ -28,7 +28,7 @@
 	let variantKeys = $derived(Object.keys(ex.variants ?? {}));
 	let variant = $state('B');
 	let v = $derived(variantKeys.includes(variant) ? variant : variantKeys[variantKeys.length - 1]);
-	let key = $derived(player.keyFor(id, parseKey(ex.key)));
+	let key = $derived(player.keyFor(id, parseKey(ex.key), ex.id));
 	let arranged = $derived(arrange(ex, { key, variant: v, voicing: settings.voicing }));
 	let playing = $derived(player.isPlaying(id));
 

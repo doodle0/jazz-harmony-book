@@ -62,6 +62,9 @@ export const STYLE_LABEL: Record<Style, string> = {
 	samba: '삼바',
 	latin: '아프로-쿠반',
 	modal: '모달',
+	smooth: '스무드 재즈',
+	funk: '펑크',
+	soul: '소울',
 	pad: '코드만'
 };
 
@@ -76,6 +79,9 @@ export const STYLE_EMOJI: Record<Style, string> = {
 	samba: '🥁',
 	latin: '🪇',
 	modal: '🌊',
+	smooth: '🌆',
+	funk: '🕺',
+	soul: '🎙️',
 	pad: '🎹'
 };
 

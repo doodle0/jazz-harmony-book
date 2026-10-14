@@ -45,7 +45,7 @@
 	let scaleId = $state('altered');
 	let ex = $derived(deck.current);
 	let usual = $derived(parseKey(ex.key));
-	let key = $derived(player.keyFor(id, usual));
+	let key = $derived(player.keyFor(id, usual, ex.id));
 	let scale = $derived(DOMINANT_SCALES.find((s) => s.id === scaleId)!);
 
 	function withV(e: Example, sid: string): Example {

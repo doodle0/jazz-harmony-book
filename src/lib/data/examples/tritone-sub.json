@@ -96,6 +96,28 @@
 				"origin": "ai",
 				"model": "claude-opus-5-5/v1"
 			}
+		},
+		{
+			"id": "tt-funk",
+			"title": "펑크 ii-V-I",
+			"style": "funk",
+			"key": "F",
+			"tempo": 98,
+			"variants": {
+				"A": {
+					"label": "V7",
+					"prog": "ii-7 | V7 | IΔ7 | %"
+				},
+				"B": {
+					"label": "subV7",
+					"prog": "ii-7 | subV7 | IΔ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		}
 	]
 }

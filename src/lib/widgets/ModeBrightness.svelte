@@ -1,6 +1,6 @@
 <script lang="ts">
 	// ★ Mode Brightness Slider (guide §2): seven modes on one root, brightest to darkest.
-	// Each step changes exactly one note; that note flashes and the parent-scale window
+	// Each step changes exactly one note; its mark glides to the new key and the parent-scale window
 	// on the circle of fifths turns one step.
 	import data from '#lib/data/examples/mode-vamps.json';
 	import WidgetCard from '#lib/components/WidgetCard.svelte';
@@ -35,7 +35,7 @@
 	let prevPos = $state(1);
 	let mode = $derived(MODES[pos]);
 	let ex = $derived(deck.current);
-	let key = $derived(player.keyFor(id, parseKey(ex.key)));
+	let key = $derived(player.keyFor(id, parseKey(ex.key), ex.id));
 
 	function vampExample(m = mode): Example {
 		return { ...ex, prog: `${VAMP[m.id]} | %`, voicing: 'rootless' };
@@ -53,11 +53,17 @@
 	let playing = $derived(player.isPlaying(id));
 
 	let scale = $derived(scalePitches(key.tonic, mode));
-	let changed = $derived.by(() => {
-		if (prevPos === pos) return null;
+	// every mode lists its seven steps in order, so step i of one mode moved to step i of
+	// the next; usually one note, more when the reader jumps several modes at once
+	let moves = $derived.by(() => {
+		if (prevPos === pos) return [];
 		const before = MODES[prevPos].degrees;
-		return mode.degrees.find((d) => !before.includes(d)) ?? null;
+		return mode.degrees
+			.map((d, i) => ({ from: before[i], to: d }))
+			.filter((m) => m.from !== m.to)
+			.map((m) => ({ ...m, up: degreeInterval(m.to).semis > degreeInterval(m.from).semis }));
 	});
+	let movedTo = $derived(new Map(moves.map((m) => [m.to, m.up])));
 
 	let marks = $derived.by(() => {
 		const out: Record<number, KeyMark> = {};
@@ -69,9 +75,9 @@
 		}
 		return out;
 	});
-	let flash = $derived.by(() => {
-		if (!changed) return [];
-		return [midiAtOrAbove(key.tonic, 60) + degreeInterval(changed).semis];
+	let glides = $derived.by(() => {
+		const low = midiAtOrAbove(key.tonic, 60);
+		return moves.map((m) => ({ from: low + degreeInterval(m.from).semis, to: low + degreeInterval(m.to).semis }));
 	});
 
 	// circle of fifths: parent-scale window turns one step per mode
@@ -118,11 +124,14 @@
 			<div class="mt-1 text-sm text-ink-soft">{mode.mood}</div>
 			<div class="mt-2 flex flex-wrap gap-1 font-bold">
 				{#each mode.degrees as d (d)}
-					<span
-						class="grid min-w-8 place-items-center rounded-lg border-2 border-ink px-1 text-sm"
-						style:background={d === mode.character ? 'var(--mustard)' : d === changed ? 'var(--sky)' : 'var(--card)'}
-						style:animation={d === changed ? 'pop 400ms ease' : ''}>{prettyDegree(d)}</span
-					>
+					{#key `${pos}:${d}`}
+						<span
+							class="grid min-w-8 place-items-center rounded-lg border-2 border-ink px-1 text-sm"
+							style:background={d === mode.character ? 'var(--mustard)' : movedTo.has(d) ? 'var(--sky)' : 'var(--card)'}
+							style:animation={movedTo.has(d) ? `${movedTo.get(d) ? 'nudge-up' : 'nudge-down'} 520ms ease-out` : ''}
+							>{#if movedTo.has(d)}<span class="text-[0.65rem] leading-none" aria-hidden="true">{movedTo.get(d) ? '▲' : '▼'}</span>{/if}{prettyDegree(d)}</span
+						>
+					{/key}
 				{/each}
 			</div>
 		</div>
@@ -167,7 +176,7 @@
 	</div>
 
 	<div class="mt-4">
-		<PianoKeys low={midiAtOrAbove(key.tonic, 60) - 2} high={midiAtOrAbove(key.tonic, 60) + 13} {marks} {flash} onTap={(m) => player.tap('vibes', [m])} />
+		<PianoKeys low={midiAtOrAbove(key.tonic, 60) - 2} high={midiAtOrAbove(key.tonic, 60) + 13} {marks} {glides} onTap={(m) => player.tap('vibes', [m])} />
 	</div>
 	<p class="mt-2 text-sm">
 		뱀프 코드: <b>{arranged.chords[0].symbol}</b>
@@ -181,6 +190,22 @@
 </WidgetCard>
 
 <style>
+	@keyframes -global-nudge-up {
+		0% {
+			transform: translateY(8px);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
+	@keyframes -global-nudge-down {
+		0% {
+			transform: translateY(-8px);
+		}
+		100% {
+			transform: translateY(0);
+		}
+	}
 	.mode-slider {
 		appearance: none;
 		height: 44px;

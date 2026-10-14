@@ -1,5 +1,6 @@
 <script lang="ts">
-	// ★ ii-V-I Voicing Explorer (guide §1): major/minor, shell / A / B / alternating A-B.
+	// ★ ii-V-I Voicing Explorer (guide §1): major/minor, A / B / alternating A-B, for either
+	// root-position shells (A = 1-3-7, B = 1-7-3) or four-note rootless voicings.
 	// The ladder shows every voice moving by step; the ø7 ninth toggle plays the
 	// textbook ♭9 (an avoid note) against the ♮9.
 	import data from '#lib/data/examples/ii-v-i.json';
@@ -17,14 +18,18 @@
 	import { noteLabel } from '#lib/theory/labels.ts';
 	import type { VoicingStyle } from '#lib/theory/voicing.ts';
 
-	let { mode: initialMode = 'major' }: { mode?: 'major' | 'minor' } = $props();
+	let { mode: initialMode = 'major', kind = 'rootless' }: { mode?: 'major' | 'minor'; kind?: 'rootless' | 'shell' } = $props();
 
 	const id = $props.id();
 	const deck = new Deck(data.examples as Example[]);
+	// open on medium swing rather than the ballad
+	deck.i = Math.max(0, deck.examples.findIndex((e) => e.id === 'iivi-swing'));
+	// svelte-ignore state_referenced_locally
+	const shell = kind === 'shell';
 
 	// svelte-ignore state_referenced_locally
 	let mode = $state<'major' | 'minor'>(initialMode);
-	let form = $state<'shell' | 'A' | 'B' | 'alternate'>('alternate');
+	let form = $state<'A' | 'B' | 'alternate'>('alternate');
 	let ninth = $state<'none' | 'b9' | '9'>('none');
 
 	let ex = $derived(deck.current);
@@ -32,16 +37,20 @@
 		const k = parseKey(ex.key);
 		return { tonic: k.tonic, minor: mode === 'minor' } satisfies Key;
 	});
-	let key = $derived(player.keyFor(id, usual));
+	let key = $derived(player.keyFor(id, usual, ex.id));
 	let opts = $derived({
 		variant: mode,
 		voicing: form as VoicingStyle,
-		voiceOptions: { halfDimNinth: ninth, startForm: mode === 'minor' ? ('B' as const) : ('A' as const) },
-		bass: true
+		voiceOptions: shell
+			? // the root sits in the left hand, so keep it in the bass register and drop the bass player
+				{ family: 'shell' as const, startForm: 'A' as const, low: 41, high: 52 }
+			: { halfDimNinth: ninth, startForm: mode === 'minor' ? ('B' as const) : ('A' as const) },
+		bass: !shell
 	});
 	let arranged = $derived(arrange(ex, { ...opts, key }));
 	let playing = $derived(player.isPlaying(id));
 	let shown = $derived(playing && player.mark >= 0 ? player.mark : 0);
+	let shownForm = $derived(arranged.voicings[shown].form);
 
 	let marks = $derived.by(() => {
 		const out: Record<number, KeyMark> = {};
@@ -72,11 +81,13 @@
 </script>
 
 <WidgetCard
-	title="ii-V-I 보이싱 탐험기"
-	kicker="보이스 리딩"
-	color="var(--teal)"
+	title={shell ? '셸 보이싱 ii-V-I' : 'ii-V-I 보이싱 탐험기'}
+	kicker={shell ? '근음 + 3도 + 7도' : '근음 없는 4음 보이싱'}
+	color={shell ? 'var(--sky)' : 'var(--teal)'}
 	example={ex}
-	summary="A → B → A로 번갈아 쓰면 모든 성부가 반음이나 온음으로만 움직입니다. 각 코드의 7도가 반음 내려가 다음 코드의 3도가 되는 것도 찾아보세요."
+	summary={shell
+		? '1-3-7과 1-7-3을 번갈아 쓰면 3도와 7도가 제자리에 머물거나 반음 내려가며 다음 코드로 이어집니다. 3도와 7도가 위아래로 자리를 바꾸는 이 움직임이 가이드톤 라인입니다.'
+		: 'A → B → A로 번갈아 쓰면 모든 성부가 반음이나 온음으로만 움직입니다. 각 코드의 7도가 반음 내려가 다음 코드의 3도가 되는 것도 찾아보세요.'}
 >
 	<div class="flex flex-wrap gap-2">
 		<Segmented
@@ -95,13 +106,12 @@
 			bind:value={form}
 			onchange={refresh}
 			options={[
-				{ value: 'shell', label: '셸' },
-				{ value: 'A', label: 'A 폼' },
-				{ value: 'B', label: 'B 폼' },
-				{ value: 'alternate', label: mode === 'minor' ? 'B·A·B 교대' : 'A·B·A 교대' }
+				{ value: 'A', label: shell ? 'A 폼 (1-3-7)' : 'A 폼' },
+				{ value: 'B', label: shell ? 'B 폼 (1-7-3)' : 'B 폼' },
+				{ value: 'alternate', label: mode === 'minor' && !shell ? 'B·A·B 교대' : 'A·B·A 교대' }
 			]}
 		/>
-		{#if mode === 'minor' && form !== 'shell'}
+		{#if mode === 'minor' && !shell}
 			<Segmented
 				label="iiø7의 9도"
 				size="sm"
@@ -128,8 +138,17 @@
 		/>
 	</div>
 
-	<div class="mt-3">
-		<PianoKeys low={45} high={74} {marks} onTap={(m) => player.tap('piano', [m])} />
+	<div class="mt-3 flex items-center gap-2 text-sm font-bold" aria-live="polite">
+		<span class="font-display text-lg">{arranged.chords[shown].symbol}</span>
+		{#if shownForm}
+			<span class="rounded-full border-2 border-ink px-2.5 py-0.5" style:background={shownForm === 'A' ? 'var(--mustard)' : 'var(--sky)'} style:color="var(--on-color)">
+				{shownForm} 폼
+			</span>
+			<span class="text-ink-soft">{shownForm === 'A' ? '3도가 7도보다 아래' : '7도가 3도보다 아래'}</span>
+		{/if}
+	</div>
+	<div class="mt-2">
+		<PianoKeys low={shell ? 40 : 45} high={shell ? 64 : 74} {marks} onTap={(m) => player.tap('piano', [m])} />
 	</div>
 
 	{#snippet controls()}

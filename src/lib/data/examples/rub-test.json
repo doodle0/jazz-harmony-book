@@ -9,7 +9,11 @@
 			"key": "C",
 			"tempo": 80,
 			"prog": "I | %",
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "rub-ballad",
@@ -18,7 +22,11 @@
 			"key": "E♭",
 			"tempo": 66,
 			"prog": "I | %",
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "rub-bossa",
@@ -27,7 +35,24 @@
 			"key": "F",
 			"tempo": 120,
 			"prog": "I | %",
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "rub-smooth",
+			"title": "스무드 재즈 위에서",
+			"style": "smooth",
+			"key": "A♭",
+			"tempo": 84,
+			"prog": "I | %",
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		}
 	]
 }

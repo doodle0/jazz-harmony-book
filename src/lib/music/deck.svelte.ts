@@ -39,6 +39,7 @@ export class Deck {
 export function exampleSource(id: string, ex: Example, opts: Omit<ArrangeOptions, 'key'> = {}, title?: string): PlaySource {
 	return {
 		id,
+		content: ex.id,
 		title: title ?? ex.tune?.title ?? ex.title,
 		style: opts.style ?? ex.style,
 		usualKey: parseKey(ex.key),

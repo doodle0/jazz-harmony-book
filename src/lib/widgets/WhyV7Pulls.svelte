@@ -19,13 +19,15 @@
 
 	const id = $props.id();
 	const deck = new Deck(data.examples as Example[]);
+	// keep the voices inside the keyboard shown below (E3–E5)
+	const voiceOptions = { low: 53, high: 64 };
 
 	let variant = $state<'V' | 'V7'>('V7');
 	let holding = $state(false);
 
 	let ex = $derived(deck.current);
-	let key = $derived(player.keyFor(id, parseKey(ex.key)));
-	let arranged = $derived(arrange(ex, { key, variant }));
+	let key = $derived(player.keyFor(id, parseKey(ex.key), ex.id));
+	let arranged = $derived(arrange(ex, { key, variant, voiceOptions }));
 	let playing = $derived(player.isPlaying(id));
 	let shown = $derived(playing && player.mark >= 0 ? player.mark : holding ? 0 : -1);
 	let current = $derived(shown >= 0 ? arranged.chords[shown] : arranged.chords[0]);
@@ -61,7 +63,7 @@
 	});
 
 	function source() {
-		return exampleSource(id, ex, { variant });
+		return exampleSource(id, ex, { variant, voiceOptions });
 	}
 
 	function toggle() {
@@ -80,7 +82,7 @@
 		holding = true;
 		// hold whichever dominant is selected, so the keyboard and the sound agree
 		const held: Example = { ...ex, style: 'pad', prog: `${variant} | %`, variants: undefined };
-		player.play({ ...exampleSource(id, held), title: `${variant}에서 멈추기…` }, { loop: false });
+		player.play({ ...exampleSource(id, held, { voiceOptions }), title: `${variant}에서 멈추기…` }, { loop: false });
 	}
 
 	function shuffle() {

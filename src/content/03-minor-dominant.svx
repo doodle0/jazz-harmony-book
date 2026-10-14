@@ -12,7 +12,7 @@
 | 하모닉 마이너 | C D E♭ F G A♭ **B** | 7음을 올려 진짜 V7을 만든다 → i로 가는 힘이 강해짐. 대신 증2도(A♭–B)가 남아 "스파이시한" 소리가 남 |
 | 멜로딕 마이너 (상행) | C D E♭ F G **A B** | 6음을 올려 증2도를 없앤다. 아래는 마이너, 위는 메이저 |
 
-<Hear prog="iv-7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={72} label="내추럴: v-7 → i" /> <Hear prog="iv-7 | V7(♭9, ♭13) | i-7 | %" key="C-" style="ballad" tempo={72} label="하모닉: V7 → i" /> <Hear prog="IV7 | V7 | i-Δ7 | %" key="C-" style="ballad" tempo={72} label="멜로딕: IV7 – V7 – i-Δ7" />
+<Hear prog="iv-7 | v-7 | i-7 | %" key="C-" style="ballad" tempo={72} label="내추럴: iv – v-7 – i" /> <Hear prog="iv-7 | V7(♭9, ♭13) | i-7 | %" key="C-" style="ballad" tempo={72} label="하모닉: iv – V7 – i" /> <Hear prog="IV7 | V7 | i-Δ7 | %" key="C-" style="ballad" tempo={72} label="멜로딕: IV7 – V7 – i-Δ7" />
 
 
 재즈는 멜로딕 마이너를 **상행형으로만** 씁니다. 하모닉·멜로딕 마이너는 **논다이아토닉**입니다: 어떤 메이저 스케일의 모드도 아니고, 그 모드들도 마찬가지입니다. "재즈적인" 색채가 여기서 나옵니다.

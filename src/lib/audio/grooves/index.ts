@@ -3,6 +3,7 @@
 // testable without audio and can be rendered by the review page later.
 
 import { bassMidi, type Voicing } from '#lib/theory/voicing.ts';
+import { CHORD_TONES } from '#lib/theory/chord.ts';
 import { degreeInterval, pc, transpose } from '#lib/theory/pitch.ts';
 import type { ResolvedChord } from '#lib/theory/progression.ts';
 import type { DrumEv, Inst, NoteEv, Sequence, Style } from '../types';
@@ -25,6 +26,8 @@ interface Groove {
 	bass: (g: GrooveInput) => NoteEv[];
 	drums: (g: GrooveInput) => DrumEv[];
 	defaultComp?: Inst;
+	/** the bass sound for this style (electric for funk and soul) */
+	bassInst?: Inst;
 }
 
 // ---- helpers --------------------------------------------------------------
@@ -107,20 +110,51 @@ function walkingBass(g: GrooveInput, vel = 0.8): NoteEv[] {
 	return out;
 }
 
-function rootFifthBass(g: GrooveInput, pattern: [number, 'R' | '5', number][], vel = 0.8): NoteEv[] {
+function seventhOf(c: ResolvedChord) {
+	return CHORD_TONES[c.chord.quality].find((d) => /7|6/.test(d)) ?? fifthOf(c);
+}
+
+/**
+ * A one-bar bass pattern repeated over the progression: 'R' root, '5' fifth, 'O' the root
+ * an octave up, '7' the chord's seventh. The first note in a new chord is always its root.
+ */
+function rootFifthBass(g: GrooveInput, pattern: [number, 'R' | '5' | 'O' | '7', number][], vel = 0.8): NoteEv[] {
 	const out: NoteEv[] = [];
 	let prev = 40;
+	let lastChord = -1;
+	let root = 40;
 	for (let bar = 0; bar * g.beatsPerBar < g.beats; bar++) {
 		for (const [offset, which, dur] of pattern) {
 			const beat = bar * g.beatsPerBar + offset;
 			if (beat >= g.beats) continue;
-			const c = g.chords[chordAt(g, beat)];
-			const target = which === 'R' ? rootPc(c) : tonePc(c, fifthOf(c));
-			const m = nearest(target, prev);
+			const ci = chordAt(g, beat);
+			const c = g.chords[ci];
+			// each chord's root sits low (near the last chord's root) so the octave above fits
+			if (ci !== lastChord) root = nearest(rootPc(c), root, BASS_LOW, BASS_HIGH - 7);
+			let m: number;
+			if (ci !== lastChord || which === 'R') m = root;
+			else if (which === 'O') m = root + 12;
+			else m = nearest(tonePc(c, which === '5' ? fifthOf(c) : seventhOf(c)), prev);
+			lastChord = ci;
 			out.push({ beat, dur, inst: 'bass', midi: [m], vel });
 			prev = m;
 		}
 	}
+	return out;
+}
+
+/**
+ * Comping hits per chord: `long` offsets for a chord of a bar or more, `short` for a
+ * shorter one. Each hit is [offset, duration, velocity].
+ */
+function chordHits(g: GrooveInput, inst: Inst, long: [number, number, number][], short: [number, number, number][]): NoteEv[] {
+	const out: NoteEv[] = [];
+	g.chords.forEach((c, i) => {
+		const midi = g.voicings[i].notes.map((n) => n.midi);
+		for (const [o, dur, vel] of c.beats >= g.beatsPerBar ? long : short) {
+			if (o < c.beats) out.push({ beat: c.start + o, dur: Math.min(dur, c.beats - o), inst, midi, vel });
+		}
+	});
 	return out;
 }
 
@@ -412,6 +446,127 @@ const modal: Groove = {
 
 // ---- pad (no band, just sustained chords) ---------------------------------------
 
+// ---- smooth jazz / funk / soul ------------------------------------------------
+
+/** Straight 8th hi-hats with a lighter off-beat, plus extra hits per bar. */
+function backbeatKit(g: GrooveInput, sixteenths: boolean, extra: (s: number) => DrumEv[]): DrumEv[] {
+	return perBar(g, (s) => {
+		const ev: DrumEv[] = [];
+		const step = sixteenths ? 0.25 : 0.5;
+		for (let b = 0; b < g.beatsPerBar; b += step) {
+			const onBeat = b % 1 === 0;
+			ev.push({ beat: s + b, drum: 'hat', vel: onBeat ? 0.42 : b % 0.5 === 0 ? 0.3 : 0.18 });
+		}
+		return [...ev, ...extra(s)];
+	});
+}
+
+const smooth: Groove = {
+	swing: 0.5,
+	defaultComp: 'epiano',
+	bassInst: 'ebass',
+	// e-piano pads: a long chord on 1 and a push on the "and" of 2; short chords just ring
+	comp: (g) =>
+		chordHits(
+			g,
+			g.comp ?? 'epiano',
+			[
+				[0, 1.4, 0.42],
+				[1.5, 2.4, 0.36]
+			],
+			[[0, 1.9, 0.42]]
+		),
+	bass: (g) => rootFifthBass(g, [[0, 'R', 1.3], [1.5, 'R', 0.4], [2, '5', 1.3], [3.5, 'O', 0.4]], 0.72),
+	drums: (g) =>
+		backbeatKit(g, false, (s) => [
+			{ beat: s, drum: 'kick', vel: 0.5 },
+			{ beat: s + 1.75, drum: 'kick', vel: 0.3 },
+			{ beat: s + 2.5, drum: 'kick', vel: 0.38 },
+			{ beat: s + 1, drum: 'rim', vel: 0.5 },
+			{ beat: s + 3, drum: 'rim', vel: 0.5 }
+		])
+};
+
+const funk: Groove = {
+	swing: 0.5,
+	defaultComp: 'eguitar',
+	bassInst: 'ebass',
+	// short muted-guitar stabs on the 16th off-beats
+	comp: (g) =>
+		chordHits(
+			g,
+			g.comp ?? 'eguitar',
+			[
+				[0.5, 0.18, 0.55],
+				[1.25, 0.15, 0.4],
+				[1.75, 0.18, 0.5],
+				[2.5, 0.18, 0.55],
+				[3.25, 0.15, 0.4],
+				[3.75, 0.18, 0.5]
+			],
+			[
+				[0.5, 0.18, 0.55],
+				[1.25, 0.15, 0.4],
+				[1.75, 0.18, 0.5]
+			]
+		),
+	bass: (g) =>
+		rootFifthBass(
+			g,
+			[
+				[0, 'R', 0.45],
+				[0.75, 'R', 0.2],
+				[1.5, 'O', 0.2],
+				[2, '7', 0.2],
+				[2.5, 'R', 0.4],
+				[3.25, '5', 0.2],
+				[3.5, 'O', 0.2]
+			],
+			0.82
+		),
+	drums: (g) =>
+		backbeatKit(g, true, (s) => [
+			{ beat: s, drum: 'kick', vel: 0.75 },
+			{ beat: s + 0.75, drum: 'kick', vel: 0.5 },
+			{ beat: s + 2.5, drum: 'kick', vel: 0.65 },
+			{ beat: s + 1, drum: 'backbeat', vel: 0.75 },
+			{ beat: s + 3, drum: 'backbeat', vel: 0.75 },
+			// ghost notes
+			{ beat: s + 1.75, drum: 'snare', vel: 0.14 },
+			{ beat: s + 2.25, drum: 'snare', vel: 0.12 },
+			{ beat: s + 3.75, drum: 'snare', vel: 0.14 }
+		])
+};
+
+const soul: Groove = {
+	swing: 0.5,
+	defaultComp: 'organ',
+	bassInst: 'ebass',
+	// held organ chords, re-struck on 3, with a push into the next chord now and then
+	comp: (g) =>
+		chordHits(
+			g,
+			g.comp ?? 'organ',
+			[
+				[0, 1.9, 0.4],
+				[2, 1.4, 0.34],
+				[3.5, 0.45, 0.38]
+			],
+			[[0, 1.9, 0.4]]
+		),
+	bass: (g) => rootFifthBass(g, [[0, 'R', 0.9], [1.5, '5', 0.4], [2, 'O', 0.9], [3, '5', 0.45], [3.5, 'R', 0.4]], 0.78),
+	drums: (g) =>
+		backbeatKit(g, false, (s) => [
+			{ beat: s, drum: 'kick', vel: 0.7 },
+			{ beat: s + 2, drum: 'kick', vel: 0.55 },
+			{ beat: s + 2.5, drum: 'kick', vel: 0.45 },
+			{ beat: s + 1, drum: 'backbeat', vel: 0.7 },
+			{ beat: s + 3, drum: 'backbeat', vel: 0.7 },
+			{ beat: s + 1, drum: 'shaker', vel: 0.35 },
+			{ beat: s + 3, drum: 'shaker', vel: 0.35 }
+		])
+};
+
 const pad: Groove = {
 	swing: 0.5,
 	comp: (g) =>
@@ -437,6 +592,9 @@ export const GROOVES: Record<Style, Groove> = {
 	samba,
 	latin,
 	modal,
+	smooth,
+	funk,
+	soul,
 	pad
 };
 
@@ -449,7 +607,10 @@ export function renderGroove(style: Style, g: GrooveInput): Sequence {
 		beats: g.beats,
 		beatsPerBar: g.beatsPerBar,
 		swing: groove.swing,
-		notes: [...groove.comp(input), ...(g.bass === false ? [] : groove.bass(input))],
+		notes: [
+			...groove.comp(input),
+			...(g.bass === false ? [] : groove.bass(input).map((n) => (groove.bassInst ? { ...n, inst: groove.bassInst } : n)))
+		],
 		drums: g.drums === false ? [] : groove.drums(input),
 		marks: g.chords.map((c, i) => ({ beat: c.start, index: i }))
 	};

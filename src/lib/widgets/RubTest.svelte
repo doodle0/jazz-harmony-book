@@ -48,7 +48,7 @@
 	];
 
 	let ex = $derived(deck.current);
-	let key = $derived(player.keyFor(id, parseKey(ex.key)));
+	let key = $derived(player.keyFor(id, parseKey(ex.key), ex.id));
 	let def = $derived(CHORDS[chordId]);
 	let chord = $derived(romanToChord(def.roman, key.tonic));
 	let scale = $derived(SCALES[def[scaleKind]]);

@@ -9,10 +9,20 @@
 			"key": "E♭",
 			"tempo": 64,
 			"variants": {
-				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | V7(♭9, ♭13) | i-9 | %"
+				}
 			},
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "iivi-swing",
@@ -21,10 +31,20 @@
 			"key": "C",
 			"tempo": 138,
 			"variants": {
-				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | V7(♭9, ♭13) | i-9 | %"
+				}
 			},
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "iivi-bossa",
@@ -34,10 +54,20 @@
 			"tempo": 128,
 			"comp": "piano",
 			"variants": {
-				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | V7(♭9, ♭13) | i-9 | %"
+				}
 			},
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "iivi-waltz",
@@ -46,10 +76,20 @@
 			"key": "F",
 			"tempo": 150,
 			"variants": {
-				"major": { "label": "메이저", "prog": "ii-9 | % | V13 | % | IΔ9 | % | % | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | % | V7(♭9, ♭13) | % | i-9 | % | % | %" }
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | % | V13 | % | IΔ9 | % | % | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | % | V7(♭9, ♭13) | % | i-9 | % | % | %"
+				}
 			},
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		},
 		{
 			"id": "iivi-hardbop",
@@ -58,10 +98,42 @@
 			"key": "B♭",
 			"tempo": 168,
 			"variants": {
-				"major": { "label": "메이저", "prog": "ii-9 | V13 | IΔ9 | %" },
-				"minor": { "label": "마이너", "prog": "iiø7 | V7(♭9, ♭13) | i-9 | %" }
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | V7(♭9, ♭13) | i-9 | %"
+				}
 			},
-			"provenance": { "status": "generated", "origin": "ai", "model": "claude-opus-5-5/v1" }
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "iivi-smooth",
+			"title": "스무드 재즈 ii-V-I",
+			"style": "smooth",
+			"key": "A♭",
+			"tempo": 88,
+			"variants": {
+				"major": {
+					"label": "메이저",
+					"prog": "ii-9 | V13 | IΔ9 | %"
+				},
+				"minor": {
+					"label": "마이너",
+					"prog": "iiø7 | V7(♭9, ♭13) | i-9 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
 		}
 	]
 }

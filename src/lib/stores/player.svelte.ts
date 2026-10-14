@@ -10,6 +10,8 @@ import { settings } from './settings.svelte';
 export interface PlaySource {
 	/** widget instance id; replaying the same id keeps the reader's key and tempo */
 	id: string;
+	/** which example the widget is showing; a new one resets tempo (and key, unless the reader picked one) */
+	content?: string;
 	title: string;
 	style?: Style;
 	usualKey: Key;
@@ -41,6 +43,8 @@ class Player {
 	loading = $state(false);
 	/** index of the chord currently sounding, -1 when idle */
 	mark = $state(-1);
+	/** the reader chose `key` themselves (mini-player, key buttons), so it survives a shuffle */
+	private keyPinned = $state(false);
 	private token = 0;
 
 	isActive(id: string) {
@@ -51,9 +55,19 @@ class Player {
 		return this.playing && this.source?.id === id;
 	}
 
-	/** The key a widget should display: the reader's key while it's the active source. */
-	keyFor(id: string, usual: Key): Key {
-		return this.source?.id === id && this.key ? this.key : usual;
+	/** Whether a key carries over to an example whose usual key is `usual`. */
+	private keeps(src: { content?: string }, content: string | undefined, usual: Key): boolean {
+		if (content === undefined || src.content === content) return true;
+		return this.keyPinned && !!this.key && this.key.minor === usual.minor;
+	}
+
+	/**
+	 * The key a widget should display: the reader's key while it's the active source and
+	 * still showing the same example (or the reader picked the key), else the usual key.
+	 */
+	keyFor(id: string, usual: Key, content?: string): Key {
+		if (this.source?.id !== id || !this.key) return usual;
+		return this.keeps(this.source, content, usual) ? this.key : usual;
 	}
 
 	async play(src: PlaySource, opts: { loop?: boolean; key?: Key } = {}) {
@@ -61,8 +75,20 @@ class Player {
 		if (this.source?.id !== src.id) {
 			this.key = src.usualKey;
 			this.tempo = src.tempo;
+			this.keyPinned = false;
+		} else if (this.source.content !== src.content) {
+			// another example in the same widget (다른 예시): its own tempo, and its own key
+			// unless the reader chose one
+			this.tempo = src.tempo;
+			if (!this.keeps(this.source, src.content, src.usualKey)) {
+				this.key = src.usualKey;
+				this.keyPinned = false;
+			}
 		}
-		if (opts.key) this.key = opts.key;
+		if (opts.key) {
+			this.key = opts.key;
+			this.keyPinned = true;
+		}
 		this.loop = opts.loop ?? src.loop ?? true;
 		this.source = src;
 		this.mark = -1;
@@ -122,6 +148,7 @@ class Player {
 	}
 
 	async setKey(key: Key) {
+		this.keyPinned = true;
 		if (this.key && sameKey(this.key, key)) return;
 		this.key = key;
 		if (this.playing && this.source) {

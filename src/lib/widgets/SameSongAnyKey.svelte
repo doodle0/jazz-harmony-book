@@ -21,7 +21,7 @@
 	let show = $state<'letters' | 'roman' | 'both'>('both');
 	let ex = $derived(deck.current);
 	let usual = $derived(parseKey(ex.key));
-	let key = $derived(player.keyFor(id, usual));
+	let key = $derived(player.keyFor(id, usual, ex.id));
 	let arranged = $derived(arrange(ex, { key, voicing: settings.voicing }));
 	let playing = $derived(player.isPlaying(id));
 

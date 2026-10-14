@@ -1,5 +1,5 @@
-export type Inst = 'piano' | 'bass' | 'guitar' | 'vibes';
-export type Drum = 'ride' | 'hat' | 'hatFoot' | 'kick' | 'snare' | 'rim' | 'brush' | 'shaker' | 'cowbell';
+export type Inst = 'piano' | 'bass' | 'guitar' | 'vibes' | 'epiano' | 'organ' | 'ebass' | 'eguitar';
+export type Drum = 'ride' | 'hat' | 'hatFoot' | 'kick' | 'snare' | 'backbeat' | 'rim' | 'brush' | 'shaker' | 'cowbell';
 
 export interface NoteEv {
 	beat: number;
@@ -43,4 +43,7 @@ export type Style =
 	| 'samba'
 	| 'latin'
 	| 'modal'
+	| 'smooth'
+	| 'funk'
+	| 'soul'
 	| 'pad';

@@ -31,10 +31,10 @@
 		},
 		{
 			"id": "mi-soul",
-			"title": "소울 재즈 인터체인지",
-			"style": "hard-bop",
+			"title": "소울 인터체인지",
+			"style": "soul",
 			"key": "F",
-			"tempo": 112,
+			"tempo": 92,
 			"variants": {
 				"A": {
 					"label": "다이아토닉",

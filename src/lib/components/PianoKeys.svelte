@@ -32,12 +32,16 @@
 
 <script lang="ts">
 	// SVG keyboard. Marks show what each key is (color + a text label, never color alone).
-	// Tapping a key plays it.
+	// Tapping a key plays it. `glides` animate a mark sliding from one key to another.
+	import { Tween } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
+
 	let {
 		low = 48,
 		high = 72,
 		marks = {},
 		flash = [],
+		glides = [],
 		onTap,
 		legend = true
 	}: {
@@ -46,6 +50,8 @@
 		marks?: Record<number, KeyMark>;
 		/** keys that briefly light up (e.g. the note that changed) */
 		flash?: number[];
+		/** marks that just moved: each slides from `from` to the mark on `to` */
+		glides?: { from: number; to: number }[];
 		onTap?: (midi: number) => void;
 		legend?: boolean;
 	} = $props();
@@ -76,6 +82,26 @@
 	const BW = 0.62;
 
 	let pressed = $state<number | null>(null);
+
+	/** centre and radius of the mark dot on a key */
+	function dot(m: number) {
+		const w = layout.whites.find((k) => k.midi === m);
+		if (w) return { x: w.x + 0.5, y: WH - 0.55, r: 0.36 };
+		const b = layout.blacks.find((k) => k.midi === m);
+		if (b) return { x: b.x + BW / 2, y: BH - 0.42, r: 0.27 };
+		return null;
+	}
+
+	// 0 → 1 each time a new set of glides arrives
+	const progress = new Tween(1, { duration: 520, easing: cubicOut });
+	$effect(() => {
+		if (!glides.length) return;
+		progress.set(0, { duration: 0 });
+		progress.set(1);
+	});
+	let gliding = $derived(progress.current < 1 ? glides : []);
+	let landing = $derived(new Set(gliding.map((g) => g.to)));
+	const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
 	function down(m: number) {
 		pressed = m;
@@ -113,9 +139,9 @@
 					stroke="var(--ink)"
 					stroke-width="0.07"
 					class:flash={flash.includes(k.midi)}
-					style:transform={pressed === k.midi ? 'translateY(0.06px)' : ''}
+					class:pressed={pressed === k.midi}
 				/>
-				{#if mark}
+				{#if mark && !landing.has(k.midi)}
 					<circle cx={k.x + 0.5} cy={WH - 0.55} r="0.36" fill={MARK_COLOR[mark.kind]} stroke="var(--ink)" stroke-width="0.06" />
 					{#if mark.label}
 						<text
@@ -145,8 +171,9 @@
 					stroke="var(--ink)"
 					stroke-width="0.06"
 					class:flash={flash.includes(k.midi)}
+					class:pressed={pressed === k.midi}
 				/>
-				{#if mark}
+				{#if mark && !landing.has(k.midi)}
 					<circle cx={k.x + BW / 2} cy={BH - 0.42} r="0.27" fill={MARK_COLOR[mark.kind]} stroke="var(--key-white)" stroke-width="0.05" />
 					{#if mark.label}
 						<text
@@ -163,6 +190,21 @@
 				{/if}
 			</g>
 		{/each}
+		{#each gliding as g (g.from + ':' + g.to)}
+			{@const a = dot(g.from)}
+			{@const b = dot(g.to)}
+			{@const mark = marks[g.to]}
+			{#if a && b && mark}
+				{@const t = progress.current}
+				<g pointer-events="none">
+					<line x1={a.x} y1={a.y} x2={lerp(a.x, b.x, t)} y2={lerp(a.y, b.y, t)} stroke={MARK_COLOR[mark.kind]} stroke-width="0.12" stroke-linecap="round" opacity={0.6 * (1 - t)} />
+					<circle cx={lerp(a.x, b.x, t)} cy={lerp(a.y, b.y, t)} r={lerp(a.r, b.r, t)} fill={MARK_COLOR[mark.kind]} stroke="var(--ink)" stroke-width="0.06" />
+					{#if mark.label}
+						<text x={lerp(a.x, b.x, t)} y={lerp(a.y, b.y, t)} text-anchor="middle" dominant-baseline="central" font-size="0.27" font-weight="800" fill="var(--on-color)">{mark.label}</text>
+					{/if}
+				</g>
+			{/if}
+		{/each}
 	</svg>
 	{#if legend && usedKinds.length > 1}
 		<div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ink-soft">
@@ -177,6 +219,15 @@
 </div>
 
 <style>
+	/* the keys are focusable SVG groups; a browser focus ring gets scaled up with the
+	   viewBox into a big black blob, and mobile adds its own tap highlight */
+	svg :global(g[role='button']) {
+		outline: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.pressed {
+		filter: brightness(0.82);
+	}
 	.flash {
 		animation: keyflash 900ms ease-out;
 	}

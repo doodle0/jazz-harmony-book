@@ -28,9 +28,9 @@ Last updated: 2026-10-13
 | ★ Same Song, Any Key | ✅ | 5 examples |
 | ★ Why V7 Pulls | ✅ | 5 examples; "V7에서 멈추기" hold |
 | Home-Away-Home Journey | ⬜ | |
-| ★ ii-V-I Voicing Explorer | ✅ | Shell / A / B / alternating, ø7 ninth toggle, voice-leading ladder |
+| ★ ii-V-I Voicing Explorer | ✅ | Two instances in ch.1: root-position shells (1-3-7 / 1-7-3) and four-note rootless. A / B / alternating, A·B form badge, ø7 ninth toggle, voice-leading ladder |
 | Guide-tone line | ⬜ | |
-| ★ Mode Brightness Slider | ✅ | Circle of fifths, changed-note flash. Shuffle examples are generic vamps, not the plan's per-mode settings yet. |
+| ★ Mode Brightness Slider | ✅ | Circle of fifths, the changed note's mark glides to its new key. Shuffle examples are generic vamps, not the plan's per-mode settings yet. |
 | ★ Rub Test | ✅ | Ratings, reveal, "기피음을 일부러" phrase, Corcovado link |
 | Tension Heatmap | ⬜ | |
 | How Many Keys | ⬜ | |
@@ -66,8 +66,8 @@ Extra (not in the plan's catalog): `DeviceAB`, an A/B/C demo used for 11 chapter
 ## Engine and content
 
 - ✅ Theory core: spelled pitches, chord parsing (lecture + tonal-style input), lecture-notation display, Roman numerals with secondary/sub, progressions, A/B voicings with voice leading, modes and dominant scales, avoid-note rule
-- ✅ Grooves: swing, bebop, hard-bop/blues, ballad, waltz, bossa, samba, Afro-Cuban, modal, pad
-- ✅ Automatic checks: every example set and every chapter `<Hear>` progression plays in all 12 keys and displays in lecture notation (158 tests)
+- ✅ Grooves: swing, bebop, hard-bop/blues, ballad, waltz, bossa, samba, Afro-Cuban, modal, smooth jazz, funk, soul, pad (electric piano, organ, electric bass and muted guitar samples for the last three)
+- ✅ Automatic checks: every example set and every chapter `<Hear>` progression plays in all 12 keys and displays in lecture notation (172 tests)
 - ⬜ Voicing styles beyond shell/rootless/close: drop 2, quartal, So What, block, upper structure
 - ⬜ Coverage report script (concept × style buckets)
 - ⬜ Melody support (`MelodyExcerpt`) and the rights check
