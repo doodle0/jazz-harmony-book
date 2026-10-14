@@ -126,7 +126,7 @@ export function arrange(ex: Example, o: ArrangeOptions = {}): Arranged {
 	const voicings =
 		o.voicings ??
 		(stack ? chords.map((c) => voiceStack(c.chord, stack)) : null) ??
-		voiceProgression(chords.map((c) => c.chord), o.voicing ?? ex.voicing ?? 'rootless', o.voiceOptions);
+		voiceProgression(chords.map((c) => c.chord), o.voicing ?? ex.voicing ?? 'spread', o.voiceOptions);
 	const seq = renderGroove(o.style ?? ex.style, {
 		chords,
 		voicings,

@@ -28,6 +28,7 @@
 	"settings.theme.auto": "자동",
 	"settings.theme.light": "낮",
 	"settings.theme.dark": "밤",
+	"voicing.spread": "두 손",
 	"voicing.rootless": "근음 없는 A·B",
 	"voicing.shell": "셸",
 	"voicing.close": "기본형",

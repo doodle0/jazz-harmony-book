@@ -127,7 +127,7 @@
 					{#key `${pos}:${d}`}
 						<span
 							class="grid min-w-8 place-items-center rounded-lg border-2 border-ink px-1 text-sm"
-							style:background={d === mode.character ? 'var(--mustard)' : movedTo.has(d) ? 'var(--sky)' : 'var(--card)'}
+							style:background={d === mode.character ? 'var(--mustard)' : 'var(--card)'}
 							style:animation={movedTo.has(d) ? `${movedTo.get(d) ? 'nudge-up' : 'nudge-down'} 520ms ease-out` : ''}
 							>{#if movedTo.has(d)}<span class="text-[0.65rem] leading-none" aria-hidden="true">{movedTo.get(d) ? '▲' : '▼'}</span>{/if}{prettyDegree(d)}</span
 						>

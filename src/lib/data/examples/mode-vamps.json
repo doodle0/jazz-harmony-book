@@ -55,37 +55,11 @@
 			}
 		},
 		{
-			"id": "modes-latin",
-			"title": "아프로-쿠반 뱀프",
-			"style": "latin",
-			"key": "E",
-			"tempo": 168,
-			"prog": "I | %",
-			"provenance": {
-				"status": "generated",
-				"origin": "ai",
-				"model": "claude-opus-5-5/v1"
-			}
-		},
-		{
 			"id": "modes-funk",
 			"title": "펑크 뱀프",
 			"style": "funk",
 			"key": "E",
 			"tempo": 100,
-			"prog": "I | %",
-			"provenance": {
-				"status": "generated",
-				"origin": "ai",
-				"model": "claude-opus-5-5/v1"
-			}
-		},
-		{
-			"id": "modes-smooth",
-			"title": "스무드 재즈 뱀프",
-			"style": "smooth",
-			"key": "D♭",
-			"tempo": 88,
 			"prog": "I | %",
 			"provenance": {
 				"status": "generated",

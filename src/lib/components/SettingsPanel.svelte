@@ -45,12 +45,13 @@
 			label={t('settings.voicing')}
 			bind:value={settings.voicing}
 			options={[
+				{ value: 'spread' as VoicingStyle, label: t('voicing.spread') },
 				{ value: 'rootless' as VoicingStyle, label: t('voicing.rootless') },
 				{ value: 'shell' as VoicingStyle, label: t('voicing.shell') },
 				{ value: 'close' as VoicingStyle, label: t('voicing.close') }
 			]}
 		/>
-		<p class="mt-1.5 text-xs text-ink-soft">별도로 정해진 보이싱이 없는 예시에 쓰입니다.</p>
+		<p class="mt-1.5 text-xs text-ink-soft">별도로 정해진 보이싱이 없는 예시에 쓰입니다. 두 손: 왼손은 3도와 7도, 오른손은 텐션, 근음은 베이스가 맡습니다.</p>
 	</div>
 
 	<div>

@@ -67,19 +67,6 @@
 				"origin": "ai",
 				"model": "claude-opus-5-5/v1"
 			}
-		},
-		{
-			"id": "dp-soul",
-			"title": "소울 ii-V-I",
-			"style": "soul",
-			"key": "B♭",
-			"tempo": 92,
-			"prog": "ii-7 | V7 | IΔ7 | %",
-			"provenance": {
-				"status": "generated",
-				"origin": "ai",
-				"model": "claude-opus-5-5/v1"
-			}
 		}
 	]
 }

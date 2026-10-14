@@ -4,19 +4,29 @@
 	"summary": "근음을 뺀 V7(♭9)는 곧 viio7. 세컨더리 도미넌트를 목표의 반음 아래 o7로 바꾸면 베이스가 반음계로 올라갑니다.",
 	"examples": [
 		{
-			"id": "dim-swing",
-			"title": "IΔ7 – ♯io7 – ii-7",
+			"id": "dim-could-happen",
+			"title": "It Could Happen to You 첫 8마디",
 			"style": "swing",
 			"key": "E♭",
-			"tempo": 144,
+			"tempo": 152,
+			"tune": {
+				"title": "It Could Happen to You",
+				"composer": "Jimmy Van Heusen",
+				"year": 1944
+			},
+			"era": "1940년대",
 			"variants": {
 				"A": {
 					"label": "세컨더리 도미넌트",
-					"prog": "IΔ7 V7/ii | ii-7 V7/iii | iii-7 V7/ii | ii-7 V7"
+					"prog": "IΔ7 | V7/ii | ii-7 | V7/iii | iii-7 | IVΔ7 | iiø7/ii | V7(♭9)/ii"
 				},
 				"B": {
-					"label": "o7 대체",
-					"prog": "IΔ7 ♯io7 | ii-7 ♯iio7 | iii-7 V7/ii | ii-7 V7"
+					"label": "ii-V로 쪼개기",
+					"prog": "IΔ7 | iiø7/ii V7(♭9)/ii | ii-7 | iiø7/iii V7(♭9)/iii | iii-7 | IVΔ7 | iiø7/ii | V7(♭9)/ii"
+				},
+				"C": {
+					"label": "o7로 바꾸기 (원곡)",
+					"prog": "IΔ7 | ♯io7 | ii-7 | ♯iio7 | iii-7 | IVΔ7 | iiø7/ii | V7(♭9)/ii"
 				}
 			},
 			"provenance": {

@@ -1,12 +1,12 @@
 // Piano voicings. A voicing form is a bottom-up list of slots ('3', '7', '9', '13|5' …)
-// that resolve against a chord's quality and tensions. Placement then picks the octave
-// that moves least from the previous chord, so a ii-V-I in A/B forms comes out the way
+// that resolve against a chord's quality and tensions. Placement then picks the octaves
+// that move least over the whole progression, so a ii-V-I in A/B forms comes out the way
 // the guide prints it: D-9 (F A C E) → G13 (F A B E) → CΔ9 (E G B D).
 
 import { CHORD_TONES, type Chord, type Quality } from './chord';
 import { degreeInterval, pc, transpose, type Pitch } from './pitch';
 
-export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'smooth' | 'triad';
+export type VoicingStyle = 'shell' | 'rootless' | 'A' | 'B' | 'alternate' | 'close' | 'smooth' | 'triad' | 'spread';
 
 export interface VoicedNote {
 	midi: number;
@@ -28,9 +28,11 @@ export interface VoiceOptions {
 	/** For 'A' / 'B' / 'alternate' / 'rootless': four-note rootless forms (default), or
 	 *  root-position shells, where A = 1-3-7 and B = 1-7-3 */
 	family?: 'rootless' | 'shell';
-	/** Window for the lowest note of the voicing */
+	/** Window for the lowest note of the voicing (for 'spread', of the left hand) */
 	low?: number;
 	high?: number;
+	/** 'spread': highest note the right hand may reach */
+	top?: number;
 }
 
 const has = (c: Chord, t: string) => c.tensions.includes(t);
@@ -163,9 +165,7 @@ function stack(c: Chord, degrees: string[], bottom: number): VoicedNote[] {
 }
 
 /** All placements of a form whose lowest note lies in [low, high]. */
-function placements(c: Chord, degrees: string[], opts: VoiceOptions): VoicedNote[][] {
-	const low = opts.low ?? 48;
-	const high = opts.high ?? 62;
+function placements(c: Chord, degrees: string[], low: number, high: number): VoicedNote[][] {
 	const out: VoicedNote[][] = [];
 	for (let b = low; b <= high; b++) {
 		const v = stack(c, degrees, b);
@@ -174,52 +174,206 @@ function placements(c: Chord, degrees: string[], opts: VoiceOptions): VoicedNote
 	return out;
 }
 
-function distance(a: VoicedNote[], b: VoicedNote[]): number {
+// ---- two-hand spread voicings ----------------------------------------------------
+
+const SPREAD_LH = { low: 45, high: 57 };
+const SPREAD_TOP = 79; // G5
+const SPREAD_TOP_TARGET = 74;
+
+/** Right-hand "pretty" notes for a spread voicing (the left hand plays 3 and 7). */
+function prettyDegrees(c: Chord, opts: VoiceOptions): string[] {
+	switch (c.quality) {
+		case 'dom7':
+		case 'aug7':
+		case 'sus7':
+			return ['9', '13'];
+		case 'alt7':
+			return ['#9', 'b13'];
+		case 'halfDim7': {
+			// ♭5 is what makes it ø7; the 11 would sit a half step from it, so the root goes on top instead
+			const n = opts.halfDimNinth ?? 'none';
+			return n === 'none' ? ['5', '1'] : ['5', n];
+		}
+		case 'dim7':
+			return ['5', '1'];
+		case 'maj':
+		case 'min':
+		case 'dim':
+		case 'aug':
+		case 'sus':
+			return ['3', '5', '1'];
+		default:
+			return ['9', '13|5'];
+	}
+}
+
+function* permutations<T>(xs: T[]): Generator<T[]> {
+	if (xs.length <= 1) {
+		yield xs;
+		return;
+	}
+	for (let i = 0; i < xs.length; i++) for (const rest of permutations([...xs.slice(0, i), ...xs.slice(i + 1)])) yield [xs[i], ...rest];
+}
+
+/**
+ * Root-shell-pretty: the bass has the root, the left hand the shell (3 and 7, in either
+ * order) around C3–A3, the right hand the colour tones (9, 13 or 5, written tensions)
+ * within an octave above it. Spread over two hands, the low register keeps wide intervals.
+ */
+function spreadCandidates(c: Chord, opts: VoiceOptions): VoicedNote[][] {
+	const semis = (d: string) => degreeInterval(d).semis % 12;
+	const g3 = slot(c, '3', opts)!;
+	const g7 = slot(c, '7', opts);
+	const lhShapes = g7 ? [[g3, g7], [g7, g3]] : [['1', '5']];
+	const lhDegrees = lhShapes[0];
+	const rh: string[] = [];
+	const add = (d: string | null) => {
+		if (d && ![...lhDegrees, ...rh].some((x) => semis(x) === semis(d))) rh.push(d);
+	};
+	// 7alt's tensions are implied, not written, so its degrees go in as they are
+	for (const s of prettyDegrees(c, opts)) add(c.quality === 'alt7' ? s : slot(c, s, opts));
+	if (c.quality !== 'alt7') for (const t of c.tensions) if (!(c.quality === 'halfDim7' && /9$/.test(t))) add(t);
+
+	const out: VoicedNote[][] = [];
+	const low = opts.low ?? SPREAD_LH.low;
+	const high = opts.high ?? SPREAD_LH.high;
+	const top = opts.top ?? SPREAD_TOP;
+	for (const lh of lhShapes.flatMap((d) => placements(c, d, low, high))) {
+		const lhTop = lh[lh.length - 1].midi;
+		for (const order of permutations(rh)) {
+			for (const v of placements(c, order, lhTop + 1, lhTop + 12)) {
+				if (v[v.length - 1].midi > top || v[v.length - 1].midi - v[0].midi > 12) continue;
+				out.push([...lh, ...v]);
+			}
+		}
+	}
+	return out;
+}
+
+// ---- choosing among placements -------------------------------------------------
+
+/** Lowest comfortable bottom note for each interval in semitones ("low interval limits"). */
+const LOW_LIMIT = [0, 52, 51, 48, 46, 45, 46, 34, 43, 41, 41, 41];
+
+/** How far adjacent notes sit below their low interval limits: small intervals down low turn to mud. */
+function mud(v: VoicedNote[]): number {
+	let p = 0;
+	for (let i = 1; i < v.length; i++) {
+		const lo = v[i - 1].midi;
+		const iv = v[i].midi - lo;
+		if (iv < 12 && lo < LOW_LIMIT[iv]) p += LOW_LIMIT[iv] - lo;
+	}
+	return p;
+}
+
+const avg = (v: number[]) => v.reduce((s, m) => s + m, 0) / v.length;
+
+/**
+ * Voice-leading distance. Voices pair up in order when the counts match (the root of a
+ * shell voicing counts for less: it's a bass note, not a line); otherwise each note goes
+ * to the nearest note of the other chord, and the top voice counts once more.
+ */
+function distance(a: VoicedNote[], b: VoicedNote[], rootWeight = 1): number {
 	const x = a.map((n) => n.midi);
 	const y = b.map((n) => n.midi);
-	const n = Math.max(x.length, y.length);
 	let d = 0;
-	for (let i = 0; i < n; i++) d += Math.abs((x[Math.min(i, x.length - 1)] ?? 0) - (y[Math.min(i, y.length - 1)] ?? 0));
+	if (x.length === y.length) {
+		x.forEach((m, i) => (d += Math.abs(m - y[i]) * (i === 0 ? rootWeight : 1)));
+	} else {
+		const near = (m: number, to: number[]) => Math.min(...to.map((t) => Math.abs(t - m)));
+		d = (x.reduce((s, m) => s + near(m, y), 0) + y.reduce((s, m) => s + near(m, x), 0)) / 2;
+		d += Math.abs(x[x.length - 1] - y[y.length - 1]);
+	}
 	// keep the overall register steady too
-	const avg = (v: number[]) => v.reduce((s, m) => s + m, 0) / v.length;
 	return d + Math.abs(avg(x) - avg(y));
+}
+
+interface Candidate {
+	v: VoicedNote[];
+	form: 'A' | 'B';
+	/** cost of the voicing on its own: register and low-register mud */
+	own: number;
 }
 
 /**
  * Voices a progression. 'A' / 'B' fix the form, 'alternate' goes A-B-A…, 'rootless'
- * picks whichever form moves least, 'shell' / 'close' / 'triad' use those shapes, and
- * 'smooth' is close position in whichever inversion moves least.
+ * picks whichever form moves least, 'shell' / 'close' / 'triad' use those shapes,
+ * 'smooth' is close position in whichever inversion moves least, and 'spread' is a
+ * two-hand root-shell-pretty voicing without the root (the bass plays it).
+ *
+ * The whole progression is voiced at once (a shortest path through every chord's
+ * placements), so the first chord is chosen with the rest in view: a guide-tone line
+ * that drifts down by step through a ii-V-I starts high enough to stay smooth, in any key.
  */
 export function voiceProgression(chords: Chord[], style: VoicingStyle, opts: VoiceOptions = {}): Voicing[] {
-	const out: Voicing[] = [];
-	let prev: VoicedNote[] | null = null;
-	const center = ((opts.low ?? 48) + (opts.high ?? 62)) / 2;
+	const spread = style === 'spread' && opts.family !== 'shell';
+	const shell = style === 'shell' || (opts.family === 'shell' && !['close', 'smooth', 'triad'].includes(style));
+	const low = opts.low ?? 48;
+	const high = opts.high ?? 62;
+	const center = (low + high) / 2;
 	// 'alternate' switches form on each new chord; a repeated bar keeps its voicing
 	let turn = -1;
-	chords.forEach((c, i) => {
+	const layers: Candidate[][] = chords.map((c, i) => {
 		if (i === 0 || JSON.stringify(c) !== JSON.stringify(chords[i - 1])) turn++;
-		let candidateForms: ('A' | 'B')[];
-		if (style === 'A' || style === 'B') candidateForms = [style];
+		if (spread) {
+			return spreadCandidates(c, opts).map((v) => ({
+				v,
+				form: 'A' as const,
+				own: 1.5 * mud(v) + 0.3 * Math.max(0, Math.abs(v[0].midi - (SPREAD_LH.low + SPREAD_LH.high) / 2) - 4) + 0.3 * Math.max(0, Math.abs(v[v.length - 1].midi - SPREAD_TOP_TARGET) - 3)
+			}));
+		}
+		let forms: ('A' | 'B')[];
+		if (style === 'A' || style === 'B') forms = [style];
 		else if (style === 'alternate') {
 			const first = opts.startForm ?? 'A';
 			const other = first === 'A' ? 'B' : 'A';
-			candidateForms = [turn % 2 === 0 ? first : other];
-		}
-		else candidateForms = ['A', 'B'];
-		let best: { v: VoicedNote[]; form: 'A' | 'B'; score: number } | null = null;
-		for (const form of candidateForms) {
+			forms = [turn % 2 === 0 ? first : other];
+		} else forms = ['A', 'B'];
+		return forms.flatMap((form) => {
 			const base = degreesFor(c, style, form, opts);
 			// 'smooth': chord tones in any inversion, so each voice moves as little as it can
 			const shapes = style === 'smooth' ? base.map((_, r) => [...base.slice(r), ...base.slice(0, r)]) : [base];
-			for (const v of shapes.flatMap((d) => placements(c, d, opts))) {
-				const score = prev ? distance(prev, v) : Math.abs(v[0].midi - center) + (form === 'A' ? 0 : 0.5);
-				if (!best || score < best.score) best = { v, form, score };
-			}
-		}
-		if (!best) throw new Error('No voicing found');
-		out.push({ notes: best.v, form: best.form });
-		prev = best.v;
+			return shapes
+				.flatMap((d) => placements(c, d, low, high))
+				.map((v) => ({
+					v,
+					form,
+					own: 1.5 * mud(v) + 0.3 * Math.max(0, Math.abs(v[0].midi - center) - 4) + (i === 0 && form === 'B' ? 0.5 : 0)
+				}));
+		});
 	});
+	layers.forEach((l, i) => {
+		if (!l.length) throw new Error(`No voicing found for chord ${i + 1}`);
+	});
+
+	// shortest path: cost[i][k] = own + min over j of cost[i-1][j] + distance(j, k)
+	const rootWeight = shell ? 0.25 : 1;
+	let cost = layers[0].map((c) => c.own);
+	const back: number[][] = [[]];
+	for (let i = 1; i < layers.length; i++) {
+		const prev = layers[i - 1];
+		const next: number[] = [];
+		const from: number[] = [];
+		for (const cand of layers[i]) {
+			let best = Infinity;
+			let arg = 0;
+			prev.forEach((p, j) => {
+				const s = cost[j] + distance(p.v, cand.v, rootWeight);
+				if (s < best) [best, arg] = [s, j];
+			});
+			next.push(best + cand.own);
+			from.push(arg);
+		}
+		cost = next;
+		back.push(from);
+	}
+	let k = cost.indexOf(Math.min(...cost));
+	const out: Voicing[] = [];
+	for (let i = layers.length - 1; i >= 0; i--) {
+		const c = layers[i][k];
+		out.unshift(spread ? { notes: c.v } : { notes: c.v, form: c.form });
+		k = back[i][k];
+	}
 	return out;
 }
 

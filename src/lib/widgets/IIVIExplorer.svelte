@@ -1,6 +1,6 @@
 <script lang="ts">
-	// ★ ii-V-I Voicing Explorer (guide §1): major/minor, A / B / alternating A-B, for either
-	// root-position shells (A = 1-3-7, B = 1-7-3) or four-note rootless voicings.
+	// ★ ii-V-I Voicing Explorer (guide §1): major/minor, A / B / alternating A·B·A or B·A·B,
+	// for either root-position shells (A = 1-3-7, B = 1-7-3) or four-note rootless voicings.
 	// The ladder shows every voice moving by step; the ø7 ninth toggle plays the
 	// textbook ♭9 (an avoid note) against the ♮9.
 	import data from '#lib/data/examples/ii-v-i.json';
@@ -22,14 +22,15 @@
 
 	const id = $props.id();
 	const deck = new Deck(data.examples as Example[]);
-	// open on medium swing rather than the ballad
-	deck.i = Math.max(0, deck.examples.findIndex((e) => e.id === 'iivi-swing'));
 	// svelte-ignore state_referenced_locally
 	const shell = kind === 'shell';
 
 	// svelte-ignore state_referenced_locally
 	let mode = $state<'major' | 'minor'>(initialMode);
-	let form = $state<'A' | 'B' | 'alternate'>('alternate');
+	// the guide alternates A·B·A in major and B·A·B in minor (rootless)
+	const guideForm = (m: 'major' | 'minor') => (m === 'minor' && !shell ? 'BAB' : 'ABA');
+	// svelte-ignore state_referenced_locally
+	let form = $state<'A' | 'B' | 'ABA' | 'BAB'>(guideForm(initialMode));
 	let ninth = $state<'none' | 'b9' | '9'>('none');
 
 	let ex = $derived(deck.current);
@@ -40,17 +41,27 @@
 	let key = $derived(player.keyFor(id, usual, ex.id));
 	let opts = $derived({
 		variant: mode,
-		voicing: form as VoicingStyle,
-		voiceOptions: shell
-			? // the root sits in the left hand, so keep it in the bass register and drop the bass player
-				{ family: 'shell' as const, startForm: 'A' as const, low: 41, high: 52 }
-			: { halfDimNinth: ninth, startForm: mode === 'minor' ? ('B' as const) : ('A' as const) },
-		bass: !shell
+		voicing: (form === 'A' || form === 'B' ? form : 'alternate') as VoicingStyle,
+		voiceOptions: {
+			startForm: form === 'BAB' ? ('B' as const) : ('A' as const),
+			// shells: the root may sit anywhere from C2 to G3; the guide tones' line decides the octave
+			...(shell ? { family: 'shell' as const, low: 36, high: 55 } : { halfDimNinth: ninth })
+		}
 	});
 	let arranged = $derived(arrange(ex, { ...opts, key }));
 	let playing = $derived(player.isPlaying(id));
 	let shown = $derived(playing && player.mark >= 0 ? player.mark : 0);
 	let shownForm = $derived(arranged.voicings[shown].form);
+	// shells move register with the key, so the keyboard follows them (from a C or F up to an E or B)
+	let range = $derived.by(() => {
+		if (!shell) return { low: 45, high: 74 };
+		const all = arranged.voicings.flatMap((v) => v.notes.map((n) => n.midi));
+		let low = Math.min(...all) - 1;
+		let high = Math.max(...all) + 1;
+		while (![0, 5].includes(low % 12)) low--;
+		while (![4, 11].includes(high % 12)) high++;
+		return { low, high };
+	});
 
 	let marks = $derived.by(() => {
 		const out: Record<number, KeyMark> = {};
@@ -94,7 +105,10 @@
 			label="장조/단조"
 			size="sm"
 			bind:value={mode}
-			onchange={refresh}
+			onchange={() => {
+				if (form === 'ABA' || form === 'BAB') form = guideForm(mode);
+				refresh();
+			}}
 			options={[
 				{ value: 'major', label: '메이저 ii-V-I' },
 				{ value: 'minor', label: '마이너 ii-V-i', color: 'var(--plum)' }
@@ -108,7 +122,8 @@
 			options={[
 				{ value: 'A', label: shell ? 'A 폼 (1-3-7)' : 'A 폼' },
 				{ value: 'B', label: shell ? 'B 폼 (1-7-3)' : 'B 폼' },
-				{ value: 'alternate', label: mode === 'minor' && !shell ? 'B·A·B 교대' : 'A·B·A 교대' }
+				{ value: 'ABA', label: 'A·B·A 교대' },
+				{ value: 'BAB', label: 'B·A·B 교대' }
 			]}
 		/>
 		{#if mode === 'minor' && !shell}
@@ -148,7 +163,7 @@
 		{/if}
 	</div>
 	<div class="mt-2">
-		<PianoKeys low={shell ? 40 : 45} high={shell ? 64 : 74} {marks} onTap={(m) => player.tap('piano', [m])} />
+		<PianoKeys low={range.low} high={range.high} {marks} onTap={(m) => player.tap('piano', [m])} />
 	</div>
 
 	{#snippet controls()}

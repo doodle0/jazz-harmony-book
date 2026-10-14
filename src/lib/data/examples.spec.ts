@@ -31,6 +31,10 @@ describe.each(Object.entries(sets))('%s', (_, set) => {
 	});
 });
 
+it('every set has at most five grooves', () => {
+	for (const [file, set] of Object.entries(sets)) expect(set.examples.length, file).toBeLessThanOrEqual(5);
+});
+
 it('every concept set spans at least two styles', () => {
 	for (const [file, set] of Object.entries(sets)) {
 		const styles = new Set(set.examples.map((e) => e.style));

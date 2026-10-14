@@ -1,0 +1,137 @@
+{
+	"concept": "three-minors",
+	"title": "세 가지 마이너",
+	"summary": "같은 iv – v – i를 내추럴, 하모닉, 멜로딕 마이너로. 6음과 7음이 바뀌면 코드도 바뀝니다.",
+	"examples": [
+		{
+			"id": "minors-ballad",
+			"title": "발라드 iv – v – i",
+			"style": "ballad",
+			"key": "C-",
+			"tempo": 72,
+			"variants": {
+				"natural": {
+					"label": "내추럴",
+					"prog": "iv-7 | v-7 | i-7 | %"
+				},
+				"harmonic": {
+					"label": "하모닉",
+					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+				},
+				"melodic": {
+					"label": "멜로딕",
+					"prog": "IV7 | V7 | i-Δ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "minors-swing",
+			"title": "미디엄 스윙 iv – v – i",
+			"style": "swing",
+			"key": "F-",
+			"tempo": 132,
+			"variants": {
+				"natural": {
+					"label": "내추럴",
+					"prog": "iv-7 | v-7 | i-7 | %"
+				},
+				"harmonic": {
+					"label": "하모닉",
+					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+				},
+				"melodic": {
+					"label": "멜로딕",
+					"prog": "IV7 | V7 | i-Δ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "minors-bossa",
+			"title": "보사노바 iv – v – i",
+			"style": "bossa",
+			"key": "A-",
+			"tempo": 126,
+			"variants": {
+				"natural": {
+					"label": "내추럴",
+					"prog": "iv-7 | v-7 | i-7 | %"
+				},
+				"harmonic": {
+					"label": "하모닉",
+					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+				},
+				"melodic": {
+					"label": "멜로딕",
+					"prog": "IV7 | V7 | i-Δ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "minors-waltz",
+			"title": "재즈 왈츠 iv – v – i",
+			"style": "waltz",
+			"key": "D-",
+			"tempo": 150,
+			"variants": {
+				"natural": {
+					"label": "내추럴",
+					"prog": "iv-7 | % | v-7 | % | i-7 | % | % | %"
+				},
+				"harmonic": {
+					"label": "하모닉",
+					"prog": "iv-7 | % | V7(♭9, ♭13) | % | i-7 | % | % | %"
+				},
+				"melodic": {
+					"label": "멜로딕",
+					"prog": "IV7 | % | V7 | % | i-Δ7 | % | % | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		},
+		{
+			"id": "minors-latin",
+			"title": "아프로-쿠반 iv – v – i",
+			"style": "latin",
+			"key": "G-",
+			"tempo": 168,
+			"variants": {
+				"natural": {
+					"label": "내추럴",
+					"prog": "iv-7 | v-7 | i-7 | %"
+				},
+				"harmonic": {
+					"label": "하모닉",
+					"prog": "iv-7 | V7(♭9, ♭13) | i-7 | %"
+				},
+				"melodic": {
+					"label": "멜로딕",
+					"prog": "IV7 | V7 | i-Δ7 | %"
+				}
+			},
+			"provenance": {
+				"status": "generated",
+				"origin": "ai",
+				"model": "claude-opus-5-5/v1"
+			}
+		}
+	]
+}

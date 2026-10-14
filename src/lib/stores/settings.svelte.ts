@@ -11,6 +11,8 @@ interface SettingsData {
 	voicing: VoicingStyle;
 	theme: Theme;
 	soundHintSeen: boolean;
+	/** bumped when the default voicing changes, so a saved old default moves to the new one */
+	voicingVersion?: number;
 }
 
 const KEY = 'jhb:settings';
@@ -18,7 +20,7 @@ const DEFAULTS: SettingsData = {
 	volume: 0.8,
 	labels: 'degree',
 	staff: false,
-	voicing: 'rootless',
+	voicing: 'spread',
 	theme: 'auto',
 	soundHintSeen: false
 };
@@ -33,7 +35,9 @@ class Settings {
 
 	/** Call once from the root layout (browser only). */
 	init() {
-		const d = load(KEY, DEFAULTS);
+		const { voicingVersion, ...d } = load(KEY, DEFAULTS);
+		// the first default was 'rootless'; a stored 'rootless' from before v2 was never a choice
+		if ((voicingVersion ?? 1) < 2 && d.voicing === 'rootless') d.voicing = DEFAULTS.voicing;
 		Object.assign(this, d);
 		$effect.root(() => {
 			$effect(() => {
@@ -43,7 +47,8 @@ class Settings {
 					staff: this.staff,
 					voicing: this.voicing,
 					theme: this.theme,
-					soundHintSeen: this.soundHintSeen
+					soundHintSeen: this.soundHintSeen,
+					voicingVersion: 2
 				});
 			});
 			$effect(() => {
